@@ -1,26 +1,30 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <header>
+      <div>
+        <top></top> <!-- 在这里使用局部注册的组件 -->
+      </div>
+    </header>
+    
+    <router-view></router-view>
+
+    <footer>
+      <bottom></bottom>
+    </footer>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  import Top from '@/components/Top.vue';
+  import Bottom from '@/components/Bottom.vue';
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  export default {
+    components: {
+      'top': Top,
+      'bottom': Bottom
+    },
+  };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
