@@ -63,7 +63,7 @@
 </template>
 
 <script>
-    import '/css/index_top.css'
+import '/css/index_top.css'
 </script>
 
 <style>

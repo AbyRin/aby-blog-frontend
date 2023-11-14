@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="top" th:insert="/top.html"></div>
+        <div th:insert="/top.html"></div>
     
         <!-- 大模块（一）：话题区 -->
         <div class="container">

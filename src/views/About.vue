@@ -1,6 +1,6 @@
 <template>
     <header>
-        <div class="top" th:insert="/top.html"></div>
+        <div th:insert="/top.html"></div>
     </header>
 
     <main>
@@ -9,7 +9,7 @@
             <div class="about_div">
                 <!-- 头像 -->
                 <div class="photo">
-                    <img src="/image/img_bg/Asuka.jpg" alt="">
+                    <img src="@/image/img_bg/Asuka.jpg" alt="">
                     <p class="big_name">Aby_VoV</p>
                 </div>
 

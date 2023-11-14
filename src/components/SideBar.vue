@@ -35,14 +35,18 @@
 </template>
 
 <script>
-    const sidebar = document.querySelector('.sidebar')
+export default {
+    mounted() {
+        const sidebar = document.querySelector('.sidebar')
 
-    sidebar.addEventListener('mouseover', function () {
-        sidebar.classList.add('long')
-    })
-    sidebar.addEventListener('mouseleave', function () {
-        sidebar.classList.remove('long')
-    })
+        sidebar.addEventListener('mouseover', function () {
+            sidebar.classList.add('long')
+        })
+        sidebar.addEventListener('mouseleave', function () {
+            sidebar.classList.remove('long')
+        })
+    }
+}
 </script>
 
 <style scoped>

@@ -1,5 +1,5 @@
 <template>
-    <div class="top" th:insert="/top.html"></div>
+    <div th:insert="/top.html"></div>
 
     <!-- 网页主要内容 -->
     <div class="container">
@@ -56,61 +56,17 @@
         </div>
     </div>
 
-    <!-- 功能: 电梯 -->
-    <div class="elevator">
-        <ul class="elevator_list">
-            <li class="sea"><a href="javascript:">Acidic Sea</a></li>
-            <li class="sea"><a href="javascript:">Alkaline Sea</a></li>
-
-            <li><a href="javascript:" data-name="wb3">World Bubble Ⅲ</a></li>
-            <li><a href="javascript:" data-name="wb4">World Bubble Ⅳ</a></li>
-            <li><a href="javascript:" data-name="wb5">World Bubble Ⅴ</a></li>
-            <li><a href="javascript:" data-name="wb6">World Bubble Ⅵ</a></li>
-            
-            <li><a href="javascript:" id="backTop">Top</a></li>
-        </ul>
-    </div>
-
-    <!-- 底部 -->
     <div class="bottom" th:insert="/bottom.html"></div>
 </template>
 
 <!-- js -->
 <script>
-    import '@/js/store.js';
-
-    export default {
+export default {
+    mounted() {
+        
     }
+}
 </script>
-
-<!-- <script type="text/javascript" src="/js/store.js"></script> -->
-
-<!-- 测试用 -->
-<!-- <script>
-    console.log(document.querySelector('.class_1'))
-    
-    const ele = document.querySelector('.elevator_list li a')
-    console.log(ele.dataset.name)
-
-    const ele_2 = document.querySelector('.elevator_list a[data-name = "class_2"]')
-    console.log(ele_2.dataset.name)
-</script> -->
-
-<!-- <script>
-    const search = document.querySelector('.search_div')
-    const n = document.documentElement.scrollTop 
-    console.log(search.style)
-
-    获取html滚动像素
-    console.log('html滚动像素为' + document.documentElement.scrollTop)
-
-    console.log(search.offsetTop)
-</script> -->
-
-<!-- <script>
-    const a = document.querySelector('#backTop')
-    console.log(a)
-</script> -->
 
 <style scoped>
 * {
@@ -118,10 +74,6 @@
     margin: 0;
 }
 body{
-    /*
-    background-size: cover;
-    background: url("../image/background/bg_black hole.jpg") no-repeat fixed;
-    */
     display: flex;
     flex-direction: column;
 
@@ -352,7 +304,6 @@ td {
     background-color: #f84f52;
     color: #ffffff;
 }
-
 
 /* 功能: 电梯 */
 /* 电梯本体 */

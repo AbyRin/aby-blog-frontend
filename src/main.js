@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
+import { createPinia } from 'pinia'
 
 import App from './App.vue'
 import Index from './views/Index.vue'
@@ -10,19 +11,25 @@ import Forum from './views/Forum.vue'
 import Inspiration from './views/Inspiration.vue'
 import About from './views/About.vue'
 
+import NotFound from './views/NotFound.vue'
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/', component: Index },  // 将根路径指向 Index 组件
+    { path: '/', component: Index },
     { path: '/home', component: Home },
     { path: '/library', component: Library },
     { path: '/store', component: Store },
-    { path: '/forum', component: Forum },  // 修正 Forum 的路径
-    { path: '/inspiration', component: Inspiration },  // 修正 Inspiration 的路径
-    { path: '/about', component: About }
+    { path: '/forum', component: Forum },
+    { path: '/inspiration', component: Inspiration },
+    { path: '/about', component: About },
+
+    { path: '/:catchAll(.*)', component: NotFound }
+    
   ]
 });
   
 const app = createApp(App);
+app.use(createPinia());
 app.use(router);
 app.mount('#app');

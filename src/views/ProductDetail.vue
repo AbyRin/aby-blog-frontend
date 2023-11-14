@@ -1,6 +1,6 @@
 <template>
     <!-- 顶部 -->
-    <div class="top" th:insert="/top.html"></div>
+    <div th:insert="/top.html"></div>
 
     <!-- 网页主要内容 -->
     <div class="container">

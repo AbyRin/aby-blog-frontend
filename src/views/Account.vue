@@ -1,6 +1,6 @@
 <template>
     <!-- 顶部 -->
-    <div class="top" th:insert="/top.html"></div>
+    <div th:insert="/top.html"></div>
 
     <!-- toast 提示框 -->
     <div class="toast my-toast" data-bs-delay="1500">
