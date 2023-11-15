@@ -1,4 +1,4 @@
-# aby-blog-v2
+# aby-blog-frontend
 
 ## Project setup
 ```

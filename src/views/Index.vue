@@ -1,8 +1,5 @@
-<template>
+<template xmlns:th="http://www.w3.org/1999/xhtml">
 	<div class="container">
-		<!-- 顶部 -->
-		<div class="index_top" th:insert="/index_top.html"></div>
-
 		<!-- 三角符 -->
 		<div class="triangle"></div>
 
