@@ -1,63 +1,71 @@
-<template xmlns:th="http://www.w3.org/1999/xhtml">
-	<div class="container">
-		<!-- 三角符 -->
-		<div class="triangle"></div>
+<template>
+  <div>
+    <div class="container">
+      <!-- 三角符 -->
+      <div class="triangle" />
 
-		<!-- 简介 -->
-		<div class="introduce_div">
-			<p>Welcome to AbyBlog!</p>
-			<p>This showcases my hobbies and ideas.</p>
-			<p>You are also welcome to leave messages and discuss with me!（＾∀＾）ﾉ</p>
-		</div>
-	</div>
+      <!-- 简介 -->
+      <div class="introduce_div">
+        <p>Welcome to AbyBlog!</p>
+        <p>This showcases my hobbies and ideas.</p>
+        <p>You are also welcome to leave messages and discuss with me!（＾∀＾）ﾉ</p>
+      </div>
+    </div>
 
-	<!-- 分块_1 -->
-	<div class="box_1">
-		<div class="circle_1">
-			<a>Index</a>
-		</div>
-		<div class="word_div_1">
-			<p>I referenced the styles of Soviet constructivism and functionalism that I am interested in and designed a webpage with a space theme.
-				I don't have a deep understanding, I just like this sense of design.</p>
-			<p>In addition, I also want to add a bit of retro futurism, but let's talk about it later.</p>
-		</div>
-	</div>
+    <!-- 分块_1 -->
+    <div class="box_1">
+      <div class="circle_1">
+        <a>Index</a>
+      </div>
+      <div class="word_div_1">
+        <p>
+          I referenced the styles of Soviet constructivism and functionalism that I am interested in and designed a webpage with a space theme.
+          I don't have a deep understanding, I just like this sense of design.
+        </p>
+        <p>In addition, I also want to add a bit of retro futurism, but let's talk about it later.</p>
+      </div>
+    </div>
 
-	<!-- 分块_2 -->
-	<div class="box_2">
-		<div class="word_div_2">
-			<p>It records some strange thoughts and fictional stories of myself.
-				If I write the story completely like JK Rowling, I wonder if I can publish it?</p>
-			<p>Actually, I would prefer to make it into a simple visual novel or game.</p>
-		</div>
-		<div class="circle_2">
-			<a>Library</a>
-		</div>
-	</div>
+    <!-- 分块_2 -->
+    <div class="box_2">
+      <div class="word_div_2">
+        <p>
+          It records some strange thoughts and fictional stories of myself.
+          If I write the story completely like JK Rowling, I wonder if I can publish it?
+        </p>
+        <p>Actually, I would prefer to make it into a simple visual novel or game.</p>
+      </div>
+      <div class="circle_2">
+        <a>Library</a>
+      </div>
+    </div>
 
-	<!-- 分块_3 -->
-	<div class="box_3">
-		<div class="circle_3">
-			<a>Store</a>
-		</div>
-		<div class="word_div_3">
-			<p>The work is for sale and is very reasonable. In order to sell myself, I will set the price very user-friendly.</p>
-			<p>My own paintings, handicrafts, maybe I can share second-hand comics as well?</p>
-		</div>
-	</div>
+    <!-- 分块_3 -->
+    <div class="box_3">
+      <div class="circle_3">
+        <a>Store</a>
+      </div>
+      <div class="word_div_3">
+        <p>The work is for sale and is very reasonable. In order to sell myself, I will set the price very user-friendly.</p>
+        <p>My own paintings, handicrafts, maybe I can share second-hand comics as well?</p>
+      </div>
+    </div>
 
-	<!-- 分块_4 -->
-	<div class="box_4">
-		<div class="word_div_4">
-			<p>As a generation of 'internet natives', I can't say I enjoy instant and efficient online chatting, so I have placed a message board here.</p>
-			<p>If you have anything you want to share with me, just write it down!</p>
-		</div>
-		<div class="circle_4">
-			<a>Forum</a>
-		</div>
-	</div>
+    <!-- 分块_4 -->
+    <div class="box_4">
+      <div class="word_div_4">
+        <p>As a generation of 'internet natives', I can't say I enjoy instant and efficient online chatting, so I have placed a message board here.</p>
+        <p>If you have anything you want to share with me, just write it down!</p>
+      </div>
+      <div class="circle_4">
+        <a>Forum</a>
+      </div>
+    </div>
+  </div>
 </template>
 
+<script setup>
+</script>
 <style scoped>
 * {
     margin: 0;

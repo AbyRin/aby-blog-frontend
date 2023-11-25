@@ -1,87 +1,136 @@
-import { RouterLink } from 'vue-router';
-
 <template xmlns:th="http://www.w3.org/1999/xhtml">
-    <header></header>
+  <div>
+    <header />
     <main>
-        <div class="top_container">
+      <div class="top_container">
         <div class="top_div">
-            <!-- 图标 -->
-            <div class="icon_div">
-                <img src="@/image/img_bg/aby_icon.png" alt="">
+          <!-- 图标 -->
+          <div class="icon_div">
+            <img
+              src="@/image/img_bg/aby_icon.png"
+              alt=""
+            >
+          </div>
+
+          <div class="left_div">
+            <!-- 欢迎语 -->
+            <div class="welcome_div">
+              <a th:if="${session.member}">
+                <span th:text="${session.member.getEmail()}+'Welcome to AbyBlog!'" />
+              </a>
+              <a th:unless="${session.member}">Welcome to AbyBlog!</a>
             </div>
 
-            <div class="left_div">
-                <!-- 欢迎语 -->
-                <div class="welcome_div">
-                    <a th:if="${session.member}">
-                        <span th:text="${session.member.getEmail()}+'Welcome to AbyBlog!'"></span>
-                    </a>
-                    <a th:unless="${session.member}">Welcome to AbyBlog!</a>
-                </div>
-
-                <!-- 登入登出 -->
-                <div class="account_div">
-                    <div>
-                        <a th:if="${session.member}">
-                            <router-link to="/index/toLogout">Sign Out</router-link>
-                            <!-- <router-link to="/index/toRegister">Sign Up</router-link> -->
-                            <router-link to="/admin/toAdminLogin">Sign In as Admin</router-link>
-                        </a>
-                        <a th:unless="${session.member}">
-                            <router-link to="/index/toLogin">Sign In</router-link>
-                            <!-- <router-link to="/index/toRegister">Sign Up</router-link> -->
-                            <router-link to="/admin/toAdminLogin">Sign In as Admin</router-link>
-                        </a>
-                    </div>
-                </div>
+            <!-- 登入登出 -->
+            <div class="account_div">
+              <div>
+                <a th:if="${session.member}">
+                  <router-link to="/index/toLogout">Sign Out</router-link>
+                  <!-- <router-link to="/index/toRegister">Sign Up</router-link> -->
+                  <router-link to="/admin/toAdminLogin">Sign In as Admin</router-link>
+                </a>
+                <a th:unless="${session.member}">
+                  <router-link to="/index/toLogin">Sign In</router-link>
+                  <!-- <router-link to="/index/toRegister">Sign Up</router-link> -->
+                  <router-link to="/admin/toAdminLogin">Sign In as Admin</router-link>
+                </a>
+              </div>
             </div>
+          </div>
 
-            <!-- 功能键 -->
-            <div class="function_div">
-                <div class="each_function">
-                    <img src="@/image/icon/icons8-account-30.png" alt="">
-                    <router-link to="/account" style="text-decoration:none;">Account</router-link>
-                </div>
-                <div class="each_function">
-                    <img src="@/image/icon/icons8-order-48.png" alt="">
-                    <router-link to="/order/showorder" style="text-decoration:none;">Order</router-link>
-                </div>
-                <div class="each_function">
-                    <img src="@/image/icon/icons8-cart-30.png" alt="">
-                    <router-link to="/cart/showcart" style="text-decoration:none;">Cart</router-link>
-                </div>
-                <div class="each_function">
-                    <img src="@/image/icon/icons8-star-30.png" alt="">
-                    <router-link to="/collect/showcollect" style="text-decoration:none;">Collection</router-link>
-                </div>
+          <!-- 功能键 -->
+          <div class="function_div">
+            <div class="each_function">
+              <img
+                src="@/image/icon/icons8-account-30.png"
+                alt=""
+              >
+              <router-link
+                to="/account"
+                style="text-decoration:none;"
+              >
+                Account
+              </router-link>
             </div>
+            <div class="each_function">
+              <img
+                src="@/image/icon/icons8-order-48.png"
+                alt=""
+              >
+              <router-link
+                to="/order/showorder"
+                style="text-decoration:none;"
+              >
+                Order
+              </router-link>
+            </div>
+            <div class="each_function">
+              <img
+                src="@/image/icon/icons8-cart-30.png"
+                alt=""
+              >
+              <router-link
+                to="/cart/showcart"
+                style="text-decoration:none;"
+              >
+                Cart
+              </router-link>
+            </div>
+            <div class="each_function">
+              <img
+                src="@/image/icon/icons8-star-30.png"
+                alt=""
+              >
+              <router-link
+                to="/collect/showcollect"
+                style="text-decoration:none;"
+              >
+                Collection
+              </router-link>
+            </div>
+          </div>
 
-            <!-- 分页栏 -->
-            <div class="page_div">
-                <div class="each_page">
-                    <router-link to="/Home">Home</router-link>
-                </div>
-                <div class="each_page">
-                    <router-link to="/Library">Library</router-link>
-                </div>
-                <div class="each_page">
-                    <router-link to="/Store">Store</router-link>
-                </div>
-                <div class="each_page">
-                    <router-link to="/Forum">Forum</router-link>
-                </div>
-                <div class="each_page">
-                    <router-link to="/Inspiration">Inspiration</router-link>
-                </div>
-                <div class="each_page">
-                    <router-link to="/About">About Aby</router-link>
-                </div>
+          <!-- 分页栏 -->
+          <div class="page_div">
+            <div class="each_page">
+              <router-link to="/Home">
+                Home
+              </router-link>
             </div>
+            <div class="each_page">
+              <router-link to="/Library">
+                Library
+              </router-link>
+            </div>
+            <div class="each_page">
+              <router-link to="/Store">
+                Store
+              </router-link>
+            </div>
+            <div class="each_page">
+              <router-link to="/Forum">
+                Forum
+              </router-link>
+            </div>
+            <div class="each_page">
+              <router-link to="/Inspiration">
+                Inspiration
+              </router-link>
+            </div>
+            <div class="each_page">
+              <router-link to="/About">
+                About Aby
+              </router-link>
+            </div>
+          </div>
         </div>
-    </div>
+      </div>
     </main>
+  </div>
 </template>
 
+<script setup>
+</script>
 <style scoped>
 body {
     width: 100%;

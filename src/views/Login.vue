@@ -1,71 +1,125 @@
 <template>
-    <!-- 网页主要内容 -->
-    <div class="sign_container">
-        <div class="sign_div">
-            <!-- 右边-登录盒子 -->
-            <div class="sign_in_div">
-                <p>SIGN IN</p>
+  <!-- 网页主要内容 -->
+  <div class="sign_container">
+    <div class="sign_div">
+      <!-- 右边-登录盒子 -->
+      <div class="sign_in_div">
+        <p>SIGN IN</p>
 
-                <!-- 账号 -->
-                <div class="div_cell">
-                    <img src="/image/icon/icons8-account-48.png" alt="">
-                    <input type="text" name="email" id="username" placeholder="E-mail" />
-                </div>
-        
-                <!-- 密码 -->
-                <div class="div_cell">
-                    <img src="/image/icon/icons8-password-30.png" alt="">
-                    <input type="password" name="password" placeholder="password" />
-                </div>
-
-                <!-- 跳转: 注册 -->
-                <div class="sign_switch"><a href="">Sign up</a></div>
-
-                <!-- 登录按钮 -->
-                <div class="sign_button">
-                    <input class="sign_button" type="submit" name="s" value="SIGN IN"/>
-                </div>
-
-                <!-- 警告 -->
-                <div class="warn_cell"><p class="warn_p"></p></div>
-            </div>
-            
-            <!-- 左边-注册盒子 -->
-            <div class="sign_up_div">
-                <p>SIGN UP</p>
-
-                <!-- 账号 -->
-                <div class="div_cell">
-                    <img src="/image/icon/icons8-account-48.png" alt="">
-                    <input type="text" name="email" id="username" placeholder="E-mail" />
-                </div>
-                
-                <!-- 密码 -->
-                <div class="div_cell">
-                    <img src="/image/icon/icons8-password-30.png" alt="">
-                    <input type="password" name="password" placeholder="password" />
-                </div>
-
-                <!-- 确认密码 -->
-                <div class="div_cell">
-                    <img src="/image/icon/icons8-password-30.png" alt="">
-                    <input type="password" name="password" placeholder="confirm password" />
-                </div>
-        
-                <!-- 跳转: 登录 -->
-                <div class="sign_switch"><a href="">Sign in</a></div>
-                
-                <!-- 注册按钮 -->
-                <div class="sign_button">
-                    <input class="sign_button" type="submit" name="s" value="SIGN UP"/>
-                </div>
-
-                <!-- 警告 -->
-                <div class="warn_cell"><p class="warn_p"></p></div>
-            </div>
-
+        <!-- 账号 -->
+        <div class="div_cell">
+          <img
+            src="/image/icon/icons8-account-48.png"
+            alt=""
+          >
+          <input
+            id="username"
+            type="text"
+            name="email"
+            placeholder="E-mail"
+          >
         </div>
+        
+        <!-- 密码 -->
+        <div class="div_cell">
+          <img
+            src="/image/icon/icons8-password-30.png"
+            alt=""
+          >
+          <input
+            type="password"
+            name="password"
+            placeholder="password"
+          >
+        </div>
+
+        <!-- 跳转: 注册 -->
+        <div class="sign_switch">
+          <a href="">Sign up</a>
+        </div>
+
+        <!-- 登录按钮 -->
+        <div class="sign_button">
+          <input
+            class="sign_button"
+            type="submit"
+            name="s"
+            value="SIGN IN"
+          >
+        </div>
+
+        <!-- 警告 -->
+        <div class="warn_cell">
+          <p class="warn_p" />
+        </div>
+      </div>
+            
+      <!-- 左边-注册盒子 -->
+      <div class="sign_up_div">
+        <p>SIGN UP</p>
+
+        <!-- 账号 -->
+        <div class="div_cell">
+          <img
+            src="/image/icon/icons8-account-48.png"
+            alt=""
+          >
+          <input
+            id="username"
+            type="text"
+            name="email"
+            placeholder="E-mail"
+          >
+        </div>
+                
+        <!-- 密码 -->
+        <div class="div_cell">
+          <img
+            src="/image/icon/icons8-password-30.png"
+            alt=""
+          >
+          <input
+            type="password"
+            name="password"
+            placeholder="password"
+          >
+        </div>
+
+        <!-- 确认密码 -->
+        <div class="div_cell">
+          <img
+            src="/image/icon/icons8-password-30.png"
+            alt=""
+          >
+          <input
+            type="password"
+            name="password"
+            placeholder="confirm password"
+          >
+        </div>
+        
+        <!-- 跳转: 登录 -->
+        <div class="sign_switch">
+          <a href="">Sign in</a>
+        </div>
+                
+        <!-- 注册按钮 -->
+        <div class="sign_button">
+          <input
+            class="sign_button"
+            type="submit"
+            name="s"
+            value="SIGN UP"
+          >
+        </div>
+
+        <!-- 警告 -->
+        <div class="warn_cell">
+          <p class="warn_p" />
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>

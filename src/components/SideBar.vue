@@ -1,37 +1,43 @@
 <template>
-    <div class="sidebar">
-        <ul>
-            <!-- 搜索框 -->
-            <div class="sidebar_cell">
-                <img src="@/image/icon/icons8-search-100.png" alt="">
-                <input type="text" placeholder="Search">
-            </div>
-            <!-- 目录 -->
-            <div class="sidebar_cell">
-                <a>设计</a>
-            </div>
+  <div class="sidebar">
+    <ul>
+      <!-- 搜索框 -->
+      <div class="sidebar_cell">
+        <img
+          src="@/image/icon/icons8-search-100.png"
+          alt=""
+        >
+        <input
+          type="text"
+          placeholder="Search"
+        >
+      </div>
+      <!-- 目录 -->
+      <div class="sidebar_cell">
+        <a>设计</a>
+      </div>
 
-            <div class="sidebar_cell">
-                <a>文化</a>
-            </div>
+      <div class="sidebar_cell">
+        <a>文化</a>
+      </div>
 
-            <div class="sidebar_cell">
-                <a>工艺</a>
-            </div>
+      <div class="sidebar_cell">
+        <a>工艺</a>
+      </div>
 
-            <div class="sidebar_cell">
-                <a>生活</a>
-            </div>
+      <div class="sidebar_cell">
+        <a>生活</a>
+      </div>
 
-            <div class="sidebar_cell">
-                <a>时代</a>
-            </div>
+      <div class="sidebar_cell">
+        <a>时代</a>
+      </div>
 
-            <div class="sidebar_cell">
-                <a>专题</a>
-            </div>
-        </ul>
-    </div>
+      <div class="sidebar_cell">
+        <a>专题</a>
+      </div>
+    </ul>
+  </div>
 </template>
 
 <script>

@@ -1,0 +1,26 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "plugin:vue/essential",
+        "plugin:vue/vue3-recommended"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 12,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "vue"
+    ],
+    "rules": {
+        "vue/multi-word-component-names": "off",
+        "object-property-newline": ["error", { "allowAllPropertiesOnSameLine": true }],
+        "vue/max-attributes-per-line": "off",
+
+        "vue/html-indent": ["error", 2],
+        "vue/script-indent": ["error", 4]
+    }
+}

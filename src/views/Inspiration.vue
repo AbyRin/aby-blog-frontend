@@ -1,39 +1,47 @@
 <template>
+  <div>
     <!-- 网页主要内容 -->
     <div class="container">
-        <!-- 图瀑布 -->
-        <div class="fall_div" id="fall_div">
-        </div>
+      <!-- 图瀑布 -->
+      <div
+        id="fall_div"
+        class="fall_div"
+      />
     </div>
 
     <!-- 功能: 电梯 -->
     <div class="elevator">
-        <ul class="elevator_list">
-            <li id="backTop"><img src="@/image/icon/icons8-top-100-gray.png" alt=""></li>
-        </ul>
+      <ul class="elevator_list">
+        <li id="backTop">
+          <img
+            src="@/image/icon/icons8-top-100-gray.png"
+            alt=""
+          >
+        </li>
+      </ul>
     </div>
 
     <!-- 侧边栏 -->
-    <SideBar></SideBar>
+    <SideBar />
+  </div>
 </template>
 
 <script>
-import SideBar from "@/components/SideBar.vue"
+import SideBar from '@/components/SideBar.vue';
+
 export default {
     components: {
         SideBar,
     },
     mounted() {
-        const fallDiv = document.getElementById("fall_div");
+        const fallDiv = document.getElementById('fall_div');
         const columnCount = window.innerWidth * 1.5 <= window.screen.width ? 2 : 3;
 
         // 爬虫图片路径
         function loadImagesFromDirectory(directoryPath) {
             const imagePaths = [];
-            const imageDirectory = directoryPath;
-
             for (let i = 1; i <= 20; i++) {
-                const imagePath = imageDirectory + i + ".png";
+                const imagePath = `${directoryPath + i}.png`;
                 imagePaths.push(imagePath);
             }
             populateColumns(imagePaths);
@@ -43,8 +51,8 @@ export default {
         function populateColumns(imagePaths) {
             // 创建瀑布列
             for (let i = 0; i < columnCount; i++) {
-                const column = document.createElement("column");
-                column.classList.add("column");
+                const column = document.createElement('column');
+                column.classList.add('column');
                 if (fallDiv) {
                     fallDiv.appendChild(column);
                 }
@@ -55,15 +63,15 @@ export default {
                 const column = fallDiv.children[index % columnCount];
 
                 // 创建：image_div
-                const imageDiv = document.createElement("div");
-                imageDiv.classList.add("image_div");
-                imageDiv.style.boxShadow = "2px 2px 2px #bdbdbd";
+                const imageDiv = document.createElement('div');
+                imageDiv.classList.add('image_div');
+                imageDiv.style.boxShadow = '2px 2px 2px #bdbdbd';
                 column.appendChild(imageDiv);
 
                 // 创建：图片
-                const image = document.createElement("img");
+                const image = document.createElement('img');
                 image.src = imagePath;
-                image.alt = "Image " + (index + 1);
+                image.alt = `Image ${index + 1}`;
                 // 图片加载失败时隐藏
                 image.onerror = function () {
                     imageDiv.style.display = 'none';
@@ -71,34 +79,34 @@ export default {
                 imageDiv.appendChild(image);
 
                 // 创建：按钮组 image_buttons
-                const imageButtons = document.createElement("div");
-                imageButtons.classList.add("image_buttons");
+                const imageButtons = document.createElement('div');
+                imageButtons.classList.add('image_buttons');
                 imageDiv.appendChild(imageButtons);
 
                 // 创建：按钮 image_button
                 for (let j = 1; j <= 3; j++) {
-                    const button = document.createElement("div");
-                    button.classList.add("image_button");
+                    const button = document.createElement('div');
+                    button.classList.add('image_button');
 
-                    button.id = "btn" + j;
-                    button.style.display = "flex"
-                    button.style.justifyContent = "center";
-                    button.style.alignItems = "center";
+                    button.id = `btn${j}`;
+                    button.style.display = 'flex';
+                    button.style.justifyContent = 'center';
+                    button.style.alignItems = 'center';
 
                     // 创建：按钮图标 img
-                    let imgSrc = "";
+                    let imgSrc = '';
                     if (j === 1) {
-                        imgSrc = "@/image/icon/icons8-heart-50-gray.png";
+                        imgSrc = '@/image/icon/icons8-heart-50-gray.png';
                     } else if (j === 2) {
-                        imgSrc = "@/image/icon/icons8-bookmark-60-gray.png";
+                        imgSrc = '@/image/icon/icons8-bookmark-60-gray.png';
                     } else {
-                        imgSrc = "@/image/icon/icons8-download-48-gray.png";
+                        imgSrc = '@/image/icon/icons8-download-48-gray.png';
                     }
 
-                    const img = document.createElement("img");
+                    const img = document.createElement('img');
                     img.src = imgSrc;
-                    img.style.maxWidth = "24px";
-                    img.alt = "";
+                    img.style.maxWidth = '24px';
+                    img.alt = '';
 
                     button.appendChild(img);
                     imageButtons.appendChild(button);
@@ -113,39 +121,39 @@ export default {
 
                 if (event.type === 'mouseover') {
                     if (btnId === 'btn1') {
-                        img.src = "@/image/icon/icons8-heart-50-color.png";
-                        button.style.borderRadius = "50px";
+                        img.src = '@/image/icon/icons8-heart-50-color.png';
+                        button.style.borderRadius = '50px';
                     } else if (btnId === 'btn2') {
-                        img.src = "@/image/icon/icons8-bookmark-60-color.png";
-                        button.style.borderRadius = "50px";
+                        img.src = '@/image/icon/icons8-bookmark-60-color.png';
+                        button.style.borderRadius = '50px';
                     } else {
-                        img.src = "@/image/icon/icons8-download-48-color.png";
-                        button.style.borderRadius = "50px";
+                        img.src = '@/image/icon/icons8-download-48-color.png';
+                        button.style.borderRadius = '50px';
                     }
                 } else if (event.type === 'mouseout') {
                     if (btnId === 'btn1') {
-                        img.src = "@/image/icon/icons8-heart-50-gray.png";
-                        button.style.borderRadius = "10px";
+                        img.src = '@/image/icon/icons8-heart-50-gray.png';
+                        button.style.borderRadius = '10px';
                     } else if (btnId === 'btn2') {
-                        img.src = "@/image/icon/icons8-bookmark-60-gray.png";
-                        button.style.borderRadius = "10px";
+                        img.src = '@/image/icon/icons8-bookmark-60-gray.png';
+                        button.style.borderRadius = '10px';
                     } else {
-                        img.src = "@/image/icon/icons8-download-48-gray.png";
-                        button.style.borderRadius = "10px";
+                        img.src = '@/image/icon/icons8-download-48-gray.png';
+                        button.style.borderRadius = '10px';
                     }
                 }
             }
 
             // 获取所有 image_button 并 绑定事件
-            const allImageButtons = document.querySelectorAll(".image_button");
+            const allImageButtons = document.querySelectorAll('.image_button');
 
-            allImageButtons.forEach(button => {
+            allImageButtons.forEach((button) => {
                 button.addEventListener('mouseover', handleButtonHover);
                 button.addEventListener('mouseout', handleButtonHover);
             });
         }
         // 调用
-        loadImagesFromDirectory("/image/reptile_image/");
+        loadImagesFromDirectory('/image/reptile_image/');
 
         // 功能: 页面resize时刷新
         // 启用节流
@@ -153,41 +161,41 @@ export default {
             let timer = null;
             return function () {
                 if (!timer) {
-                    timer = setTimeout(function () {
-                        fn(),
+                    timer = setTimeout(() => {
+                        fn();
                         // 清空定时器
                         timer = null;
                     }, t);
                 }
-            }
+            };
         }
         // 主函数
         // 注意: 为了保证刷新的流畅, 浏览器要启用缓存
         function refreshOnResize() {
             location.reload();
         }
-        window.addEventListener('resize', throttle(refreshOnResize, 500))
+        window.addEventListener('resize', throttle(refreshOnResize, 500));
 
         // 电梯：backTop键
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', () => {
             (function () {
-                const backTop = document.querySelector('#backTop')
+                const backTop = document.querySelector('#backTop');
                 const img = backTop.querySelector('img');
                 // 修改样式
-                backTop.addEventListener('mouseover', function () {
-                img.src = '@//image/icon/icons8-top-100-white.png'
-                })
-                backTop.addEventListener('mouseout', function () {
-                    img.src = '@//image/icon/icons8-top-100-gray.png'
-                })
+                backTop.addEventListener('mouseover', () => {
+                    img.src = '@//image/icon/icons8-top-100-white.png';
+                });
+                backTop.addEventListener('mouseout', () => {
+                    img.src = '@//image/icon/icons8-top-100-gray.png';
+                });
                 // backTop功能
-                backTop.addEventListener('click', function () {
-                    window.scrollTo(0, 0)
-                })
-            })();
+                backTop.addEventListener('click', () => {
+                    window.scrollTo(0, 0);
+                });
+            }());
         });
-    }
-}
+    },
+};
 </script>
 
 <style scoped>

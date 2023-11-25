@@ -5,14 +5,20 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "build-and-copy": "npm run build && npm run copy-to-springboot",
+    "copy-to-springboot": "xcopy /E /Y dist/* ../AbyBlog-app/src/main/resources/static/"
   },
   "dependencies": {
     "axios": "^1.6.1",
     "core-js": "^3.8.3",
+    "g": "^2.0.1",
     "glob": "^10.3.10",
+    "node-sass": "^9.0.0",
     "pinia": "^2.1.7",
-    "vue": "^3.2.13",
+    "sass": "^1.69.5",
+    "sass-loader": "^13.3.2",
+    "vue": "^3.3.9",
     "vue-router": "^4.2.5",
     "vuex": "^4.1.0"
   },
@@ -22,9 +28,13 @@
     "@types/body-parser": "^1.19.5",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
-    "@vue/cli-service": "~5.0.8",
-    "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3",
+    "@vue/cli-service": "^5.0.8",
+    "@vue/compiler-sfc": "^3.3.9",
+    "eslint": "^8.53.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-vue": "^9.18.1",
+    "vue-template-compiler": "^2.7.15",
     "webpack-cli": "^5.1.4"
   },
   "eslintConfig": {

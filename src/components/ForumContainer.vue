@@ -1,51 +1,65 @@
 <template>
-    <div>
-        <!-- （2）话题展示 -->
-        <div class="forum_container">
-            <!-- 话题块 -->
-            <div class="forum_div">
-                <!-- 左边区: 头像、关注功能 -->
-                <div class="forum_left">
-                    <!-- 头像 -->
-                    <div class="user_photo">
-                        <img src="@/image/img_bg/user.jpg" alt="">
-                    </div>
-                    <!-- 用户名 -->
-                    <div class="user_name">
-                        <p class="user_name">Aby_VoV</p>
-                    </div>
-                    <!-- 功能键：关注-->
-                    <div class="forum_follow">
-                        <a><b>Follow</b></a>
-                    </div>
-                </div>
-
-                <!-- 右边区: 话题框、功能键（点赞、收藏、回复） -->
-                <div class="forum_right">
-                    <!-- 话题框 -->
-                    <div class="forum_content"></div>
-                    <!-- 功能键 -->
-                    <div class="forum_function_div">
-                        <!-- 点赞功能 -->
-                        <div class="function_button">
-                            <img src="@/image/icon/icons8-heart-50.png" alt="">
-                            <a>Like</a>
-                        </div>
-                        <!-- 收藏功能 -->
-                        <div class="function_button">
-                            <img src="@/image/icon/icons8-bookmark-50.png" alt="">
-                            <a>Collect</a>
-                        </div>
-                        <!-- 回复功能 -->
-                        <div class="function_button">
-                            <img src="@/image/icon/icons8-forum-50.png" alt="">
-                            <a>Reply</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  <div>
+    <!-- （2）话题展示 -->
+    <div class="forum_container">
+      <!-- 话题块 -->
+      <div class="forum_div">
+        <!-- 左边区: 头像、关注功能 -->
+        <div class="forum_left">
+          <!-- 头像 -->
+          <div class="user_photo">
+            <img
+              src="@/image/img_bg/user.jpg"
+              alt=""
+            >
+          </div>
+          <!-- 用户名 -->
+          <div class="user_name">
+            <p class="user_name">
+              Aby_VoV
+            </p>
+          </div>
+          <!-- 功能键：关注-->
+          <div class="forum_follow">
+            <a><b>Follow</b></a>
+          </div>
         </div>
+
+        <!-- 右边区: 话题框、功能键（点赞、收藏、回复） -->
+        <div class="forum_right">
+          <!-- 话题框 -->
+          <div class="forum_content" />
+          <!-- 功能键 -->
+          <div class="forum_function_div">
+            <!-- 点赞功能 -->
+            <div class="function_button">
+              <img
+                src="@/image/icon/icons8-heart-50.png"
+                alt=""
+              >
+              <a>Like</a>
+            </div>
+            <!-- 收藏功能 -->
+            <div class="function_button">
+              <img
+                src="@/image/icon/icons8-bookmark-50.png"
+                alt=""
+              >
+              <a>Collect</a>
+            </div>
+            <!-- 回复功能 -->
+            <div class="function_button">
+              <img
+                src="@/image/icon/icons8-forum-50.png"
+                alt=""
+              >
+              <a>Reply</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script setup>

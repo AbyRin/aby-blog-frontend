@@ -1,52 +1,71 @@
 <template>
-    <div class="sign_container">
+  <div class="sign_container">
+    <div class="sign_div">
+      <form>
+        <table>
+          <tr>
+            <td
+              class="td_sign_in"
+              colspan="3"
+            >
+              Sign Up
+            </td>
+          </tr>
+          <tr>
+            <td class="td_cell">
+              Account
+            </td>
+            <td class="td_cell">
+              <input
+                type="text"
+                name="email"
+              >
+            </td>
+            <td class="td_cell">
+              <span
+                id="email_msg"
+                class="span_warn"
+              />
+            </td>
+          </tr>
 
-        <div class="sign_div">
-            <form>
-                <table>
-                    <tr>
-                        <td class="td_sign_in" colspan="3">Sign Up</td>
-                    </tr>
-                    <tr>
-                        <td class="td_cell">Account</td>
-                        <td class="td_cell">
-                            <input type=text name="email" />
-                        </td>
-                        <td class="td_cell">
-                            <span class="span_warn" id="email_msg"></span>
-                        </td>
-                    </tr>
+          <tr>
+            <td class="td_cell">
+              Password
+            </td>
+            <td class="td_cell">
+              <input type="password">
+            </td>
+            <td class="td_cell">
+              <span id="passw1_msg" />
+            </td>
+          </tr>
 
-                    <tr>
-                        <td class="td_cell">Password</td>
-                        <td class="td_cell">
-                            <input type="password" />
-                        </td>
-                        <td class="td_cell">
-                            <span id="passw1_msg"></span>
-                        </td>
-                    </tr>
+          <tr>
+            <td class="td_cell">
+              Confirm Password
+            </td>
+            <td class="td_cell">
+              <input type="password">
+            </td>
+            <td class="td_cell">
+              <span id="passw2_msg" />
+            </td>
+          </tr>
+        </table>
 
-                    <tr>
-                        <td class="td_cell">Confirm Password</td>
-                        <td class="td_cell">
-                            <input type=password />
-                        </td>
-                        <td class="td_cell">
-                            <span id="passw2_msg"></span>
-                        </td>
-                    </tr>
-                </table>
-
-                <div class="sign_button">
-                    <td colspan="3">
-                        <input type=submit name=s value="注册">
-                    </td>
-                </div>
-
-            </form>
+        <div class="sign_button">
+          <td colspan="3">
+            <input
+              type="submit"
+              name="s"
+              value="注册"
+            >
+          </td>
         </div>
+      </form>
     </div>
+  </div>
 </template>
 
 <script setup>

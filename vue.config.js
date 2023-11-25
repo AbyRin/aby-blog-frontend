@@ -1,4 +1,16 @@
+const path = require('path')
+function resolve(dir) {
+  return path.join(__dirname, dir);
+}
 module.exports = {
-    transpileDependencies: true
-};
-  
+    transpileDependencies: [
+        'vue',
+        ],
+    configureWebpack: {
+        resolve: {
+            alias: {
+                '@': path.resolve(__dirname, 'src')
+            }
+        }
+    }
+}

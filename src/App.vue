@@ -1,17 +1,17 @@
 <template>
-    <div id="app">
-        <header>
-            <top></top>
-        </header>
+  <div id="app">
+    <header>
+      <top />
+    </header>
 
-        <main>
-            <router-view></router-view>
-        </main>
+    <main>
+      <router-view />
+    </main>
 
-        <footer>
-            <bottom></bottom>
-        </footer>
-    </div>
+    <footer>
+      <bottom />
+    </footer>
+  </div>
 </template>
 
 <script>

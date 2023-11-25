@@ -1,70 +1,135 @@
 <template>
+  <div>
     <!-- toast 提示框 -->
-    <div class="toast my-toast" data-bs-delay="1500">
-        <div class="toast-body">
+    <div
+      class="toast my-toast"
+      data-bs-delay="1500"
+    >
+      <div class="toast-body">
         <div class="alert alert-success info-box">
-            操作成功
+          操作成功
         </div>
-        </div>
+      </div>
     </div>
-    
+
     <!-- 核心内容区域 -->
     <div class="container">
+      <!-- 左边页面：账户信息 -->
+      <div class="content">
+        <!-- 头像 -->
+        <div class="avatar_div">
+          <p class="ava_title">
+            头像
+          </p>
+          <img
+            class="prew"
+            src="@/image/img_bg/Asuka.jpg"
+            alt=""
+          >
 
-        <!-- 左边页面：账户信息 -->
-        <div class="content">
-
-            <!-- 头像 -->
-            <div class="avatar_div">
-                <p class="ava_title">头像</p>
-                <img class="prew" src="/image/img_bg/Asuka.jpg" alt="">
-                
-                <p for="upload" class="change_p">更换头像</p>
-                <input id="upload" type="file" class="upload">
-            </div>
-
-            <!-- 昵称 -->
-            <div class="information_div">
-                <p for="nickname">昵称</p>
-                <input id="nickname" name="nickname" class="nickname" type="text" placeholder="请输入昵称" autocomplete="off">
-            </div>
-
-            <!-- 邮箱 -->
-            <div class="information_div">
-                <p for="email">邮箱</p>
-                <input id="email" name="email" class="email" type="text" placeholder="请输入邮箱" autocomplete="off">
-            </div>
-
-            <!-- 性别 -->
-            <div class="information_div">
-                <p>性别</p>
-                <p><input type="radio" name="gender" class="gender" value="0">男</p>
-                <p><input type="radio" name="gender" class="gender" value="1">女</p>
-            </div>
-            
-            <!-- 签名 -->
-            <div class="information_div">
-                <p for="desc">签名</p>
-                <textarea id="desc" name="desc" class="desc" placeholder="请输入个人简介" cols="20" rows="10" autocomplete="off"></textarea>
-            </div>
-
-            <!-- 按钮：保存 -->
-            <button class="submit">提交</button>
+          <p
+            for="upload"
+            class="change_p"
+          >
+            更换头像
+          </p>
+          <input
+            id="upload"
+            type="file"
+            class="upload"
+          >
         </div>
 
-        <!-- 右边页面：设置 -->
-        <div class="content">
-            <div class="active"><a href="">基本设置</a></div>
-            <div><a href="">安全设置</a></div>
-            <div>账号绑定</div>
-            <div>新消息通知</div>
+        <!-- 昵称 -->
+        <div class="information_div">
+          <p for="nickname">
+            昵称
+          </p>
+          <input
+            id="nickname"
+            name="nickname"
+            class="nickname"
+            type="text"
+            placeholder="请输入昵称"
+            autocomplete="off"
+          >
         </div>
+
+        <!-- 邮箱 -->
+        <div class="information_div">
+          <p for="email">
+            邮箱
+          </p>
+          <input
+            id="email"
+            name="email"
+            class="email"
+            type="text"
+            placeholder="请输入邮箱"
+            autocomplete="off"
+          >
+        </div>
+
+        <!-- 性别 -->
+        <div class="information_div">
+          <p>性别</p>
+          <p>
+            <input
+              type="radio"
+              name="gender"
+              class="gender"
+              value="0"
+            >男
+          </p>
+          <p>
+            <input
+              type="radio"
+              name="gender"
+              class="gender"
+              value="1"
+            >女
+          </p>
+        </div>
+
+        <!-- 签名 -->
+        <div class="information_div">
+          <p for="desc">
+            签名
+          </p>
+          <textarea
+            id="desc"
+            name="desc"
+            class="desc"
+            placeholder="请输入个人简介"
+            cols="20"
+            rows="10"
+            autocomplete="off"
+          />
+        </div>
+
+        <!-- 按钮：保存 -->
+        <button class="submit">
+          提交
+        </button>
+      </div>
+
+      <!-- 右边页面：设置 -->
+      <div class="content">
+        <div class="active">
+          <a href="">基本设置</a>
+        </div>
+        <div><a href="">安全设置</a></div>
+        <div>账号绑定</div>
+        <div>新消息通知</div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
 import 'https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js';
 import '/js/form-serialize.js'
+import axios from "axios";
 
 export default {
     mounted() {
@@ -78,7 +143,7 @@ export default {
 
         // 1.1 获取用户的数据
         axios({
-            url: 'http://hmajax.itheima.net/api/settings',
+            url: 'https://hmajax.itheima.net/api/settings',
             // 省略 get 请求方法
             params: {
                 creator: creator
@@ -128,13 +193,12 @@ export default {
             
             // 2.2 提交服务器并更新头像
             axios({
-                url: 'http://hmajax.itheima.net/api/avatar',
+                url: 'https://hmajax.itheima.net/api/avatar',
                 method: 'PUT',
                 data: fd
             }).then(result => {
-                const imgUrl = result.data.data.avatar
-                // 把新的头像回显到页面上
-                document.querySelector('.prew').src = imgUrl
+              // 把新的头像回显到页面上
+                document.querySelector('.prew').src = result.data.data.avatar
             })
         })
 
@@ -166,7 +230,7 @@ export default {
 
             // 3.2 提交到服务器保存
             axios({
-                url: 'http://hmajax.itheima.net/api/settings',
+                url: 'https://hmajax.itheima.net/api/settings',
                 method: 'PUT',
                 data: userObj
             }).then(result => {

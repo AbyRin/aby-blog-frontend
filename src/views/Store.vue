@@ -1,59 +1,95 @@
 <template xmlns:th="http://www.w3.org/1999/xhtml">
+  <!-- 网页主要内容 -->
+  <div class="container">
+    <!-- 商品搜索条部分 -->
+    <div class="search_div">
+      <form method="post" action="">
+        <!-- 按商品名搜索 -->
+        <span class="input_span">Name
+          <input type="text" name="product_name">
+        </span>
 
-    <!-- 网页主要内容 -->
-    <div class="container">
-        <!-- 商品搜索条部分 -->
-        <div class="search_div">
-            <form method="post" action="">
+        <!-- 按商品分类搜索 -->
+        <span class="input_span">Class
+          <select name="product_class" class="product_class">
+            <option value="">All</option>
+            <option
+              th:each="product_class:${product_classes}"
+              th:value="${product_class}"
+              th:text="${product_class}"
+            />
+          </select>
+        </span>
 
-                <!-- 按商品名搜索 -->
-                <span class="input_span">Name
-                    <input type="text" name="product_name" />
-                </span>
+        <!-- 按价格区间搜索 -->
+        <span class="input_span">Price Range
+          <input
+            type="text"
+            name="minprice"
+          > ~ <input
+            type="text"
+            name="maxprice"
+          >
+        </span>
 
-                <!-- 按商品分类搜索 -->
-                <span class="input_span">Class
-                    <select name="product_class" class="product_class">
-                        <option value="">All</option>
-                        <option th:each="product_class:${product_classes}" th:value="${product_class}" th:text="${product_class}"></option>
-                    </select>
-                </span>
-
-                <!-- 按价格区间搜索 -->
-                <span class="input_span">Price Range
-                    <input type="text" name="minprice"/> ~ <input type="text" name="maxprice" />
-                </span>
-
-                <input type="submit" value="Search">
-            </form>
-        </div>
-
-        <!-- 商品部分 -->
-        <div class="product_container">
-
-            <!-- 商品展示块 -->
-            <div class="product_div" th:each="product:${productlist}">
-                <a th:href="'/store/productdetail?product_id='+${product.product_id}">
-                    <img th:src="@{'/image/img_product/'+${product.picture}}" alt=""/>
-                </a>
-                <div id="product_class_div" th:utext="${product.product_class}" ><b>Product Class</b></div>
-                <div id="product_name_div" th:utext="${product.product_name}" ><b>Product Name</b></div>
-                <div id="product_price_div" th:utext="${product.price}+'CNY'" ><b>Price</b></div>
-                <div id="product_sold_div" th:utext="'Sold '+${product.soldnum}">Sold Num</div>
-                <div>
-                    <!-- 加入购物车功能-->
-                    <div id="gotocart_div">
-                        <a th:href="'/cart/addcart?product_id='+${product.product_id}"><b>Purchase</b></a>
-                    </div>
-
-                    <!-- 收藏功能 -->
-                    <div id="collect_div">
-                        <a th:href="'/collect/addcollect?product_id='+${product.product_id}"><b>Collect</b></a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <input
+          type="submit"
+          value="Search"
+        >
+      </form>
     </div>
+
+    <!-- 商品部分 -->
+    <div class="product_container">
+      <!-- 商品展示块 -->
+      <div
+        class="product_div"
+        th:each="product:${productlist}"
+      >
+        <a th:href="'/store/productdetail?product_id='+${product.product_id}">
+          <img
+            th:src="@{'/image/img_product/'+${product.picture}}"
+            alt=""
+          >
+        </a>
+        <div
+          id="product_class_div"
+          th:utext="${product.product_class}"
+        >
+          <b>Product Class</b>
+        </div>
+        <div
+          id="product_name_div"
+          th:utext="${product.product_name}"
+        >
+          <b>Product Name</b>
+        </div>
+        <div
+          id="product_price_div"
+          th:utext="${product.price}+'CNY'"
+        >
+          <b>Price</b>
+        </div>
+        <div
+          id="product_sold_div"
+          th:utext="'Sold '+${product.soldnum}"
+        >
+          Sold Num
+        </div>
+        <div>
+          <!-- 加入购物车功能-->
+          <div id="gotocart_div">
+            <a th:href="'/cart/addcart?product_id='+${product.product_id}"><b>Purchase</b></a>
+          </div>
+
+          <!-- 收藏功能 -->
+          <div id="collect_div">
+            <a th:href="'/collect/addcollect?product_id='+${product.product_id}"><b>Collect</b></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <!-- js -->

@@ -1,45 +1,60 @@
 <template>
-    <div>
-        <!-- 大模块（一）：话题区 -->
-        <div class="container">
-            <!-- （1）话题筛选条 -->
-            <div class="topic_div">
-                <!-- 话题开关 -->
-                <div class="filter_div">
-                    <div class="filter">Series</div>
-                    <div class="filter">Neutral</div>
-                    <div class="filter">Humorous</div>
-                </div>
-            </div>
-
-            <div class="comment_div">
-                <ForumContainer></ForumContainer>
-                <ForumContainer></ForumContainer>
-                <ForumContainer></ForumContainer>
-            </div>
+  <div>
+    <!-- 大模块（一）：话题区 -->
+    <div class="container">
+      <!-- （1）话题筛选条 -->
+      <div class="topic_div">
+        <!-- 话题开关 -->
+        <div class="filter_div">
+          <div class="filter">
+            Series
+          </div>
+          <div class="filter">
+            Neutral
+          </div>
+          <div class="filter">
+            Humorous
+          </div>
         </div>
+      </div>
 
-        <!-- 大模块（二）：评论区 -->
-        <div class="comment_container">
-            <!-- 子区1：切换按钮：显示/隐藏 -->
-            <div class="toggle_bar"><img src="@/image/icon/icons8-triangle-96-up-white.png" alt=""></div>
-            
-            <!-- 子区2：文本 -->
-            <div class="text_bar">
-                <!-- 文本框 -->
-                <div class="wrapper">
-                    <textarea name="" id="text" placeholder="各抒己见——" maxlength="400"></textarea>
-                    <button>发布</button>
-                </div>
-                
-                <!-- 字数统计 -->
-                <div class="wrapper">
-                    <span class="total">0/400字</span>
-                </div>
-            </div>
-        </div>
-
+      <div class="comment_div">
+        <ForumContainer />
+        <ForumContainer />
+        <ForumContainer />
+      </div>
     </div>
+
+    <!-- 大模块（二）：评论区 -->
+    <div class="comment_container">
+      <!-- 子区1：切换按钮：显示/隐藏 -->
+      <div class="toggle_bar">
+        <img
+          src="@/image/icon/icons8-triangle-96-up-white.png"
+          alt=""
+        >
+      </div>
+            
+      <!-- 子区2：文本 -->
+      <div class="text_bar">
+        <!-- 文本框 -->
+        <div class="wrapper">
+          <textarea
+            id="text"
+            name=""
+            placeholder="各抒己见——"
+            maxlength="400"
+          />
+          <button>发布</button>
+        </div>
+                
+        <!-- 字数统计 -->
+        <div class="wrapper">
+          <span class="total">0/400字</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
