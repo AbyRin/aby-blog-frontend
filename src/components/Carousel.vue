@@ -1,22 +1,10 @@
 <template>
-  <div class="slider">
-    <div class="slider-wrapper">
-      <img :src="currentSlide.url" alt="">
-    </div>
-    <div class="slider-footer">
-      <p>{{ currentSlide.title }}</p>
-      <ul class="slider-indicator">
-        <li v-for="(index) in sliderData" :key="index" :class="{ active: index === currentIndex }" />
-      </ul>
-      <div class="toggle">
-        <button class="prev" @click="prevSlide">
-          &lt;
-        </button>
-        <button class="next" @click="nextSlide">
-          &gt;
-        </button>
-      </div>
-    </div>
+  <div class="block text-center">
+    <el-carousel :interval="4000" type="card" arrow="never" :height="bannerHeight + 'px'">
+      <el-carousel-item v-for="item in imageList" :key="item">
+        <img :src="item" alt="carousel-image">
+      </el-carousel-item>
+    </el-carousel>
   </div>
 </template>
 
@@ -24,109 +12,42 @@
 export default {
     data() {
         return {
-            sliderData: [
-                { url: './image/reptile_image/0.png'},
-                { url: './image/reptile_image/1.png'},
-
+            imageList: [
+                require('@/image/reptile_image/6.png'),
+                require('@/image/reptile_image/7.png'),
             ],
-            currentIndex: 0,
-            // testImg: './image/reptile_image/0.png',
+            bannerHeight : 100,
+            screenWidth :0,
         };
     },
-    computed: {
-        currentSlide() {
-            return this.sliderData[this.currentIndex];
-        },
-    },
     mounted() {
-        console.log('Image Path:', this.currentSlide.url);
-        setInterval(this.nextSlide, 1500);
+        this.screenWidth = window.innerWidth;
+        this.setSize();
+        window.onresize = () => {
+            this.screenWidth = window.innerWidth;
+            this.setSize();
+        };
     },
     methods: {
-        nextSlide() {
-            this.currentIndex = (this.currentIndex + 1) % this.sliderData.length;
+        setSize: function () {
+            // 通过屏幕宽度(图片宽度)计算高度
+            this.bannerHeight = 400 / 1920 * this.screenWidth;
         },
-        prevSlide() {
-            this.currentIndex = (this.currentIndex - 1 + this.sliderData.length) % this.sliderData.length;
-        },
-    },
+    }
 };
 </script>
 
 <style scoped lang="scss">
-.slider {
-    width: 560px;
-    height: 400px;
-    overflow: hidden;
+.el-carousel {
+    height: 800px;
+    background-color: #2c9c92;
 
-    .slider-wrapper {
-        width: 100%;
-        height: 320px;
-
-        img {
-            width: 100%;
-            height: 100%;
-            display: block;
+    .el-carousel__item {
+        &:nth-child(2n) {
+            background-color: #99a9bf;
         }
-    }
-
-    .slider-footer {
-        height: 80px;
-        background-color: #31384f;
-        padding: 12px 12px 0 12px;
-        position: relative;
-
-        .toggle {
-            position: absolute;
-            right: 0;
-            top: 12px;
-            display: flex;
-
-            button {
-                margin-right: 12px;
-                width: 28px;
-                height: 28px;
-                appearance: none;
-                border: none;
-                background: rgba(255, 255, 255, 0.1);
-                color: #fff;
-                border-radius: 4px;
-                cursor: pointer;
-            }
-
-            &:hover {
-                background: rgba(255, 255, 255, 0.2);
-            }
-        }
-
-        p {
-            color: #fff;
-            font-size: 18px;
-            margin: 0 0 10px;
-        }
-
-        .slider-indicator {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            display: flex;
-            align-items: center;
-
-            li {
-                width: 8px;
-                height: 8px;
-                margin: 4px;
-                border-radius: 50%;
-                background: #fff;
-                opacity: 0.4;
-                cursor: pointer;
-
-                &.active {
-                    width: 12px;
-                    height: 12px;
-                    opacity: 1;
-                }
-            }
+        &:nth-child(2n + 1) {
+            background-color: #d3dce6;
         }
     }
 }

@@ -1,12 +1,9 @@
 <template>
   <div class="sidebar">
-    <ul>
+    <div>
       <!-- 搜索框 -->
       <div class="sidebar_cell">
-        <img
-          src="@/image/icon/icons8-search-100.png"
-          alt=""
-        >
+        <img src="@/image/icon/icons8-search-100.png" alt="">
         <input
           type="text"
           placeholder="Search"
@@ -36,7 +33,7 @@
       <div class="sidebar_cell">
         <a>专题</a>
       </div>
-    </ul>
+    </div>
   </div>
 </template>
 
@@ -55,7 +52,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 * {
     margin: 0;
     padding: 0;
@@ -66,7 +63,7 @@ export default {
 .sidebar {
     position: fixed;
 
-    top: 140px;
+    top: 104px;
     left: 0;
 
     width: 80px;
@@ -80,70 +77,74 @@ export default {
     z-index: 100;
 
     box-shadow: 2px 2px 2px #bdbdbd;
-}
-/* 伸展状态 的 样式 */
-.sidebar.long {
-    width: 200px;
-}
 
-/* 主题 */
-.sidebar .sidebar_cell {
-    display: flex;
-    align-items: center;
+    /* 伸展状态 的 样式 */
+    &:hover {
+        width: 200px;
+    }
 
-    height: 40px;
-    margin-bottom: 10px;
-    border-radius: 8px;
+    /* 主题 */
+    .sidebar_cell {
+        display: flex;
+        align-items: center;
 
-    background-color: #ffffff;
-    box-shadow:
-        inset -2px -2px 4px rgba(255, 255, 255, .9),
-        inset 2px 2px 4px rgba(0, 0, 0, .4);
+        height: 40px;
+        margin-bottom: 10px;
+        border-radius: 8px;
 
-    list-style: none;
-    cursor: pointer;
-}
-.sidebar .sidebar_cell img{
-    margin-left: 4px;
-    height: 24px;
-}
-.sidebar .sidebar_cell input {
-    width: 100%;
-    height: 70%;
+        background-color: #ffffff;
+        box-shadow:
+                inset -2px -2px 4px rgba(255, 255, 255, .9),
+                inset 2px 2px 4px rgba(0, 0, 0, .4);
 
-    text-indent: 2px;
-    outline: none;
-    border-radius: 8px;
+        list-style: none;
+        cursor: pointer;
 
-    transition: width .3s;
-    /* box-sizing: border-box; */
+        img{
+            margin-left: 4px;
+            height: 24px;
+        }
+        input {
+            width: 100%;
+            height: 70%;
 
-    font-size: 14px;
-    font-weight: bold;
-    color: #31384F;
-}
-.sidebar .sidebar_cell input::placeholder {
-    font-size: 14px;
-    font-weight: bold;
-    color: #a5a5a5;
-}
-.sidebar .sidebar_cell a {
-    width: 100%;
-    height: 100%;
-    border-radius: 6px;
-    
-    color: #31384F;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 40px;
-    text-decoration: none;
+            text-indent: 2px;
+            outline: none;
+            border-radius: 8px;
+            border: none;
 
-    list-style: none;
-    transition: all 0.3s ease;
-}
+            transition: width .3s;
+            /* box-sizing: border-box; */
 
-.sidebar .sidebar_cell a:hover {
-    background-color: #F84F52;
-    color: #ffffff;
+            font-size: 14px;
+            font-weight: bold;
+            color: #31384F;
+
+            &::placeholder {
+                font-size: 14px;
+                font-weight: bold;
+                color: #a5a5a5;
+            }
+        }
+        a {
+            width: 100%;
+            height: 100%;
+            border-radius: 6px;
+
+            color: #31384F;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 40px;
+            text-decoration: none;
+
+            list-style: none;
+            transition: all 0.3s ease;
+
+            &:hover {
+                background-color: #F84F52;
+                color: #ffffff;
+            }
+        }
+    }
 }
 </style>

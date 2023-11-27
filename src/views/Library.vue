@@ -251,18 +251,12 @@ export default defineComponent({
 
 </script>
 
-<style>
+<style lang="scss">
 * {
     scroll-behavior: smooth;
     margin: 0;
 }
 body{
-    display: flex;
-    flex-direction: column;
-    justify-items: center;
-    align-items: center;
-
-    height: 100%;
     background: #dddddd;
 }
 
@@ -273,139 +267,146 @@ td {
     display: flex;
     flex-direction: column;
 
-    margin-top: 148px;
+    margin-top: 104px;
     width: 1200px;
     background-color: #dddddd;
-}
+    margin-bottom: 80px;
 
+    /* 海 */
+    .sea_div {
+        width: 1200px;
+        height: auto;
 
-/* 海 */
-.sea_div {
-    width: 1200px;
-    height: auto;
+        border-radius:  20px;
 
-    /* background-color: #eeeeee; */
-    border-radius:  20px;
-    /* box-shadow: 2px 2px 2px #bdbdbd; */
+        margin-top: 30px;
 
-    margin-top: 30px;
-}
-.sea_id {
-    width: 1200px;
-    height: 48px;
+        .sea_id {
+            width: 1200px;
+            height: 48px;
 
-    background-color: #31384f;
-    border-radius:  20px;
-    box-shadow: 2px 2px 2px #bdbdbd;
-}
-.sea_div .sea_id p {
-    font-size: 32px;
-    font-weight: bold;
-    color: #ffffff;
+            background-color: #31384f;
+            border-radius:  20px;
+            box-shadow: 2px 2px 2px #bdbdbd;
 
-    text-align: center;
-    line-height: 48px;
+            p {
+                font-size: 32px;
+                font-weight: bold;
+                color: #ffffff;
 
-    margin: 0;
-}
+                text-align: center;
+                line-height: 48px;
 
-/* 世界泡 */
-.wb_div {
-    float: left;
-    width: 1200px;
-    margin-bottom: 20px;
-    border-radius: 20px;
-    overflow: hidden;
+                margin: 0;
+            }
+        }
 
-    background-color: #eeeeee;
-    box-shadow: 2px 2px 2px #bdbdbd;
-}
-.wb_id{
-    width: 1200px;
-    height: 60px;
-    line-height: 26px;
+        /* 世界泡 */
+        .wb_div {
+            float: left;
+            width: 1200px;
+            margin-bottom: 20px;
+            border-radius: 20px;
+            overflow: hidden;
 
-    background-color: #ffffff;
-    box-shadow: 1px 1px 1px #bdbdbd;
-}
-.wb_id p:nth-child(1) {
-    font-size: 16px;
-    text-indent: 2rem;
-    margin-block: 0;
-    color: #31384f;
-}
-.wb_id p:nth-child(2) {
-    font-size: 22px;
-    font-weight: bold;
-    text-indent: 2rem;
-    margin-block: 0;
-    color: #31384f;
-}
+            background-color: #eeeeee;
+            box-shadow: 2px 2px 2px #bdbdbd;
 
-/* 书 */
-.book_div{
-    /* float: left; */
+            .wb_id{
+                width: 1200px;
+                height: 60px;
+                line-height: 26px;
 
-    width:200px;
-    height:320px;
+                background-color: #ffffff;
+                box-shadow: 1px 1px 1px #bdbdbd;
 
-    margin-top:15px;
-    margin-left:20px;
-    margin-bottom: 40px;
+                p:nth-child(1) {
+                    font-size: 16px;
+                    text-indent: 2rem;
+                    margin-block: 0;
+                    color: #31384f;
+                }
+                p:nth-child(2) {
+                    font-size: 22px;
+                    font-weight: bold;
+                    text-indent: 2rem;
+                    margin-block: 0;
+                    color: #31384f;
+                }
+            }
+        }
+    }
 
-    padding: 10px;
-    border-radius: 12px;
+    /* 书 */
+    .book_div{
+        /* float: left; */
 
-    display: inline-block;
-    background-color: #ffffff;
-    box-shadow: 5px 5px 5px #bdbdbd;
-}
+        width:200px;
+        height:320px;
 
-/* 封面 */
-.book_div img{
-    height: 200px;
-    width: 200px;
-    border-radius: 12px;
-}
+        margin-top:15px;
+        margin-left:20px;
+        margin-bottom: 40px;
 
-/* 书类 */
-#book_class_div{
-    width: 200px;
-    height: 20px;
-    line-height: 20px;
-}
-#book_class_div a {
-    font-size:15px;
+        padding: 10px;
+        border-radius: 12px;
 
-    text-align: left;
-    color: rgb(078, 157, 169);
-}
+        display: inline-block;
+        background-color: #ffffff;
+        box-shadow: 5px 5px 5px #bdbdbd;
 
-/* 书名 */
-#book_name_div {
-    width: 200px;
-    height: 30px;
-    line-height: 30px;
-}
-#book_name_div a{
-    font-size:18px;
-    font-weight: bold;
+        a {
+            /* 封面 */
+            img{
+                height: 200px;
+                width: 200px;
+                border-radius: 12px;
+            }
+        }
 
-    /* line-height: 30px; */
-    text-align: left;
-    color: #31384f;
-}
+        /* 书类 */
+        #book_class_div{
+            width: 200px;
+            height: 20px;
+            line-height: 20px;
 
-/* 更新时间 */
-#update_time_div {
-    width: 200px;
-    height: 20px;
-    line-height: 20px;
-}
-#update_time_div a{
-    font-size:16px;
-    
-    text-align: right;
-    color: #f84f52;
+            a {
+                font-size:15px;
+
+                text-align: left;
+                color: rgb(078, 157, 169);
+            }
+        }
+
+        /* 书名 */
+        #book_name_div {
+            width: 200px;
+            height: 30px;
+            line-height: 30px;
+
+            a{
+                font-size:18px;
+                font-weight: bold;
+
+                /* line-height: 30px; */
+                text-align: left;
+                color: #31384f;
+            }
+        }
+
+        /* 更新时间 */
+        #update_time_div {
+            width: 200px;
+            height: 20px;
+            line-height: 20px;
+
+            a{
+                font-size:16px;
+
+                text-align: right;
+                color: #f84f52;
+            }
+        }
+    }
 }
 </style>

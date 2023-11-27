@@ -129,7 +129,7 @@
   </main>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 body{
   background: #dddddd;
 }
@@ -140,108 +140,119 @@ p {
 
 /* 总盒子 */
 .container {
-    margin-top: 140px;
+    margin-top: 104px;
     background-color: #eeeeee;
 
     box-shadow: 2px 2px 2px #bdbdbd;
-}
 
-.about_div {
-    width: 1200px;
-    height: 100%;
+    .about_div {
+        width: 1200px;
+        height: 100%;
 
-    display: flex;
-    flex-direction: column;
+        display: flex;
+        flex-direction: column;
 
-    justify-content: center;
-    align-items: Center;
+        justify-content: center;
+        align-items: Center;
 
-    background-color: #ffffff;
-}
-/* 头像 */
-.photo {
-    width: 1200px;
-    height: 300px;
+        background-color: #ffffff;
 
-    background-color: #31384f;
-    text-align: center;
-}
-.photo img{
-    height: 200px;
-    margin-top: 36px;
+        /* 头像 */
+        .photo {
+            width: 1200px;
+            height: 300px;
 
-    border-radius: 50%;
-}
-.big_name {
-    font-size: 24px;
-    font-weight: bold;
-    color: #ffffff;
+            background-color: #31384f;
+            text-align: center;
 
-    margin-top: 8px;
-}
+            img{
+                height: 200px;
+                margin-top: 36px;
 
-/* 文字内容 */
-.introduce_box {
-    width: 1160px;
-    height: 100%;
+                border-radius: 50%;
+            }
+            .big_name {
+                font-size: 24px;
+                font-weight: bold;
+                color: #ffffff;
 
-    margin: 8px 20px 0 20px;
+                margin-top: 8px;
+            }
+        }
 
-    background-color: white;
+        /* 文字内容 */
+        .introduce_box {
+            width: 1160px;
+            height: 100%;
 
-    font-size: 20px;
-}
-.introduce_box table {
-    table-layout: fixed;
-    width: 1160px;
+            margin: 8px 20px 0 20px;
 
-    /* tr 间距 */
-    border-collapse: separate;
-    border-spacing: 20px;
-}
-.introduce_box table tr{
-    border-radius: 40px;
-    box-shadow:
-        inset -2px -2px 4px rgba(255, 255, 255, .9),
-        inset 2px 2px 4px rgba(0, 0, 0, .4);
-    margin-block: 10px;
-}
-.introduce_box tr td .content_div {
-    margin-left: 20px;
-}
-/* 一级标题 */
-.introduce_box tr td .title {
-    font-family: frutiger sans-serif;
-    font-size: 24px;
-    font-weight: bold;
-    text-indent: 18px;
-    color: #bd0707;
+            background-color: white;
 
-    width: 1200px;
-    height: 50px;
-}
-/* 二级标题 */
-.introduce_box tr td .title_2 {
-    font-family: frutiger sans-serif;
-    font-size: 18px;
-    font-weight: bold;
-    color: #000000;
+            font-size: 20px;
 
-    width: 1200px;
-    height: 30px;
-}
-/* 文本 */
-.introduce_box tr td .content{
-    font-family: frutiger sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    color: #31384f;
+            table {
+                table-layout: fixed;
+                width: 1160px;
 
-    text-indent:2em;
-    line-height: 16px;
-}
-/* 标红文本 */
-.introduce_box tr td p span{
-    color: #f84f52
+                /* tr 间距 */
+                border-collapse: separate;
+                border-spacing: 20px;
+
+                tr{
+                    border-radius: 30px;
+                    box-shadow:
+                            inset -2px -2px 4px rgba(255, 255, 255, .9),
+                            inset 2px 2px 4px rgba(0, 0, 0, .4);
+                    margin-block: 10px;
+
+                    td {
+                        .content_div {
+                            margin-left: 20px;
+                        }
+                        /* 一级标题 */
+                        .title {
+                            font-family: frutiger sans-serif;
+                            font-size: 24px;
+                            font-weight: bold;
+                            text-indent: 18px;
+                            color: #bd0707;
+
+                            width: 1200px;
+                            height: 50px;
+                            margin-top: 10px;
+                        }
+                        /* 二级标题 */
+                        .title_2 {
+                            font-family: frutiger sans-serif;
+                            font-size: 18px;
+                            font-weight: bold;
+                            color: #000000;
+
+                            width: 1200px;
+                            height: 30px;
+                        }
+                        /* 文本 */
+                        .content{
+                            font-family: frutiger sans-serif;
+                            font-size: 16px;
+                            font-weight: bold;
+                            color: #31384f;
+
+                            text-indent:2em;
+                            //line-height: 18px;
+
+                            margin-bottom: 10px;
+                        }
+                        p {
+                            span{
+                                color: #f84f52
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 </style>

@@ -71,10 +71,6 @@
     margin: 0;
 }
 body{
-    /*
-    background-size: cover;
-    background: url("../image/background/bg_black hole.jpg") no-repeat fixed;
-    */
     background: #eeeeee;
 
     position: absolute;

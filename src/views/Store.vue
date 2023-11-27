@@ -124,7 +124,7 @@ td {
     display: flex;
     flex-direction: column;
 
-    margin-top: 148px;
+    margin-top: 120px;
 
     background-color: #eeeeee;
     box-shadow: 2px 2px 2px #bdbdbd;
