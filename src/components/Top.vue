@@ -64,7 +64,7 @@
           <!-- 分页栏 -->
           <div class="page_div">
             <div class="each_page">
-              <router-link to="/Home">
+              <router-link to="/">
                 Home
               </router-link>
             </div>
@@ -103,19 +103,7 @@
 <script setup>
 </script>
 
-<style scoped lang="scss">
-$blueColor: #31384f;  /* 藏蓝色 */
-$yellowColor: #fec738;  /* 黄色 */
-$boothRedColor: #f84f52;  /* Booth浅红 */
-$boothGreenColor: #4e9da9;  /* Booth浅绿 */
-
-$lightGrayColor: #b2b2b2;  /* 浅灰 */
-$darkGrayColor: #706e6f;  /* 深灰 */
-$furGrayColor: #e7e5e1;  /* 鹅毛灰色-背景板 */
-
-$bgDarkGrayColor: #dddddd;  /* 背景-深灰 */
-$bgLightGrayColor: #eeeeee;  /* 背景-浅灰 */
-
+<style lang="scss" scoped>
 body {
     width: 100%;
     display: flex;
@@ -136,7 +124,7 @@ p, a, span {
     width: 100%;
     height: auto;
 
-    background-color: $blueColor;
+    background-color: $blue-color;
 
     z-index: 101;
 
@@ -147,7 +135,7 @@ p, a, span {
         width: 1200px;
         height: 64px;
 
-        background: $blueColor;
+        background: $blue-color;
 
         /* 图标 */
         .icon_div {
@@ -177,7 +165,7 @@ p, a, span {
                     size: 18px;
                     weight: bolder;
                 }
-                color: $boothRedColor;
+                color: $booth-red-color;
                 text-decoration: none;
             }
         }
@@ -205,13 +193,13 @@ p, a, span {
 
                 text-align: center;
 
-                border-left: 1px solid $darkGrayColor;
+                border-left: 1px solid $dark-gray-color;
 
                 cursor: pointer;
                 transition: background-color 0.3s;
 
                 &:hover {
-                    background-color: $boothRedColor;
+                    background-color: $booth-red-color;
                 }
 
                 img{
@@ -282,17 +270,17 @@ p, a, span {
                 }
 
                 a {
-                    color: $blueColor;
+                    color: $blue-color;
 
                     font-size: 16px;
                     font-weight: bold;
                     text-decoration: none;
 
                     &:link {
-                        color: $blueColor;
+                        color: $blue-color;
                     }
                     &:visited {
-                        color: $blueColor;
+                        color: $blue-color;
                     }
                 }
             }

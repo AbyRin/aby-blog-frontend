@@ -148,7 +148,7 @@ export default {
             params: {
                 creator: creator
             }
-            }).then(result => {
+        }).then(result => {
             console.log(result)
             const userObj = result.data.data
 
@@ -156,19 +156,19 @@ export default {
             // Object.keys() 方法: 遍历属性
             Object.keys(userObj).forEach(key => {
                 if (key === 'avatar') {
-                // 赋予默认头像
-                document.querySelector('.prew').src = userObj[key]
+                    // 赋予默认头像
+                    document.querySelector('.prew').src = userObj[key]
                 } else if (key === 'gender') {
-                // 赋予默认性别
-                // 获取性别单选框：[男radio元素，女radio元素]
-                // 单选框的选择与 value 无关，而与 checked = "true/false" 有关
-                const gRadioList = document.querySelectorAll('.gender')  // 伪数组: 0男，1女
-                const gNum = userObj[key]
-                // 性别数字 恰好可以作为 gRadioList伪数组的 下标
-                gRadioList[gNum].checked = true
+                    // 赋予默认性别
+                    // 获取性别单选框：[男radio元素，女radio元素]
+                    // 单选框的选择与 value 无关，而与 checked = "true/false" 有关
+                    const gRadioList = document.querySelectorAll('.gender')  // 伪数组: 0男，1女
+                    const gNum = userObj[key]
+                    // 性别数字 恰好可以作为 gRadioList伪数组的 下标
+                    gRadioList[gNum].checked = true
                 } else {
-                // 赋予默认内容
-                document.querySelector(`.${key}`).value = userObj[key]
+                    // 赋予默认内容
+                    document.querySelector(`.${key}`).value = userObj[key]
                 }
             })
             console.log(userObj)
@@ -197,7 +197,7 @@ export default {
                 method: 'PUT',
                 data: fd
             }).then(result => {
-              // 把新的头像回显到页面上
+                // 把新的头像回显到页面上
                 document.querySelector('.prew').src = result.data.data.avatar
             })
         })

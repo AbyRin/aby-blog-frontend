@@ -6,7 +6,6 @@ import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css'
 
 import App from './App.vue';
-import Index from './views/Index.vue';
 import Home from './views/Home.vue';
 import Library from './views/Library.vue';
 import Store from './views/Store.vue';
@@ -19,8 +18,7 @@ import NotFound from './views/NotFound.vue';
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/', component: Index },
-    { path: '/home', component: Home },
+    { path: '/', component: Home },
     { path: '/library', component: Library },
     { path: '/store', component: Store },
     { path: '/forum', component: Forum },

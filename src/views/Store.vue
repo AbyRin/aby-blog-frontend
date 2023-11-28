@@ -101,7 +101,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 * {
     scroll-behavior: smooth;
     margin: 0;
@@ -113,7 +113,7 @@ body{
     align-items: Center;
 
     height: 100%;
-    background: #dddddd;
+    background: $bg-dark-gray-color;
 }
 
 td {
@@ -126,7 +126,7 @@ td {
 
     margin-top: 120px;
 
-    background-color: #eeeeee;
+    background-color: $bg-light-gray-color;
     box-shadow: 2px 2px 2px #bdbdbd;
 }
 
@@ -142,7 +142,7 @@ td {
     color: #ffffff;
     font-weight: bold;
 
-    background-color: #31384f;
+    background-color: $blue-color;
 
     line-height: 40px;
 
@@ -189,7 +189,7 @@ td {
     cursor: pointer;
 
     color: #ffffff;
-    background-color: #f84f52;
+    background-color: $booth-red-color;
 
     margin-left: 40px;
 
@@ -224,16 +224,6 @@ td {
     box-shadow: 5px 5px 5px #bdbdbd;
 }
 
-/*
-.product_container .prod_div:nth-child(5),.product_container .prod_div:nth-child(10),
-.product_container .prod_div:nth-child(15),.product_container .prod_div:nth-child(20),
-.product_container .prod_div:nth-child(25),.product_container .prod_div:nth-child(30),
-.product_container .prod_div:nth-child(35),.product_container .prod_div:nth-child(40),
-.product_container .prod_div:nth-child(45),.product_container .prod_div:nth-child(50){
-    margin-right:0;
-}
-*/
-
 .product_container .product_div img{
     height: 200px;
     width: 200px;
@@ -254,7 +244,7 @@ td {
 
     font-size:20px;
     text-align: left;
-    color: #31384f;
+    color: $blue-color;
 
     overflow: hidden;
     white-space: nowrap;
@@ -267,7 +257,7 @@ td {
     font-size:18px;
     margin-top:10px;
     text-align: left;
-    color: #f84f52;
+    color: $booth-red-color;
 
     float: left;
 }
@@ -278,7 +268,7 @@ td {
     font-size:18px;
     margin-top:10px;
     text-align: right;
-    color: #fec738;
+    color: $yellow-color;
 
     float: right;
 }
@@ -306,7 +296,7 @@ td {
     transition: color .2s;
 }
 #gotocart_div a:hover{
-    background-color: #f84f52;
+    background-color: $booth-red-color;
     color: #ffffff;
 }
 
@@ -334,7 +324,7 @@ td {
     transition: color .2s;
 }
 #collect_div a:hover{
-    background-color: #f84f52;
+    background-color: $booth-red-color;
     color: #ffffff;
 }
 
@@ -370,7 +360,7 @@ td {
     margin: 0;
     padding: 0;
 
-    box-shadow: 5px 5px 5px #bdbdbd;
+    box-shadow: 5px 5px 5px $shadow-color;
 }
 /* 海 */
 .elevator .elevator_list li[class = 'sea'] {
@@ -382,7 +372,7 @@ td {
     margin: 0;
 
     list-style-type: none;
-    background-color: #31384f;
+    background-color: $blue-color;
 }
 
 .elevator .elevator_list li[class = 'sea'] a {
@@ -415,13 +405,13 @@ td {
 
     text-decoration: none;
 
-    color: #31384f;
+    color: $blue-color;
     transition: all .5s;
 }
 
 .elevator .elevator_list li a:hover,
 .elevator .elevator_list li a.active {
-    background-color: #f84f52;
+    background-color: $booth-red-color;
     color: #ffffff;
 }
 

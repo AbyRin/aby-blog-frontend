@@ -1,6 +1,6 @@
 <template>
   <div class="bottom_container">
-    <p>Copyright © 2023 AbyBlog  abyblog.com All Rights Reserved.</p>
+    <p>Copyright © 2023 POLARIS  polaris.com All Rights Reserved.</p>
   </div>
 </template>
 
