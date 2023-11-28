@@ -345,7 +345,7 @@ td {
         height:320px;
 
         margin-top:15px;
-        margin-left:20px;
+        margin-left:30px;
         margin-bottom: 40px;
 
         padding: 10px;
@@ -353,7 +353,13 @@ td {
 
         display: inline-block;
         background-color: #ffffff;
-        box-shadow: 5px 5px 5px #bdbdbd;
+        box-shadow: 5px 5px 5px rgba(0,0,0,0.32);
+
+        transition: all 0.3s;
+        &:hover {
+            transform: translateY(-3px) scale(1.01,1.01);
+            box-shadow:10px 10px 10px rgba(0,0,0,0.3);
+        }
 
         a {
             /* 封面 */
