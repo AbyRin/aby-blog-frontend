@@ -6,7 +6,7 @@
         <div class="top_div">
           <!-- 图标 -->
           <div class="icon_div">
-            <img src="@/image/img_bg/polaris_icon.jpg" alt="">
+            <img src="@/image/img_bg/Polaris_icon.png" alt="">
           </div>
 
           <!-- 欢迎语 -->

@@ -127,7 +127,7 @@ import '@/js/jquery-1.4.2.js'
 import '@/js/login_ajax.js'
 </script>
 
-<style>
+<style lang="scss" scoped>
 body {
     background-color: #dddddd;
     padding: 20px;

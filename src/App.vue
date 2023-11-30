@@ -8,23 +8,28 @@
       <router-view />
     </main>
 
-    <footer>
-      <bottom />
-    </footer>
+    <footer />
   </div>
 </template>
 
 <script>
-import Top from '@/components/Top.vue';
-import Bottom from '@/components/Bottom.vue';
+import TopNew from '@/components/TopNew.vue';
 
 export default {
     components: {
-        'top': Top,
-        'bottom': Bottom
+        'top': TopNew,
     },
 };
 </script>
 
 <style lang="scss">
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    height: 100%;
+    background-size: 100%;
+    background: linear-gradient(#f7f7f7, #b4b4b4);
+}
 </style>

@@ -129,7 +129,7 @@
   </main>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 body{
   background: #dddddd;
 }

@@ -5,13 +5,13 @@ import { createPinia } from 'pinia';
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css'
 
-import App from './App.vue';
-import Home from './views/Home.vue';
-import Library from './views/Library.vue';
-import Store from './views/Store.vue';
-import Forum from './views/Forum.vue';
-import Inspiration from './views/Inspiration.vue';
-import About from './views/About.vue';
+import App from '@/App.vue';
+import Home from '@/views/Home.vue';
+import Library from '@/views/Library.vue';
+import Store from '@/views/Store.vue';
+import Forum from '@/views/Forum.vue';
+import Inspiration from '@/views/Inspiration.vue';
+import About from '@/views/About.vue';
 
 import NotFound from './views/NotFound.vue';
 

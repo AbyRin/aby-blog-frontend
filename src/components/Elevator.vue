@@ -16,23 +16,14 @@
         <a href="javascript:" data-name="wb4">World Bubble Ⅳ</a>
       </li>
       <li>
-        <a
-          href="javascript:"
-          data-name="wb5"
-        >World Bubble Ⅴ</a>
+        <a href="javascript:" data-name="wb5">World Bubble Ⅴ</a>
       </li>
       <li>
-        <a
-          href="javascript:"
-          data-name="wb6"
-        >World Bubble Ⅵ</a>
+        <a href="javascript:" data-name="wb6">World Bubble Ⅵ</a>
       </li>
       
       <li>
-        <a
-          id="backTop"
-          href="javascript:"
-        >Top</a>
+        <a id="backTop" href="javascript:">Top</a>
       </li>
     </ul>
   </div>
@@ -42,7 +33,6 @@
 export default {
     mounted() {
         // 图书馆页面-功能模块: 电梯
-    
         // 功一二: 点击 Top: 页面顶部
         (function () {
             // 功能一: 点击 Top: 页面顶部
@@ -130,104 +120,102 @@ export default {
 </script>
 
 
-<style>
+<style lang="scss" scoped>
 .elevator {
-  position: fixed;
-  width: 160px;
-  height: auto;
-  
-  left: 50%;
-  margin-left: 620px;
-  top: 320px;
-  z-index: 100;
-  
-  /* (已修改方案) */
-  /* 初始隐藏电梯，页面向下滑动时伴随 书籍搜索条 出现 */
-  /* opacity: 0; */
-  
-  text-align: center;
-  transition: all .5s;
+    position: fixed;
+    width: 160px;
+    height: auto;
+
+    left: 50%;
+    margin-left: 620px;
+    top: 320px;
+    z-index: 100;
+
+    text-align: center;
+    transition: all .5s;
+
+    /* 分类 */
+    .elevator_list {
+        /* position: relative; */
+
+        width: 160px;
+        height: auto;
+
+        background: #fff;
+
+        margin: 0;
+        padding: 0;
+
+        box-shadow: 5px 5px 5px #bdbdbd;
+
+        /* 世界泡 */
+        li {
+            width: auto;
+            height: 50px;
+            line-height: 50px;
+
+            border: 1px solid #dcdcdc;
+            margin: 0;
+
+            list-style-type: none;
+            a {
+                display: block;
+
+                width: auto;
+                height: 50px;
+
+                text-decoration: none;
+
+                color: #31384f;
+                transition: all .5s;
+                &:hover {
+                    background-color: #f84f52;
+                    color: #ffffff;
+                }
+
+                i {
+                    position: relative;
+
+                    display: block;
+
+                    width: 16px;
+                    height: 16px;
+
+                    left: 4px;
+                    background-position: 8px -106px;
+
+                    font-size: 20px;
+                    transform: rotate(-90deg);
+                }
+            }
+            /* 海 */
+            &[class = 'sea'] {
+                width: auto;
+                height: 50px;
+                line-height: 50px;
+
+                border: 1px solid #dcdcdc;
+                margin: 0;
+
+                list-style-type: none;
+                background-color: #31384f;
+                a {
+                    display: block;
+
+                    width: auto;
+                    height: 50px;
+
+                    text-decoration: none;
+
+                    color: #ffffff;
+                }
+            }
+        }
+    }
 }
 
-/* 分类 */
-.elevator .elevator_list {
-  /* position: relative; */
-  
-  width: 160px;
-  height: auto;
-  
-  background: #fff;
-  
-  margin: 0;
-  padding: 0;
-  
-  box-shadow: 5px 5px 5px #bdbdbd;
-}
-/* 海 */
-.elevator .elevator_list li[class = 'sea'] {
-  width: auto;
-  height: 50px;
-  line-height: 50px;
-  
-  border: 1px solid #dcdcdc;
-  margin: 0;
-  
-  list-style-type: none;
-  background-color: #31384f;
-}
 
-.elevator .elevator_list li[class = 'sea'] a {
-  display: block;
-  
-  width: auto;
-  height: 50px;
-  
-  text-decoration: none;
-  
-  color: #ffffff;
-}
-/* 世界泡 */
-.elevator .elevator_list li {
-  width: auto;
-  height: 50px;
-  line-height: 50px;
-  
-  border: 1px solid #dcdcdc;
-  margin: 0;
-  
-  list-style-type: none;
-}
 
-.elevator .elevator_list li a {
-  display: block;
-  
-  width: auto;
-  height: 50px;
-  
-  text-decoration: none;
-  
-  color: #31384f;
-  transition: all .5s;
-}
 
-.elevator .elevator_list li a:hover {
-  background-color: #f84f52;
-  color: #ffffff;
-}
 
-.elevator .elevator_list li a i {
-  position: relative;
-  
-  display: block;
-  
-  width: 16px;
-  height: 16px;
-  
-  left: 4px
-;
-  background-position: 8px -106px;
-  
-  font-size: 20px;
-  transform: rotate(-90deg);
-}
 </style>

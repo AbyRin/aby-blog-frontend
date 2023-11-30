@@ -1,38 +1,36 @@
 <template>
   <div class="sidebar">
-    <div>
-      <!-- 搜索框 -->
-      <div class="sidebar_cell">
-        <img src="@/image/icon/icons8-search-100.png" alt="">
-        <input
-          type="text"
-          placeholder="Search"
-        >
-      </div>
-      <!-- 目录 -->
-      <div class="sidebar_cell">
-        <a>设计</a>
-      </div>
+    <!-- 搜索框 -->
+    <div class="sidebar_cell">
+      <img id="smileJPG" src="@/image/icon/icons8-search-100.png" alt="">
+      <input
+        type="text"
+        placeholder="Search"
+      >
+    </div>
+    <!-- 目录 -->
+    <div class="sidebar_cell">
+      <a>设计</a>
+    </div>
 
-      <div class="sidebar_cell">
-        <a>文化</a>
-      </div>
+    <div class="sidebar_cell">
+      <a>文化</a>
+    </div>
 
-      <div class="sidebar_cell">
-        <a>工艺</a>
-      </div>
+    <div class="sidebar_cell">
+      <a>工艺</a>
+    </div>
 
-      <div class="sidebar_cell">
-        <a>生活</a>
-      </div>
+    <div class="sidebar_cell">
+      <a>生活</a>
+    </div>
 
-      <div class="sidebar_cell">
-        <a>时代</a>
-      </div>
+    <div class="sidebar_cell">
+      <a>时代</a>
+    </div>
 
-      <div class="sidebar_cell">
-        <a>专题</a>
-      </div>
+    <div class="sidebar_cell">
+      <a>专题</a>
     </div>
   </div>
 </template>
@@ -52,7 +50,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 * {
     margin: 0;
     padding: 0;
@@ -147,4 +145,4 @@ export default {
         }
     }
 }
-</style>
+</style >

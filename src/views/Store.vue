@@ -72,7 +72,6 @@
           <div id="collect_div">
             <a th:href="'/collect/addcollect?product_id='+${product.product_id}"><b>Collect</b></a>
           </div>
-
         </div>
       </div>
     </div>
@@ -88,7 +87,7 @@ export default {
 }
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 * {
     scroll-behavior: smooth;
     margin: 0;
@@ -100,7 +99,7 @@ body{
     align-items: Center;
 
     height: 100%;
-    background: $bg-dark-gray-color;
+    background-color: $bg-dark-gray-color;
 }
 
 td {
@@ -110,10 +109,15 @@ td {
 .container{
     display: flex;
     flex-direction: column;
+    justify-items: center;
+    align-items: center;
+
+    width: 1200px;
+    height: auto;
 
     margin-top: 120px;
 
-    background-color: $bg-light-gray-color;
+    background-color: #ffffff;
     box-shadow: 2px 2px 2px #bdbdbd;
 
     /* 商品搜索条部分 */

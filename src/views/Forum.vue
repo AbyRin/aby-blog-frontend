@@ -179,7 +179,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 body{
     display: flex;
     flex-direction: column;

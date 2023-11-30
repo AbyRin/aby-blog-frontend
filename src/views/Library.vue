@@ -251,7 +251,7 @@ export default defineComponent({
 
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 * {
     scroll-behavior: smooth;
     margin: 0;
@@ -266,6 +266,8 @@ td {
 .library_container {
     display: flex;
     flex-direction: column;
+    justify-items: center;
+    align-items: center;
 
     margin-top: 104px;
     width: 1200px;
