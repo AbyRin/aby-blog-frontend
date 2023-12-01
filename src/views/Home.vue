@@ -1,51 +1,72 @@
 <template>
   <div>
-    <!-- smile -->
-    <img id="smileJPG" src="@/image/img_bg/smile.png" alt="">
-
     <!-- 走马灯 -->
     <div class="carousel_div">
-      <Carousel />
+      <Carousel
+        v-model="currentIndex"
+        @img-list-changed="updateImgList"
+        @img-changed="handleImgChanged"
+        @current-index-changed="updateCurrentIndex"
+      />
     </div>
 
     <!-- 内容栏 -->
-    <div v-for="(item) in imgList" :key="item" class="content_div">
+    <div v-for="(item, key) in receivedImg" :key="key" class="content_div">
       <p id="topic_p">
-        {{ item }}
+        {{ key }}
       </p>
       <p id="introduce_p">
         {{ item.introduce }}
       </p>
 
       <!-- 侧边切换栏 -->
-      <div class="side_div">
-        <div class="each_side" :class="{ 'active-side': isActiveImg }">
-          <a>{{ item }}</a>
-        </div>
-      </div>
+      <!--      <div class="side_div">-->
+      <!--        <div-->
+      <!--          v-for="(carouselItem, carouselKey) in imgList"-->
+      <!--          :key="carouselKey"-->
+      <!--          class="each_side"-->
+      <!--          :class="{ 'active-side': isActiveImg(carouselKey) }"-->
+      <!--          @click="changeCarouselByKey(carouselKey)"-->
+      <!--        >-->
+      <!--          <a>{{ carouselKey }}</a>-->
+      <!--        </div>-->
+      <!--      </div>-->
     </div>
   </div>
 </template>
 
 <script>
-import { defineComponent } from "vue";
-import Carousel from "@/components/Carousel.vue";
+import { defineComponent } from 'vue';
+import Carousel from '@/components/Carousel.vue';
 
 export default defineComponent({
     components: { Carousel },
-
     data() {
         return {
-            receivedImgList: {}
+            receivedImg: {},
+            imgList: {},
+            currentIndex: 0,
         };
     },
     methods: {
-        updateImgList(imgList) {
-            this.receivedImgList = imgList;
+        handleImgChanged(img) {
+            this.receivedImg = img;
         },
-        // each_side 激活样式
-        isActiveImg() {
-            return this.receivedImgList[this.currentIndex];
+        updateImgList(imgList) {
+            this.imgList = imgList;
+            this.receivedImg = imgList[Object.keys(imgList)[this.currentIndex]];
+        },
+        // isActiveImg(carouselKey) {
+        //     return carouselKey === Object.keys(this.imgList)[this.currentIndex];
+        // },
+        // changeCarouselByKey(key) {
+        //     const index = Object.keys(this.imgList).indexOf(key);
+        //     if (index !== -1) {
+        //         this.currentIndex = index;
+        //     }
+        // },
+        updateCurrentIndex(index) {
+            this.currentIndex = index;
         },
     },
 });
@@ -110,11 +131,10 @@ body {
 
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        justify-content: right;
 
         top: 50%;
-        right: 80px;
+        right: 90px;
         margin-top: -100px;
 
         width: 180px;;
@@ -130,7 +150,6 @@ body {
             padding: 10px;
 
             text-align: center;
-            border: #160A0A solid 1px;
 
             cursor: pointer;
             transition: all .2s;
@@ -138,6 +157,7 @@ body {
             a {
                 width: 100%;
                 height: 50px;
+                margin-right: 10px;
 
                 text-decoration: none;
 
@@ -161,7 +181,7 @@ body {
             /* 激活样式 */
             &.active-side {
                 border-right: $booth-red-color solid 4px;
-                box-shadow: 5px 0 5px rgba(0, 0, 0, 0.35);
+                //box-shadow: 5px 0 5px rgba(0, 0, 0, 0.35);
                 a {
                     color: $booth-red-color;
                 }

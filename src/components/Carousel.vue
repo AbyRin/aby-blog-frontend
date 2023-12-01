@@ -1,10 +1,12 @@
 <template>
   <div>
     <el-carousel
-      :interval="3000" arrow="always"
+      v-model="currentIndex"
+      :interval="3000"
       style="border-radius: 20px 20px 0 0"
+      @change="handleCarouselChange"
     >
-      <el-carousel-item v-for="(item) in imgList" :key="item">
+      <el-carousel-item v-for="(item, key) in imgList" :key="key">
         <img :src="item.image" alt="carousel-image">
       </el-carousel-item>
     </el-carousel>
@@ -13,7 +15,7 @@
 
 <script>
 export default {
-    emits: ['imgListChanged'],
+    emits: ['img-list-changed', 'img-changed', 'current-key-changed', 'current-index-changed'],
     data() {
         return {
             imgList: {
@@ -23,7 +25,7 @@ export default {
                 },
                 Store: {
                     image: require('@/image/img_home/img_home_2.jpg'),
-                    introduce: 'Nothing.',
+                    introduce: 'Store.',
                 },
                 Forum: {
                     image: require('@/image/img_home/img_home_3.jpg'),
@@ -31,21 +33,32 @@ export default {
                 },
                 Inspiration: {
                     image: require('@/image/img_home/img_home_4.jpg'),
-                    introduce: 'Nothing.',
+                    introduce: 'Inspiration.',
                 },
             },
             currentIndex: 0,
         };
     },
-    watch: {
-        currentIndex() {
-            this.emitImgList();
-        },
+    mounted() {
+        // 手动触发一次初始状态的处理
+        this.handleCarouselChange(this.currentIndex);
     },
     methods: {
-        // 传递 整个imgList 给 home.vue
+        handleCarouselChange(index) {
+            this.emitImgList();
+
+            const currentImgKey = Object.keys(this.imgList)[index];
+            const currentImgData = { [currentImgKey]: this.imgList[currentImgKey] };
+            this.$emit('img-changed', currentImgData);
+            this.$emit('current-index-changed', index);
+        },
         emitImgList() {
-            this.$emit('imgListChanged', this.imgList);
+            this.$emit('img-list-changed', this.imgList);
+
+            const currentImgKey = Object.keys(this.imgList)[this.currentIndex];
+            const currentImgData = { [currentImgKey]: this.imgList[currentImgKey] };
+            this.$emit('img-changed', currentImgData);
+            this.$emit('current-index-changed', this.currentIndex);
         },
     },
 };
