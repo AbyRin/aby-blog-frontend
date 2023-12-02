@@ -27,9 +27,11 @@ export default {
     margin: 0;
     padding: 0;
 }
-body {
+html {
     height: 100%;
-    background-size: 100%;
-    background: linear-gradient(#f7f7f7, #b4b4b4);
+    width: 100%;
+    background: linear-gradient(#ffffff 60%, #b4b4b4);
+}
+body {
 }
 </style>

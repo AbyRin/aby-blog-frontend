@@ -1,5 +1,6 @@
 <template>
   <div>
+    <img id="smileJPG" src="@/image/img_bg/smile.png" alt="">
     <!-- 走马灯 -->
     <div class="carousel_div">
       <Carousel
@@ -106,22 +107,27 @@ body {
     top: 240px;
     right: 70px;
 
-    width: 48vw;
+    width: 50vw;
     height: 70vh;
 
-    border: #160A0A solid 1px;
+    //border: #160A0A solid 1px;
 
     #topic_p {
+        margin-top: 10px;
         color: $blue-color;
         font: {
-            size: 40px;
+            size: 50px;
             weight: bold;
         };
     }
     #introduce_p {
-        color: #CFCFCF;
+        width: 540px;
+        margin-top: 28px;
+        //color: #CFCFCF;
+        color: $blue-color;
         font: {
-            size: 20px;
+            family: Roboto-Italic;
+            size: 24px;
         };
     }
 

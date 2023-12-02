@@ -1,28 +1,22 @@
 <template>
   <div>
-    <!-- 大模块（一）：话题区 -->
-    <div class="container">
-      <!-- （1）话题筛选条 -->
-      <div class="topic_div">
-        <!-- 话题开关 -->
-        <div class="filter_div">
-          <div class="filter">
-            Series
-          </div>
-          <div class="filter">
-            Neutral
-          </div>
-          <div class="filter">
-            Humorous
-          </div>
+    <!-- 话题筛选器 -->
+    <div class="topic_div">
+      <div class="filter_div">
+        <div class="filter">
+          Series
+        </div>
+        <div class="filter">
+          Neutral
+        </div>
+        <div class="filter">
+          Humorous
         </div>
       </div>
+    </div>
 
-      <div class="comment_div">
-        <ForumContainer />
-        <ForumContainer />
-        <ForumContainer />
-      </div>
+    <div class="comment_div">
+      <ForumContainer />
     </div>
 
     <!-- 大模块（二）：评论区 -->
@@ -207,46 +201,51 @@ td {
 
 /* （1）话题筛选条 ------------------------------------------------------------------------- */
 .topic_div{
+    position: fixed;
     display: flex;
-    justify-content: center;
+    justify-content: right;
     align-items: center;
 
-    width: 1600px;
-    height: 60px;
+    z-index: 101;
 
-    background-color: #31384f;
-}
+    width: 70vw;
+    height: 50px;
+    top: 90px;
 
-/* 话题筛选分支 */
-.filter_div {
-    display: flex;
+    background-color: $blue-color;
 
-    width: auto;
-    height: 40px;
+    .filter_div {
+        display: flex;
+        width: auto;
+        height: 32px;
 
-    background-color: #ffffff;
-    border-radius: 20px;
-}
-.filter_div .filter {
-    width: auto;
-    height: 40px;
+        background-color: #ffffff;
+        border-radius: 20px;
+        margin-right: 20px;
+        .filter {
+            width: auto;
+            height: 40px;
 
-    padding: 0 20px;
-    border-radius: 20px;
+            padding: 0 20px;
+            border-radius: 20px;
 
-    line-height: 40px;
-    transition: all 0.3s;
-    cursor: pointer;
+            line-height: 32px;
+            transition: all 0.3s;
+            cursor: pointer;
 
-    font-weight: bold;
-    color: #31384f;
+            font-weight: bold;
+            color: #31384f;
+        }
+    }
 }
 
 .comment_div {
-    width: auto;
-    height: auto;
+    position: fixed;
+    width: 800px;
+    height: 100%;
 
-    background-color: #eeeeee;
+    left: 32px;
+    top: 170px;
 }
 
 /* 大模块（二）： 评论功能 */
