@@ -11,15 +11,20 @@
       <!-- 按商品类别搜索 -->
       <div id="search_each">
         Class
-        <select name="product_class" class="product_class">
-          <option th:each="product_class:${product_classes}" th:value="${product_class}" th:text="${product_class}" />
+        <select class="product_class" name="product_class">
+          <option>
+            All
+          </option>>
+          <option v-for="(item, key) of productData" :key="key" value="item.productClass">
+            {{ item.productClass }}
+          </option>>
         </select>
       </div>
 
       <!-- 按价格区间搜索 -->
       <div id="search_each">
         Price Range
-        <input type="text" name="minprice"> ~ <input type="text" name="maxprice">
+        <input type="text" name="min_price"> ~ <input type="text" name="max_price">
       </div>
 
       <!-- 按钮 -->
@@ -28,209 +33,70 @@
 
     <img id="smileJPG" src="@/image/img_bg/smile.png" alt="">
 
-    <!-- 订单展示块 -->
-    <div class="order_div">
-      <table id="order_content">
-        <tr id="order_topic">
-          <td colspan="3">Cart</td>
+    <!-- 购物车展示块 -->
+    <div class="cart_div">
+      <table id="cart_content">
+        <tr id="cart_topic">
+          <td colspan="3">
+            Cart
+          </td>
         </tr>
-        <tr id="order_item">
+        <tr id="cart_item">
           <td>Product</td>
           <td>Price</td>
           <td>Num</td>
         </tr>
-        <!--        <tr>-->
-        <!--          <td>`${product.product_name}`</td>-->
-        <!--          <td>`${product.price}`</td>-->
-        <!--          <td>`${product.purchase_num}`</td>-->
-        <!--        </tr>-->
-        <tr>
-          <td>你说得对但原神是一款</td>
-          <td>￥20</td>
-          <td>×2</td>
+        <tr v-for="(item, key) of cartData" :key="key">
+          <td>{{ item.productId }}</td>
+          <td>￥{{ item.productPrice }}</td>
+          <td>{{ item.purchaseNum }}</td>
         </tr>
-        <tr>
-          <td>Mihoyo自主研发的</td>
-          <td>￥20</td>
-          <td>×2</td>
-        </tr>
-        <tr>
-          <td>开放世界冒险游戏</td>
-          <td>￥20</td>
-          <td>×2</td>
-        </tr>
-
-        <tr id="order_count">
+        <tr id="cart_count">
           <td>Total price</td>
-          <td colspan="2">￥120</td>
+          <td colspan="2">
+            ￥120
+          </td>
         </tr>
       </table>
     </div>
 
     <!-- 商品部分 -->
     <div class="product_container">
+      <el-backtop id="el_back_top" target=".product_container" :right="100" :bottom="30">
+        <div class="el_style">
+          ▲
+        </div>
+      </el-backtop>
       <!-- 商品展示块 -->
-      <div class="product_div" th:each="product:${productlist}">
-        <a th:href="'/store/productdetail?product_id='+${product.product_id}">
-          <img th:src="@{'/image/img_product/'+${product.picture}}" alt="">
+      <div v-for="(item, key) of productData" :key="key" class="product_div">
+        <a :id="item.productId">
+          <img :src="require(`@/image/img_product/${item.productPicture}`)" alt="">
         </a>
 
         <!-- 4个 商品信息-->
-        <div id="product_class_div" th:utext="${product.product_class}">
-          <b>Product Class</b>
+        <div id="product_class_div">
+          <b>{{ item.productClass }}</b>
         </div>
-        <div id="product_name_div" th:utext="${product.product_name}">
-          <b>Product Name</b>
+        <div id="product_name_div">
+          <b>{{ item.productName }}</b>
         </div>
-        <div id="product_price_div" th:utext="${product.price}+'CNY'">
-          <b>Price</b>
+        <div id="product_price_div">
+          <b>￥{{ item.productPrice }}</b>
         </div>
-        <div id="product_sold_div" th:utext="'Sold '+${product.soldnum}">
-          Sold Num
+        <div id="product_sold_div">
+          <b>{{ item.productSoldNum }}</b>
         </div>
 
         <!-- 2个 功能-->
         <div>
-          <!-- 加入购物车-->
-          <div id="gotocart_div">
-            <a th:href="'/cart/addcart?product_id='+${product.product_id}"><b>Purchase</b></a>
+          <!-- 功能键加入购物车-->
+          <div id="functionBtn">
+            <a @click="addCart(item.productId)"><b>Purchase</b></a>
           </div>
 
           <!-- 收藏 -->
-          <div id="collect_div">
-            <a th:href="'/collect/addcollect?product_id='+${product.product_id}"><b>Collect</b></a>
-          </div>
-        </div>
-      </div>
-      <!-- 商品展示块 -->
-      <div class="product_div" th:each="product:${productlist}">
-        <a th:href="'/store/productdetail?product_id='+${product.product_id}">
-          <img th:src="@{'/image/img_product/'+${product.picture}}" alt="">
-        </a>
-
-        <!-- 4个 商品信息-->
-        <div id="product_class_div" th:utext="${product.product_class}">
-          <b>Product Class</b>
-        </div>
-        <div id="product_name_div" th:utext="${product.product_name}">
-          <b>Product Name</b>
-        </div>
-        <div id="product_price_div" th:utext="${product.price}+'CNY'">
-          <b>Price</b>
-        </div>
-        <div id="product_sold_div" th:utext="'Sold '+${product.soldnum}">
-          Sold Num
-        </div>
-
-        <!-- 2个 功能-->
-        <div>
-          <!-- 加入购物车-->
-          <div id="gotocart_div">
-            <a th:href="'/cart/addcart?product_id='+${product.product_id}"><b>Purchase</b></a>
-          </div>
-
-          <!-- 收藏 -->
-          <div id="collect_div">
-            <a th:href="'/collect/addcollect?product_id='+${product.product_id}"><b>Collect</b></a>
-          </div>
-        </div>
-      </div>
-      <!-- 商品展示块 -->
-      <div class="product_div" th:each="product:${productlist}">
-        <a th:href="'/store/productdetail?product_id='+${product.product_id}">
-          <img th:src="@{'/image/img_product/'+${product.picture}}" alt="">
-        </a>
-
-        <!-- 4个 商品信息-->
-        <div id="product_class_div" th:utext="${product.product_class}">
-          <b>Product Class</b>
-        </div>
-        <div id="product_name_div" th:utext="${product.product_name}">
-          <b>Product Name</b>
-        </div>
-        <div id="product_price_div" th:utext="${product.price}+'CNY'">
-          <b>Price</b>
-        </div>
-        <div id="product_sold_div" th:utext="'Sold '+${product.soldnum}">
-          Sold Num
-        </div>
-
-        <!-- 2个 功能-->
-        <div>
-          <!-- 加入购物车-->
-          <div id="gotocart_div">
-            <a th:href="'/cart/addcart?product_id='+${product.product_id}"><b>Purchase</b></a>
-          </div>
-
-          <!-- 收藏 -->
-          <div id="collect_div">
-            <a th:href="'/collect/addcollect?product_id='+${product.product_id}"><b>Collect</b></a>
-          </div>
-        </div>
-      </div>
-      <!-- 商品展示块 -->
-      <div class="product_div" th:each="product:${productlist}">
-        <a th:href="'/store/productdetail?product_id='+${product.product_id}">
-          <img th:src="@{'/image/img_product/'+${product.picture}}" alt="">
-        </a>
-
-        <!-- 4个 商品信息-->
-        <div id="product_class_div" th:utext="${product.product_class}">
-          <b>Product Class</b>
-        </div>
-        <div id="product_name_div" th:utext="${product.product_name}">
-          <b>Product Name</b>
-        </div>
-        <div id="product_price_div" th:utext="${product.price}+'CNY'">
-          <b>Price</b>
-        </div>
-        <div id="product_sold_div" th:utext="'Sold '+${product.soldnum}">
-          Sold Num
-        </div>
-
-        <!-- 2个 功能-->
-        <div>
-          <!-- 加入购物车-->
-          <div id="gotocart_div">
-            <a th:href="'/cart/addcart?product_id='+${product.product_id}"><b>Purchase</b></a>
-          </div>
-
-          <!-- 收藏 -->
-          <div id="collect_div">
-            <a th:href="'/collect/addcollect?product_id='+${product.product_id}"><b>Collect</b></a>
-          </div>
-        </div>
-      </div>
-      <!-- 商品展示块 -->
-      <div class="product_div" th:each="product:${productlist}">
-        <a th:href="'/store/productdetail?product_id='+${product.product_id}">
-          <img th:src="@{'/image/img_product/'+${product.picture}}" alt="">
-        </a>
-
-        <!-- 4个 商品信息-->
-        <div id="product_class_div" th:utext="${product.product_class}">
-          <b>Product Class</b>
-        </div>
-        <div id="product_name_div" th:utext="${product.product_name}">
-          <b>Product Name</b>
-        </div>
-        <div id="product_price_div" th:utext="${product.price}+'CNY'">
-          <b>Price</b>
-        </div>
-        <div id="product_sold_div" th:utext="'Sold '+${product.soldnum}">
-          Sold Num
-        </div>
-
-        <!-- 2个 功能-->
-        <div>
-          <!-- 加入购物车-->
-          <div id="gotocart_div">
-            <a th:href="'/cart/addcart?product_id='+${product.product_id}"><b>Purchase</b></a>
-          </div>
-
-          <!-- 收藏 -->
-          <div id="collect_div">
-            <a th:href="'/collect/addcollect?product_id='+${product.product_id}"><b>Collect</b></a>
+          <div id="functionBtn">
+            <a @click="addCollect()"><b>Collect</b></a>
           </div>
         </div>
       </div>
@@ -240,10 +106,88 @@
 
 <!-- js -->
 <script>
+import axios from "axios";
+import {ElMessage} from "element-plus";
+
 export default {
+    data() {
+        return {
+            productData: [],
+            cartData: [],
+            collectData: [],
+            cartList: [
+                {productName: "default"},
+                {productPrice: "default"},
+                {purchaseNum: "default"},
+            ],
+        };
+    },
+    created() {
+        this.$http.get("/store").then((response)=>{
+            this.productData = response.data;
+        })
+        this.$http.get("/cart").then((response)=>{
+            this.cartData = response.data;
+        })
+        this.$http.get("/collect/productCollection").then((response)=>{
+            this.collectData = response.data;
+        })
+    },
     mounted() {
-        
-    }
+
+    },
+    methods: {
+        addCart(productId, userId) {
+            axios.post("/cart/add", null, {
+                params: { productId, userId }
+            })
+                .then((response) => {
+                    console.log(response.data);
+                    ElMessage({
+                        duration: 1500,
+                        type: 'success',
+                        message: '购物车添加成功',
+                    })
+                })
+                .catch((error) => {
+                    console.log(error)
+                    ElMessage({
+                        duration: 1500,
+                        type: 'info',
+                        message: '购物车添加失败',
+                    })
+                });
+        },
+        addCollect(productId, userId) {
+            axios.post("/collect/productCollection", null, {
+                params: { productId, userId }
+            })
+                .then((response) => {
+                    console.log(response.data);
+                    ElMessage({
+                        duration: 1500,
+                        type: 'success',
+                        message: '商品收藏成功',
+                    })
+                })
+                .catch((error) => {
+                    console.log(error)
+                    ElMessage({
+                        duration: 1500,
+                        type: 'info',
+                        message: '商品收藏失败',
+                    })
+                });
+        },
+        getCartList() {
+            // 连表查询
+            // 订正：放到后端去，用 results 构建
+            this.cartList.productName = this.cartData.productId;
+            this.cartList.productPrice = this.cartData.productPrice;
+            this.cartList.productName = this.cartData.productId;
+            return cartList
+        },
+    },
 }
 </script>
 
@@ -252,14 +196,11 @@ export default {
     scroll-behavior: smooth;
     margin: 0;
     padding: 0;
+    font-family: frutiger sans-serif;
 }
 body{
     width: 100%;
     min-width: 1200px;
-}
-
-td {
-    font-family: frutiger sans-serif;
 }
 
 /* 商品搜索条部分 */
@@ -345,7 +286,7 @@ img[id="smileJPG"] {
 }
 
 /* 订单展示块 */
-.order_div {
+.cart_div {
     position: fixed;
     width: 420px;
     height: auto;
@@ -358,12 +299,11 @@ img[id="smileJPG"] {
     border-radius: 20px 20px 0 0;
     text-align: center;
 
-    table[id="order_content"] {
+    table[id="cart_content"] {
         width: 390px;
         margin: 0 15px;
         border-collapse: collapse;
         tr {
-            height: 40px;
             border-bottom: #c1c1c1 solid 1px;
 
             td {
@@ -379,10 +319,16 @@ img[id="smileJPG"] {
                 color: #797979;
             }
 
-            &[id="order_topic"] {
+            &:not([id="cart_topic"]):not([id="cart_item"]):not([id="cart_count"]) {
+                td {
+                    padding: 8px 0;
+                }
+            }
+
+            &[id="cart_topic"] {
                 border: none;
                 td {
-                    height: 50px;
+                    height: 60px;
                     font: {
                         size: 24px;
                         weight: bold;
@@ -391,7 +337,7 @@ img[id="smileJPG"] {
                 }
             }
 
-            &[id="order_item"] {
+            &[id="cart_item"] {
                 border: none;
                 td {
                     height: 40px;
@@ -403,10 +349,10 @@ img[id="smileJPG"] {
                 }
             }
 
-            &[id="order_count"] {
+            &[id="cart_count"] {
                 border: none;
                 td {
-                    height: 50px;
+                    height: 60px;
                     font: {
                         size: 18px;
                         weight: bold;
@@ -436,7 +382,30 @@ img[id="smileJPG"] {
     width: 64vw;
     height: 78vh;
 
-    //border: #160A0A solid 1px;
+    overflow-y: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+
+    #el_back_top {
+        .el_style {
+            height: 100%;
+            width: 100%;
+            border-radius: 50%;
+            background-color: white;
+            text-align: center;
+            line-height: 36px;
+            color: $booth-red-color;
+
+            transition: all .2s ease-in-out;
+            &:hover {
+                background-color: $blue-color;
+            }
+        }
+    }
+
+    &::-webkit-scrollbar {
+        display: none; /* Chrome Safari */
+    }
 
     /* 商品展示块 */
     .product_div{
@@ -455,6 +424,7 @@ img[id="smileJPG"] {
 
         transition: all 0.3s;
         transform: scale(0.96, 0.96);
+        opacity: 1;
 
         &:hover {
             transform: translateY(-2px) scale(0.99, 0.99);
@@ -474,7 +444,9 @@ img[id="smileJPG"] {
             width: 200px;
             height: 15px;
 
-            font-size:15px;
+            font: {
+                size:15px;
+            };
             text-align: left;
             color: rgb(078, 157, 169);
         }
@@ -516,34 +488,8 @@ img[id="smileJPG"] {
         }
         // 2个 功能
         div {
-            // 功能键: 加入购物车
-            #gotocart_div{
-                float:left;
-
-                width:100px;
-                height:30px;
-
-                margin-top:15px;
-                text-align: center;
-                line-height:30px;
-                border-top: 1px solid #666666;
-                a{
-                    display: block;
-
-                    width:100px;
-                    height:30px;
-
-                    color:#666666;
-                    text-decoration: none;
-                    transition: color .2s;
-                    &:hover{
-                        background-color: $booth-red-color;
-                        color: #ffffff;
-                    }
-                }
-            }
-            // 功能键: 收藏
-            #collect_div{
+            // 功能键: 加入购物车, 收藏
+            #functionBtn {
                 float:left;
 
                 width:100px;

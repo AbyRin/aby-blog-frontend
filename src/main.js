@@ -4,6 +4,8 @@ import { createPinia } from 'pinia';
 
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css'
+import axios from "axios";
+axios.defaults.baseURL = 'http://localhost:8081';
 
 import App from '@/App.vue';
 import Home from '@/views/Home.vue';
@@ -13,7 +15,9 @@ import Forum from '@/views/Forum.vue';
 import Inspiration from '@/views/Inspiration.vue';
 import About from '@/views/About.vue';
 
-import NotFound from './views/NotFound.vue';
+import Account from '@/views/Account.vue';
+
+import NotFound from '@/views/NotFound.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -25,8 +29,9 @@ const router = createRouter({
     { path: '/inspiration', component: Inspiration },
     { path: '/about', component: About },
 
-    { path: '/:catchAll(.*)', component: NotFound },
+    { path: '/account', component: Account },
 
+    { path: '/:catchAll(.*)', component: NotFound },
   ],
 });
 
@@ -35,3 +40,4 @@ app.use(createPinia());
 app.use(router);
 app.use(ElementPlus)
 app.mount('#app');
+app.config.globalProperties.$http = axios;
