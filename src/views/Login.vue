@@ -1,129 +1,173 @@
 <template>
-  <!-- 网页主要内容 -->
-  <div class="sign_container">
-    <div class="sign_div">
-      <!-- 右边-登录盒子 -->
-      <div class="sign_in_div">
-        <p>SIGN IN</p>
+  <div>
+    <div class="user_container">
+      <p>Log in</p>
 
+      <el-form
+        ref="login-form"
+        class="login_form"
+        :model="user"
+        :rules="formRules"
+      >
         <!-- 账号 -->
-        <div class="div_cell">
-          <img
-            src="@/image/icon/icons8-account-48.png"
-            alt=""
-          >
-          <input
-            id="username"
-            type="text"
-            name="email"
-            placeholder="E-mail"
-          >
-        </div>
-        
+        <el-form-item prop="account">
+          <img id="account_icon" src="@/image/icon/icons8-account-48.png" alt="">
+          <el-input
+            v-model="user.account"
+            placeholder="Account"
+          />
+        </el-form-item>
+
         <!-- 密码 -->
-        <div class="div_cell">
-          <img
-            src="@/image/icon/icons8-password-30.png"
-            alt=""
-          >
-          <input
-            type="password"
-            name="password"
-            placeholder="password"
-          >
-        </div>
+        <el-form-item prop="password">
+          <img id="lock_icon" src="@/image/icon/icons8-lock-48.png" alt="">
+          <el-input
+            v-model="user.password"
+            placeholder="Password"
+            show-password
+          />
+        </el-form-item>
 
-        <!-- 跳转: 注册 -->
-        <div class="sign_switch">
-          <a href="">Sign up</a>
-        </div>
+        <!-- 单选框-用户协议 -->
+        <el-form-item prop="agree">
+          <el-checkbox v-model="user.agree">
+            我已阅读并同意
+            <a @click="openProtocol">
+              《用户协议》与《隐私条款》
+            </a>
+          </el-checkbox>
+        </el-form-item>
 
-        <!-- 登录按钮 -->
-        <div class="sign_button">
-          <input
-            class="sign_button"
-            type="submit"
-            name="s"
-            value="SIGN IN"
+        <!-- 按钮 -->
+        <el-form-item>
+          <el-button
+            class="login-btn"
+            type="primary"
+            :loading="loginLoading"
+            @click="loginVerify"
           >
-        </div>
+            Login
+          </el-button>
+        </el-form-item>
 
-        <!-- 警告 -->
-        <div class="warn_cell">
-          <p class="warn_p" />
-        </div>
-      </div>
-            
-      <!-- 左边-注册盒子 -->
-      <div class="sign_up_div">
-        <p>SIGN UP</p>
-
-        <!-- 账号 -->
-        <div class="div_cell">
-          <img
-            src="@/image/icon/icons8-account-48.png"
-            alt=""
-          >
-          <input
-            id="username"
-            type="text"
-            name="email"
-            placeholder="E-mail"
-          >
-        </div>
-                
-        <!-- 密码 -->
-        <div class="div_cell">
-          <img
-            src="@/image/icon/icons8-password-30.png"
-            alt=""
-          >
-          <input
-            type="password"
-            name="password"
-            placeholder="password"
-          >
-        </div>
-
-        <!-- 确认密码 -->
-        <div class="div_cell">
-          <img
-            src="@/image/icon/icons8-password-30.png"
-            alt=""
-          >
-          <input
-            type="password"
-            name="password"
-            placeholder="confirm password"
-          >
-        </div>
-        
-        <!-- 跳转: 登录 -->
-        <div class="sign_switch">
-          <a href="">Sign in</a>
-        </div>
-                
-        <!-- 注册按钮 -->
-        <div class="sign_button">
-          <input
-            class="sign_button"
-            type="submit"
-            name="s"
-            value="SIGN UP"
-          >
-        </div>
-
-        <!-- 警告 -->
-        <div class="warn_cell">
-          <p class="warn_p" />
-        </div>
-      </div>
+        <router-link id="sign_toggle" to="/user/signup">
+          Sign up
+        </router-link>
+      </el-form>
     </div>
   </div>
 </template>
 
 <script>
+import {ElMessage, ElMessageBox} from "element-plus";
 
+export default {
+    data() {
+        return {
+            user: {
+                account: "1001@outlook.com",
+                password: "123qwe",
+                agree: false,
+            },
+            loginLoading: false,  // 登录按钮 loading 状态
+            admin: {
+                email: "admin@outlook.com",
+                password: "admin123",
+                agree: false,
+            },
+            formRules: {
+                // required：规定表单是否必须填写
+                // message：不满足验证规则时的提示信息
+                // trigger：change属性-表单项数据改变时验证
+                account: [
+                    { required: true, message: '请输入账号', trigger: 'change' },
+                    { pattern: /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/, message: '请输入正确的账号格式', trigger: 'change' }
+                    // 规则：邮箱通用规则
+                ],
+                password: [
+                    { required: true, message: '请输入密码', trigger: 'change' },
+                    { pattern: /^(?=.*[a-zA-Z])(?=.*\d).{6,15}$/, message: '请输入正确的密码格式', trigger: 'change' }
+                    // 规则：至少包含一个字母（大小写不限）、一个数字，字符串长度6~15位
+                ],
+                agree: [
+                    {
+                        // 自定义验证规则
+                        validator: (rule, value, callback) => {
+                            if (value) {
+                                // 验证通过
+                                callback()
+                            } else {
+                                // 验证失败
+                                callback(new Error('未勾选用户协议'))
+                            }
+                        },
+                        trigger: 'change'
+                    }
+                ],
+            },
+        }
+    },
+    methods: {
+        // 表单验证
+        loginVerify () {
+            this.$refs['login-form'].validate(valid => {
+                // 验证失败，停止请求提交
+                if (!valid) {
+                    return
+                }
+                // 验证通过，提交请求
+                this.login()
+            })
+        },
+
+        // 登录
+        login() {
+            this.$http.post("user/login", this.user)
+                .then(response => {
+                    if (!response.data) {
+                        this.$message({
+                            type: 'error',
+                            message: '用户名或密码错误'
+                        });
+                    } else {
+                        this.$message({
+                            type: 'success',
+                            message: '登录成功'
+                        });
+                        this.$router.push("/");
+                    }
+                })
+                .catch(error => {
+                    console.error('登录请求失败:', error);
+                    this.$message({
+                        type: 'error',
+                        message: '登录失败，发生了一个错误'
+                    });
+                });
+        },
+
+        // 打开用户协议
+        openProtocol () {
+            ElMessageBox.confirm(
+                '这是简略内容。',
+                '用户协议与隐私政策提示',
+                {
+                    confirmButtonText: '同意',
+                    cancelButtonText: '不同意',
+                    type: '',
+                }
+            ).then(() => {
+                ElMessage({
+                    type: 'success',
+                    message: '已勾选用户协议',
+                })
+            }).catch(() => {
+
+            })
+        }
+
+    }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -131,157 +175,109 @@
     margin: 0;
     padding: 0;
 }
-body {
-}
 
-p {
-    margin-block: 0;
-}
-
-/* 总栏 */
-.container{
+.user_container {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: Center;
+    align-items: center;
 
-    margin-top: 140px;
-
-    background-color: #eeeeee;
-    box-shadow: 2px 2px 2px #bdbdbd;
-}
-
-/* 左右分栏 */
-.content {
-    height: 100%;
-    width: 560px;
-
-    padding-top: 20px;
-    padding-left: 40px;
-
+    width: 600px;
+    height: 400px;
     background-color: #ffffff;
 
-    float: left;
+    border-radius: 32px;
+    box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
 
-    /* 头像 */
-    .avatar_div {
-        width: 120px;
-        height: 160px;
-
-        text-align: center;
-
-        .ava_title {
-            width: 120px;
-            height: 30px;
+    p {
+        font: {
+            size: 40px;
+            weight: bold;
         }
-        .prew {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            margin-bottom: 15px;
-        }
-        #upload {
-            display: none;
-        }
-    }
-    .change_p {
-        width: 100px;
-        height: 30px;
-        transition: all .3s;
-        box-shadow: 0 2px 0 rgb(0 0 0 / 2%);
-        cursor: pointer;
-        font-size: 16px;
-        border-radius: 2px;
-        color: rgba(0, 0, 0, .85);
-        border: 1px solid #d9d9d9;
-        text-align: center;
-        line-height: 30px;
-
-        &:hover {
-            color: #40a9ff;
-            border-color: #40a9ff;
-            background: #fff;
-        }
+        color: $blue_color;
+        margin-bottom: 40px;
     }
 
-    /* 其他信息 */
-    .information_div {
-        float: left;
+    .el-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
-        width: 600px;
-        height: 60px;
-
-        margin-bottom: 20px;
-
-        text-align: left;
-
-        p {
-            display: inline-flex;
+        .el-form-item {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
             align-items: center;
+            margin-bottom: 16px;
+
+            width: auto;
+
+            .el-form-item__content {
+
+                img {
+                    &[id="account_icon"] {
+                        width: 24px;
+                    }
+                    &[id="lock_icon"] {
+                        width: 22px;
+                    }
+                }
+
+                .el-input {
+                    width: 200px;
+                }
+
+                .el-checkbox {
+
+                    .el-checkbox__label {
+                        a {
+                            font: {
+                                weight: bold;
+                            }
+                            &:visited, &:link {
+                                color: $blue-color;
+                            }
+                            &:hover {
+                                color: $booth-red-color;
+                            }
+                        }
+                    }
+                }
+
+                .el-button {
+                    width: 140px;
+                    height: 40px;
+                    margin-top: 10px;
+
+                    border: 0;
+                    border-radius: 20px;
+                    background-color: $blue-color;
+
+                    font: {
+                        size: 20px;
+                    }
+                    text-align: center;
+                    color: #ffffff;
+
+                    transition: all 0.2s ease-in-out;
+
+                    &:hover {
+                        background-color: $booth-green-color;
+                        width: 200px;
+                        border-radius: 40px;
+                    }
+                }
+
+            }
         }
 
-    }
-    input[type=radio] {
-        width: 30px;
-        height: 20px;
-
-        border-radius: 10px;
-        border: 2px solid #D4D4D4;
-
-        &:checked {
-            border-radius: 50%;
-            border-color: #f84f52;
-            background-color: #f84f52;
-            /* background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='2' fill='%23fff'/%3e%3c/svg%3e"); */
+        #sign_toggle {
+            margin-top: 20px;
+            &:visited, &:link, &:hover{
+                color: $booth-red-color;
+            }
         }
-    }
-    input:not([type=radio]), textarea {
-        display: block;
-        width: 330px;
-        outline: none;
-        font-size: 16px;
-        border: 1px solid #d9d9d9;
-        border-radius: 2px;
-        transition: all .3s;
-        padding-left: 5px;
-
-        height: 30px;
-        appearance: none;
-    }
-    input:focus, textarea:focus {
-        border-color: #31384f;
-        border-right-width: 1px;
-        z-index: 1;
-
-        box-shadow: 0 0 0 2px rgba(49, 56 ,79, 0.2);
-        outline: 0;
-    }
-    button.submit {
-        background: #4D8FF7;
-        width: 78px;
-        height: 32px;
-        text-align: center;
-        line-height: 32px;
-        font-size: 16px;
-        color: #FFFFFF;
-        letter-spacing: 0;
-        font-weight: 500;
-        border: none;
-        cursor: pointer;
-    }
-}
-.toast {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-
-    .toast-body {
-        padding: 0 !important;
-    }
-
-    .alert-success {
-        margin-bottom: 0 !important;
     }
 }
 </style>

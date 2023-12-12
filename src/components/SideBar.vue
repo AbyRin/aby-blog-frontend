@@ -61,7 +61,7 @@ export default {
 .sidebar {
     position: fixed;
 
-    top: 104px;
+    top: 60px;
     left: 0;
 
     width: 80px;
@@ -69,7 +69,7 @@ export default {
 
     text-align: center;
 
-    padding: 10px;
+    padding: 20px 10px 0 10px;
     background-color: #ffffff;
     transition: all 0.3s ease;
     z-index: 100;

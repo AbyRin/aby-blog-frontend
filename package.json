@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --port 8082",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "build-and-copy": "npm run build && npm run copy-to-springboot",
     "copy-to-springboot": "xcopy /E /Y dist/* ../AbyBlog-app/src/main/resources/static/"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
     "axios": "^1.6.1",
     "core-js": "^3.8.3",
     "element-plus": "^2.4.3",
@@ -18,8 +19,10 @@
     "mitt": "^3.0.1",
     "node-sass": "^9.0.0",
     "pinia": "^2.1.7",
+    "qs": "^6.11.2",
     "sass": "^1.69.5",
     "vue": "^3.3.9",
+    "vue-loader": "^17.3.1",
     "vue-router": "^4.2.5",
     "vuex": "^4.1.0"
   },
@@ -36,6 +39,7 @@
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-vue": "^9.18.1",
     "sass-loader": "^13.3.2",
+    "vue-template-compiler": "^2.7.15",
     "webpack-cli": "^5.1.4"
   },
   "eslintConfig": {

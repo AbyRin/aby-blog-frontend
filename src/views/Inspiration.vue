@@ -3,23 +3,35 @@
     <!-- 网页主要内容 -->
     <div class="container">
       <!-- 图瀑布 -->
-      <div id="fall_div" class="fall_div" />
-    </div>
-
-    <!-- 功能: 电梯 -->
-    <div class="elevator">
-      <ul class="elevator_list">
-        <li id="backTop">
-          <img
-            src="@/image/icon/icons8-top-100-gray.png"
-            alt=""
-          >
-        </li>
-      </ul>
+      <div id="fall_div" class="fall_div">
+        <div class="column">
+          <div class="image_div">
+            <!-- <img src="" alt=""> -->
+            <img src="@/image/reptile_image/1.png" alt="">
+            <div class="image_buttons">
+              <div id="btn1" class="image_button">
+                <img :src="require(`@/image/icon/icons8-heart-50-gray.png`)" alt="">
+              </div>
+              <div id="btn2" class="image_button">
+                <img :src="require(`@/image/icon/icons8-bookmark-60-gray.png`)" alt="">
+              </div>
+              <div id="btn3" class="image_button">
+                <img :src="require(`@/image/icon/icons8-download-48-gray.png`)" alt="">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- 侧边栏 -->
     <SideBar />
+
+    <el-backtop id="el_back_top" target=".container" :right="100" :bottom="30">
+      <div class="el_style">
+        ▲
+      </div>
+    </el-backtop>
   </div>
 </template>
 
@@ -30,174 +42,58 @@ export default {
     components: {
         SideBar,
     },
-    mounted() {
-        const fallDiv = document.getElementById('fall_div');
-        const columnCount = window.innerWidth * 1.5 <= window.screen.width ? 2 : 3;
+    data() {
+        return {
 
-        // 爬虫图片路径
-        function loadImagesFromDirectory(directoryPath) {
-            const imagePaths = [];
-            for (let i = 1; i <= 20; i++) {
-                const imagePath = `${directoryPath + i}.png`;
-                imagePaths.push(imagePath);
-            }
-            populateColumns(imagePaths);
         }
-
-        // 渲染列和图片
-        function populateColumns(imagePaths) {
-            // 创建瀑布列
-            for (let i = 0; i < columnCount; i++) {
-                const column = document.createElement('column');
-                column.classList.add('column');
-                if (fallDiv) {
-                    fallDiv.appendChild(column);
-                }
-            }
-
-            // 渲染
-            imagePaths.forEach((imagePath, index) => {
-                const column = fallDiv.children[index % columnCount];
-
-                // 创建：image_div
-                const imageDiv = document.createElement('div');
-                imageDiv.classList.add('image_div');
-                imageDiv.style.boxShadow = '2px 2px 2px #bdbdbd';
-                column.appendChild(imageDiv);
-
-                // 创建：图片
-                const image = document.createElement('img');
-                image.src = imagePath;
-                image.alt = `Image ${index + 1}`;
-                // 图片加载失败时隐藏
-                image.onerror = function () {
-                    imageDiv.style.display = 'none';
-                };
-                imageDiv.appendChild(image);
-
-                // 创建：按钮组 image_buttons
-                const imageButtons = document.createElement('div');
-                imageButtons.classList.add('image_buttons');
-                imageDiv.appendChild(imageButtons);
-
-                // 创建：按钮 image_button
-                for (let j = 1; j <= 3; j++) {
-                    const button = document.createElement('div');
-                    button.classList.add('image_button');
-
-                    button.id = `btn${j}`;
-                    button.style.display = 'flex';
-                    button.style.justifyContent = 'center';
-                    button.style.alignItems = 'center';
-
-                    // 创建：按钮图标 img
-                    let imgSrc = '';
-                    if (j === 1) {
-                        imgSrc = '@/image/icon/icons8-heart-50-gray.png';
-                    } else if (j === 2) {
-                        imgSrc = '@/image/icon/icons8-bookmark-60-gray.png';
-                    } else {
-                        imgSrc = '@/image/icon/icons8-download-48-gray.png';
-                    }
-
-                    const img = document.createElement('img');
-                    img.src = imgSrc;
-                    img.style.maxWidth = '24px';
-                    img.alt = '';
-
-                    button.appendChild(img);
-                    imageButtons.appendChild(button);
-                }
-            }); // 完成渲染
-
-            // 遍历每个 image_buttons 并为其中的按钮绑定事件处理程序
-            function handleButtonHover(event) {
-                const button = event.currentTarget;
-                const img = button.querySelector('img');
-                const btnId = button.id;
-
-                if (event.type === 'mouseover') {
-                    if (btnId === 'btn1') {
-                        img.src = '@/image/icon/icons8-heart-50-color.png';
-                        button.style.borderRadius = '50px';
-                    } else if (btnId === 'btn2') {
-                        img.src = '@/image/icon/icons8-bookmark-60-color.png';
-                        button.style.borderRadius = '50px';
-                    } else {
-                        img.src = '@/image/icon/icons8-download-48-color.png';
-                        button.style.borderRadius = '50px';
-                    }
-                } else if (event.type === 'mouseout') {
-                    if (btnId === 'btn1') {
-                        img.src = '@/image/icon/icons8-heart-50-gray.png';
-                        button.style.borderRadius = '10px';
-                    } else if (btnId === 'btn2') {
-                        img.src = '@/image/icon/icons8-bookmark-60-gray.png';
-                        button.style.borderRadius = '10px';
-                    } else {
-                        img.src = '@/image/icon/icons8-download-48-gray.png';
-                        button.style.borderRadius = '10px';
-                    }
-                }
-            }
-
-            // 获取所有 image_button 并 绑定事件
-            const allImageButtons = document.querySelectorAll('.image_button');
-
-            allImageButtons.forEach((button) => {
-                button.addEventListener('mouseover', handleButtonHover);
-                button.addEventListener('mouseout', handleButtonHover);
-            });
-        }
-        // 调用
-        loadImagesFromDirectory('/image/reptile_image/');
-
-        // 功能: 页面resize时刷新
-        // 启用节流
-        function throttle(fn, t) {
-            let timer = null;
-            return function () {
-                if (!timer) {
-                    timer = setTimeout(() => {
-                        fn();
-                        // 清空定时器
-                        timer = null;
-                    }, t);
-                }
-            };
-        }
-        // 主函数
-        // 注意: 为了保证刷新的流畅, 浏览器要启用缓存
-        function refreshOnResize() {
-            location.reload();
-        }
-        window.addEventListener('resize', throttle(refreshOnResize, 500));
-
-        // 电梯：backTop键
-        document.addEventListener('DOMContentLoaded', () => {
-            (function () {
-                const backTop = document.querySelector('#backTop');
-                const img = backTop.querySelector('img');
-                // 修改样式
-                backTop.addEventListener('mouseover', () => {
-                    img.src = '@//image/icon/icons8-top-100-white.png';
-                });
-                backTop.addEventListener('mouseout', () => {
-                    img.src = '@//image/icon/icons8-top-100-gray.png';
-                });
-                // backTop功能
-                backTop.addEventListener('click', () => {
-                    window.scrollTo(0, 0);
-                });
-            }());
-        });
     },
+    mounted() {
+        const handleButtonHover = (event) => {
+            const button = event.currentTarget;
+            const img = button.querySelector('.image_button img');
+            const btnId = button.id;
+
+            if (event.type === 'mouseover') {
+                if (btnId === 'btn1') {
+                    img.src = require('@/image/icon/icons8-heart-50-color.png');
+                    button.style.borderRadius = '50px';
+                } else if (btnId === 'btn2') {
+                    img.src = require('@/image/icon/icons8-bookmark-60-color.png');
+                    button.style.borderRadius = '50px';
+                } else {
+                    img.src = require('@/image/icon/icons8-download-48-color.png');
+                    button.style.borderRadius = '50px';
+                }
+            } else if (event.type === 'mouseout') {
+                if (btnId === 'btn1') {
+                    img.src = require('@/image/icon/icons8-heart-50-gray.png');
+                    button.style.borderRadius = '10px';
+                } else if (btnId === 'btn2') {
+                    img.src = require('@/image/icon/icons8-bookmark-60-gray.png');
+                    button.style.borderRadius = '10px';
+                } else {
+                    img.src = require('@/image/icon/icons8-download-48-gray.png');
+                    button.style.borderRadius = '10px';
+                }
+            }
+        };
+
+        // 获取所有 image_button 元素并绑定事件
+        const allImageButtons = document.querySelectorAll('.image_button');
+
+        allImageButtons.forEach((button) => {
+            button.addEventListener('mouseover', handleButtonHover);
+            button.addEventListener('mouseout', handleButtonHover);
+        });
+    }
 };
 </script>
 
 <style lang="scss" scoped>
 * {
     scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
 }
 body{
     display: flex;
@@ -215,7 +111,7 @@ p {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: Center;
+    align-items: center;
 
     margin-top: 148px;
 
@@ -237,30 +133,37 @@ p {
         padding: 0;
         position: relative;
 
+        box-shadow: 2px 2px 2px #bdbdbd;
+
+        /* 唤醒遮罩 */
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            box-shadow:
+                    0 -50px 50px -30px rgba(0, 0, 0, 0.7) inset,
+                    0 50px 50px -30px rgba(0, 0, 0, 0.7) inset;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        &:hover::before {
+            opacity: 1;
+        }
+        /* 唤醒按钮 */
+        &:hover .image_buttons .image_button{
+            opacity: 0.7;
+        }
+
         img {
             width: 400px;
             height: auto;
 
             margin: 0;
             padding: 0;
-
-            /* 唤醒遮罩 */
-            &::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-
-                box-shadow: 0 -50px 50px -30px rgba(0, 0, 0, 0.7) inset,
-                0 50px 50px -30px rgba(0, 0, 0, 0.7) inset;
-                opacity: 0;
-                transition: opacity 0.3s;
-            }
-            &:hover::before {
-                opacity: 1;
-            }
         }
 
         /* 按钮组 */
@@ -273,10 +176,13 @@ p {
             bottom: 5px;
             z-index: 100;
 
-            opacity: 0;
             transition: opacity 0.3s;
 
             .image_button {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
                 width: 40px;
                 height: 40px;
                 border-radius: 10px;
@@ -289,14 +195,16 @@ p {
                 cursor: pointer;
                 transition: border-radius 0.3s;
 
+                opacity: 0;
+
                 &:hover {
                     background-color: rgba(255, 255, 255);
+                    opacity: 1;
+                }
+                img {
+                    max-width: 24px;
                 }
             }
-        }
-        /* 唤醒按钮 */
-        &:hover .image_buttons {
-            opacity: 1;
         }
     }
 }
@@ -316,53 +224,19 @@ p {
     /* z-index: 99; */
 }
 
-/* 功能: 电梯 */
-.elevator {
-    position: fixed;
-    width: 100px;
-    height: auto;
+#el_back_top {
+    .el_style {
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        background-color: white;
+        text-align: center;
+        line-height: 36px;
+        color: $booth-red-color;
 
-    left: 52%;
-    margin-left: 620px;
-    bottom: 40px;
-    z-index: 100;
-
-    text-align: center;
-    transition: all .5s;
-
-    .elevator_list {
-        width: 100px;
-        height: auto;
-
-        background: #fff;
-
-        margin: 0;
-        padding: 0;
-
-        box-shadow: 5px 5px 5px #bdbdbd;
-
-        li {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            width: 100px;
-            height: 50px;
-            line-height: 50px;
-
-            border: 1px solid #dcdcdc;
-            margin: 0;
-
-            list-style-type: none;
-            cursor: pointer;
-
-            &:hover {
-                background-color: #f84f52;
-            }
-
-            img {
-                width: 60px;
-            }
+        transition: all .2s ease-in-out;
+        &:hover {
+            background-color: $blue-color;
         }
     }
 }

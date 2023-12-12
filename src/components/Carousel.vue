@@ -68,13 +68,14 @@ export default {
 p {
     font-family: "Roboto-Regular", sans-serif;
 }
-// 图片、文本 通用长度
-//$commonW: 540px;
+/* 图片、文本 通用长度 */
+/* $commonW: 540px; */
 $commonW: 30vw;
-// 图片高度
-//$imgDivH: 760px;
+/* 图片高度 */
+/* $imgDivH: 760px; */
 $imgDivH: 80vh;
-$textDivH: 100px; // 文本栏高度
+/* 文本栏高度 */
+$textDivH: 100px;
 
 .el-carousel__item {
     width: $commonW;

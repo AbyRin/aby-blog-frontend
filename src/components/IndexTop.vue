@@ -1,69 +1,71 @@
 <template>
-    <div class="blue_ring">
-        <div class="gray_ring">
-            <div class="yellow_ring">
-                <div class="top_container">
-                    <!-- 功能键 -->
-                    <div class="function_div">
-                        <a href="/user" style="text-decoration:none;">Account&nbsp;&nbsp;|&nbsp;&nbsp;</a>
-                        <a href="/order/showorder" style="text-decoration:none;">Order&nbsp;&nbsp;|&nbsp;&nbsp;</a>
-                        <a href="/cart/showcart" style="text-decoration:none;">Cart&nbsp;&nbsp;|&nbsp;&nbsp;</a>
-                        <a href="/collect/showcollect" style="text-decoration:none;">Collection&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                    </div>
+  <div class="blue_ring">
+    <div class="gray_ring">
+      <div class="yellow_ring">
+        <div class="top_container">
+          <!-- 功能键 -->
+          <div class="function_div">
+            <a href="/user" style="text-decoration:none;">Account&nbsp;&nbsp;|&nbsp;&nbsp;</a>
+            <a href="/order/showorder" style="text-decoration:none;">Order&nbsp;&nbsp;|&nbsp;&nbsp;</a>
+            <a href="/cart/showcart" style="text-decoration:none;">Cart&nbsp;&nbsp;|&nbsp;&nbsp;</a>
+            <a href="/collect/showcollect" style="text-decoration:none;">Collection&nbsp;&nbsp;&nbsp;&nbsp;</a>
+          </div>
 
-                    <!-- 登入登出 -->
-                    <div class="account_div">
-                        <div>
-                            <a th:if="${session.member}">
-                                <a href="/index/toLogout">Sign Out</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <!-- <a href="/index/toRegister">Sign Up</a>&nbsp;&nbsp;&nbsp;&nbsp; -->
-                                <a href="/admin/toAdminLogin">Sign In as Admin</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            </a>
-                            <a th:unless="${session.member}">
-                                <a href="/index/toLogin">Sign In</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <!-- <a href="/index/toRegister">Sign Up</a>&nbsp;&nbsp;&nbsp;&nbsp; -->
-                                <a href="/admin/toAdminLogin">Sign In as Admin</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- 欢迎语 -->
-                    <div class="welcome_div_1">
-                        <a>Welcome to</a>
-                    </div>
-                    <div class="welcome_div_2">
-                        <a>AbyBlog</a>
-                    </div>
-                </div>
+          <!-- 登入登出 -->
+          <div class="account_div">
+            <div>
+              <a th:if="${session.member}">
+                <a href="/index/toLogout">Sign Out</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <!-- <a href="/index/toRegister">Sign Up</a>&nbsp;&nbsp;&nbsp;&nbsp; -->
+                <a href="/admin/toAdminLogin">Sign In as Admin</a>&nbsp;&nbsp;&nbsp;&nbsp;
+              </a>
+              <a th:unless="${session.member}">
+                <a href="/index/toLogin">Sign In</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <!-- <a href="/index/toRegister">Sign Up</a>&nbsp;&nbsp;&nbsp;&nbsp; -->
+                <a href="/admin/toAdminLogin">Sign In as Admin</a>&nbsp;&nbsp;&nbsp;&nbsp;
+              </a>
             </div>
+          </div>
+
+          <!-- 欢迎语 -->
+          <div class="welcome_div_1">
+            <a>Welcome to</a>
+          </div>
+          <div class="welcome_div_2">
+            <a>AbyBlog</a>
+          </div>
         </div>
-
-        <!-- 分页栏 -->
-        <div class="page_div">
-            <div class="page_div_2">
-                <a href="/index">Index</a>
-            </div>
-            <div class="page_div_2">
-                <a href="/library">Library</a>
-            </div>
-            <div class="page_div_2">
-                <a href="/store">Store</a>
-            </div>
-            <div class="page_div_2">
-                <a href="/forum">Forum</a>
-            </div>
-            <div class="page_div_2">
-                <a href="/inspiration">Inspiration</a>
-            </div>
-            <div class="page_div_2">
-                <a href="/about">About Aby</a>
-            </div>
-        </div>
+      </div>
     </div>
+
+    <!-- 分页栏 -->
+    <div class="page_div">
+      <div class="page_div_2">
+        <a href="/index">Index</a>
+      </div>
+      <div class="page_div_2">
+        <a href="/library">Library</a>
+      </div>
+      <div class="page_div_2">
+        <a href="/store">Store</a>
+      </div>
+      <div class="page_div_2">
+        <a href="/forum">Forum</a>
+      </div>
+      <div class="page_div_2">
+        <a href="/inspiration">Inspiration</a>
+      </div>
+      <div class="page_div_2">
+        <a href="/about">About Aby</a>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import '/css/index_top.css'
+export default {
+
+}
 </script>
 
 <style>

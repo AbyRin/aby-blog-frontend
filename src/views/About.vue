@@ -129,6 +129,8 @@
   </main>
 </template>
 
+<script></script>
+
 <style lang="scss" scoped>
 body{
   background: #dddddd;

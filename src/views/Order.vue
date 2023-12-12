@@ -1,15 +1,15 @@
 <template>
   <div>
     <div style="margin-top: 100px">
-      yes
+      <h1>Order</h1>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 
 </script>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 
 </style>

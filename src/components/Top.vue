@@ -1,96 +1,54 @@
-<template xmlns:th="http://www.w3.org/1999/xhtml">
+<template>
   <div>
     <header />
+
     <main>
       <div class="top_container">
-        <div class="top_div">
+        <!-- 上方栏 -->
+        <div class="top_left_div">
           <!-- 图标 -->
           <div class="icon_div">
             <img src="@/image/img_bg/Polaris_icon.png" alt="">
           </div>
 
-          <!-- 欢迎语 -->
-          <div class="welcome_div">
-            <a th:if="${session.member}">
-              <span th:text="'Welcome to Polaris!' + ${session.member.getEmail()}" />
-            </a>
-            <a th:unless="${session.member}">Welcome to Polaris!</a>
-          </div>
-
-          <!-- 登入登出 -->
-          <!--            <div class="account_div">-->
-          <!--              <div>-->
-          <!--                <a th:if="${session.member}">-->
-          <!--                  <router-link to="/index/toLogout">Sign Out</router-link>-->
-          <!--                  &lt;!&ndash; <router-link to="/index/toRegister">Sign Up</router-link> &ndash;&gt;-->
-          <!--                  <router-link to="/admin/toAdminLogin">Sign In as Admin</router-link>-->
-          <!--                </a>-->
-          <!--                <a th:unless="${session.member}">-->
-          <!--                  <router-link to="/index/toLogin">Sign In</router-link>-->
-          <!--                  &lt;!&ndash; <router-link to="/index/toRegister">Sign Up</router-link> &ndash;&gt;-->
-          <!--                  <router-link to="/admin/toAdminLogin">Sign In as Admin</router-link>-->
-          <!--                </a>-->
-          <!--              </div>-->
-          <!--            </div>-->
-
-          <!-- 功能键 -->
-          <div class="function_div">
-            <div class="each_function">
-              <img src="@/image/icon/icons8-account-30.png" alt="">
-              <router-link to="/account" style="text-decoration:none;">
-                Account
-              </router-link>
-            </div>
-            <div class="each_function">
-              <img src="@/image/icon/icons8-order-48.png" alt="">
-              <router-link to="/order/showorder" style="text-decoration:none;">
-                Order
-              </router-link>
-            </div>
-            <div class="each_function">
-              <img src="@/image/icon/icons8-cart-30.png" alt="">
-              <router-link to="/cart/showcart" style="text-decoration:none;">
-                Cart
-              </router-link>
-            </div>
-            <div class="each_function">
-              <img src="@/image/icon/icons8-star-30.png" alt="">
-              <router-link to="/collect/showcollect" style="text-decoration:none;">
-                Collection
-              </router-link>
-            </div>
-          </div>
-
-          <!-- 分页栏 -->
+          <!-- 分页 -->
           <div class="page_div">
-            <div class="each_page">
-              <router-link to="/">
-                Home
+            <div
+              v-for="(item, key) of pageData"
+              :key="key"
+              class="each_page"
+              :class="{
+                'active-page': isActiveRoute(item.link)
+              }"
+            >
+              <router-link :to="item.link">
+                {{ item.name }}
               </router-link>
             </div>
-            <div class="each_page">
-              <router-link to="/Library">
-                Library
-              </router-link>
-            </div>
-            <div class="each_page">
-              <router-link to="/Store">
-                Store
-              </router-link>
-            </div>
-            <div class="each_page">
-              <router-link to="/Forum">
-                Forum
-              </router-link>
-            </div>
-            <div class="each_page">
-              <router-link to="/Inspiration">
-                Inspiration
-              </router-link>
-            </div>
-            <div class="each_page">
-              <router-link to="/About">
-                About
+          </div>
+
+          <!-- 四色图标 -->
+          <div class="ColorS_div">
+            <img src="@/image/img_bg/ColorS.png" alt="">
+          </div>
+        </div>
+
+        <!-- 下方栏 -->
+        <div class="sidebar">
+          <!-- 功能键-区 -->
+          <div class="function_div">
+            <div
+              v-for="(item, key) of functionData"
+              :key="key"
+              class="each_function"
+              :class="{
+                'route_style': isActiveRoute(item.link) // 判断：给定路由 是否与 当前激活路由 相匹配
+              }"
+              @click="handleFunctionClick(item.link)"
+            >
+              <img :src="require(`@/image/icon/${item.icon}`)" alt="">
+              <router-link :to="item.link">
+                {{ item.name }}
               </router-link>
             </div>
           </div>
@@ -100,19 +58,114 @@
   </div>
 </template>
 
-<script setup>
+<script>
+import {onMounted, ref, watchEffect} from 'vue';
+import {useRouter } from 'vue-router';
+
+export default {
+    // setup(): vue3语法，在 beforeCreated 之前，不能访问 this
+    setup() {
+        // const activeComponent = ref('');  // 当前子路由对应的组件
+        const router = useRouter();
+        const activeRoute = ref(router.currentRoute.value);
+
+        // console.log('router.currentRoute.value.fullPath',router.currentRoute.value.fullPath);
+        // console.log('router.currentRoute',router.currentRoute);
+        // console.log('route.fullPath', route.fullPath)
+
+        onMounted(() => {
+            activeRoute.value = router.currentRoute.value;
+        });
+
+        watchEffect(() => {
+            activeRoute.value = router.currentRoute.value;
+            // 赋值为 当前路由
+            // console.log('Full path after:', activeRoute.value.fullPath);
+        });
+
+        const pageData = [
+            {
+                name: 'Home',
+                link: '/',
+            },
+            {
+                name: 'Library',
+                link: '/library',
+            },
+            {
+                name: 'Store',
+                link: '/store',
+            },
+            {
+                name: 'Forum',
+                link: '/forum',
+            },
+            {
+                name: 'Inspiration',
+                link: '/inspiration',
+            },
+            {
+                name: 'About',
+                link: '/about',
+            },
+        ];
+
+        const functionData = [
+            {
+                name: 'Account',
+                icon: 'icons8-account-30.png',
+                link: '/account',
+            },
+            {
+                name: 'Collection',
+                icon: 'icons8-star-30.png',
+                link: '/collect/product-collection',
+            },
+            {
+                name: 'Order',
+                icon: 'icons8-order-48.png',
+                link: '/order',
+            },
+            {
+                name: 'Cart',
+                icon: 'icons8-cart-30.png',
+                link: '/cart',
+            },
+        ];
+
+        const isActiveRoute = (path) => {
+            // console.log("---------------------------------")
+            // console.log(activeRoute.value.fullPath)
+            // console.log(path)
+            return activeRoute.value.fullPath === path;
+            // path 为接收的 item.link（pageData 或 functionData）
+            // 返回布尔值--判断：给定路由 是否与 当前激活路由 相匹配
+        };
+        const handleFunctionClick = (link) => {
+            router.push(link);
+        };
+
+        return {
+            functionData,
+            pageData,
+            isActiveRoute,
+            activeRoute,
+            handleFunctionClick
+        };
+    },
+};
 </script>
 
 <style lang="scss" scoped>
 body {
     width: 100%;
+    
     display: flex;
-
     align-items: center;
     justify-content: center;
 }
 p, a, span {
-    font-family: frutiger, sans-serif;
+    font-family: Roboto-Regular, sans-serif;
 }
 
 .top_container {
@@ -122,140 +175,58 @@ p, a, span {
     border: 0;
 
     width: 100%;
-    height: auto;
+    height: 60px;
 
     background-color: $blue-color;
 
     z-index: 101;
 
-    .top_div {
-        position: relative;
-        margin: 0 auto;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.35);
 
-        width: 1200px;
-        height: 64px;
+    .top_left_div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-        background: $blue-color;
+        width: 100%;
+        height: 60px;
+
+        background-color: $blue-color;
 
         /* 图标 */
         .icon_div {
-            float: left;
+            flex: 3;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-            width:240px;
-            height:64px;
+            height: 60px;
 
             img{
-                height: 64px;
-            }
-        }
-
-        /* 欢迎语 */
-        .welcome_div {
-            float: left;
-
-            width: 250px;
-            height:60px;
-            margin-left: 20px;
-
-            a {
-                text-align:left;
-                line-height: 60px;
-
-                font: {
-                    size: 18px;
-                    weight: bolder;
-                }
-                color: $booth-red-color;
-                text-decoration: none;
-            }
-        }
-
-        /* 功能键 */
-        .function_div {
-            display: flex;
-            justify-content: flex-start;
-
-            float: right;
-
-            width:400px;
-            height:64px;
-
-            .each_function {
-                display: flex;
-                flex-flow: column;
-                align-items: center;
-                justify-content: center;
-
-                float: right;
-
-                width:100px;
-                height:64px;
-
-                text-align: center;
-
-                border-left: 1px solid $dark-gray-color;
-
-                cursor: pointer;
-                transition: background-color 0.3s;
-
-                &:hover {
-                    background-color: $booth-red-color;
-                }
-
-                img{
-                    height: 30px;
-                }
-                a {
-                    margin-top: 2px;
-                    font-size: 15px;
-                    /* font-weight: bold; */
-                    text-align:right;
-
-                    text-decoration:none;
-                    color: #ffffff;
-
-                    &:link {
-                        color: #ffffff;
-                    }
-                    /*
-                    &:hover {
-                        color: #f84f52;
-                    }
-                    &:visited {
-                        color: #ffffff;
-                    }
-                    */
-                }
-
+                height: 60px;
             }
         }
 
         /* 分页栏 */
         .page_div {
+            flex: 7;
             display: flex;
-            flex-flow: row;
+            justify-content: space-around;
             align-items: center;
-            justify-content: center;
 
             float: left;
 
             background-color: #ffffff;
 
-            width: 1200px;
-            height: 36px;
-
-            /* border-bottom:#31384f solid 2px; */
-            border-radius: 36px;
-            border: 2px solid #D4D4D4;
+            height: 60px;
 
             .each_page {
                 width: auto;
-                height: 36px;
+                height: 50px;
 
-                margin: 0 20px;
-                padding: 0 16px;
+                padding: 0 24px;
 
-                line-height: 36px;
+                line-height: 50px;
                 text-align: center;
 
                 cursor: pointer;
@@ -263,28 +234,164 @@ p, a, span {
 
                 border-radius: 36px;
 
-                &:hover {
-                    box-shadow:
-                            inset -2px -2px 4px rgba(255, 255, 255, .9),
-                            inset 2px 2px 4px rgba(0, 0, 0, .4);
-                }
-
                 a {
                     color: $blue-color;
-
-                    font-size: 16px;
-                    font-weight: bold;
                     text-decoration: none;
 
-                    &:link {
-                        color: $blue-color;
+                    transition: all 0.3s;
+
+                    font: {
+                        size: 20px;
+                        family: Roboto-Italic, sans-serif;
+
                     }
-                    &:visited {
+                }
+
+                &:not(.active-page):hover {
+                    box-shadow: inset -2px -2px 4px rgba(255, 255, 255, .9),
+                    inset 2px 2px 4px rgba(0, 0, 0, .4);
+
+                    a {
+                        font: {
+                            size: 22px;
+                            weight: bold;
+                        }
+                    }
+                }
+
+                /* 路由对应分页 激活样式 */
+                &.active-page {
+                    box-shadow: inset -2px -2px 4px rgba(255, 255, 255, .9),
+                    inset 2px 2px 4px rgba(0, 0, 0, .4);
+
+                    a {
+                        //color: $booth-green-color;
                         color: $blue-color;
+                        font: {
+                            size: 24px;
+                            weight: bold;
+                        }
                     }
                 }
             }
         }
+    }
+
+    /* ColorS */
+    .ColorS_div {
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: center;
+
+        float: left;
+
+        width: 70px;
+        height: 60px;
+
+        background-color: #ffffff;
+
+        img {
+            width: 44px;
+            &:hover {
+                animation: rotate 0.5s ease-in-out;
+            }
+        }
+    }
+}
+
+@keyframes rotate{
+    0%{
+        transform: rotateZ(0deg);
+    }
+    100%{
+        transform: rotateZ(360deg);
+    }
+}
+
+/* 侧边栏 */
+.sidebar {
+    position: fixed;
+
+    top: 60px;
+    right: 0;
+
+    width: 70px;
+    height: 100%;
+
+    text-align: center;
+
+    transition: all 0.3s ease;
+    z-index: 100;
+
+    box-shadow: 2px 2px 2px #bdbdbd;
+
+    background-color: $blue-color;
+
+    /* 功能键 */
+    .function_div {
+        position: fixed;
+        display: flex;
+        flex-flow: column;
+        justify-content: right;
+        align-items: center;
+
+        width: 70px;
+        height: auto;
+
+        padding-top: 30px;
+
+        .each_function {
+            display: flex;
+            flex-flow: column;
+            justify-content: right;
+            align-items: center;
+
+            width: 70px;
+            height: auto;
+
+            padding: 12px 0;
+
+            text-align: center;
+
+            cursor: pointer;
+
+            $transition-set: width 0.3s ease;
+            transition: $transition-set;
+
+            img {
+                width: 44px;
+            }
+
+            a {
+                display: none;
+                margin-top: 4px;
+                text-decoration: none;
+                color: #ffffff;
+                transition: $transition-set;
+
+                font: {
+                    size: 18px;
+                }
+            }
+
+            &:hover, &.route_style {
+                background-color: $booth-red-color;
+                width: 210px;
+                padding: 8px 0;
+                //margin-right: 70px;
+
+                img {
+                    width: 40px;
+                    translate: -35px;
+                }
+                a {
+                    display: block;
+                    translate: -35px;
+                }
+            }
+        }
+
     }
 }
 </style>
