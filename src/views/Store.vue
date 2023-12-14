@@ -85,7 +85,13 @@
 
     <!-- 商品部分 -->
     <div class="product_container">
-      <el-backtop id="el_back_top" target=".product_container" :right="100" :bottom="30">
+      <el-backtop
+        id="el_back_top"
+        target=".product_container"
+        :right="100"
+        :bottom="30"
+        style="box-shadow: 5px 5px 10px rgba(0,0,0,0.4);"
+      >
         <div class="el_style">
           ▲
         </div>
@@ -128,7 +134,6 @@
   </div>
 </template>
 
-<!-- js -->
 <script>
 import axios from "axios";
 
@@ -252,6 +257,9 @@ export default {
         // 购物车：商品数量 +1
         plusCart(productId) {
             this.updateCartQuantity(productId, 1)
+                .then(() => {
+                    this.refreshCartData();
+                })
                 .catch(() => {
                     this.refreshCartData();
                 });
@@ -260,6 +268,9 @@ export default {
         minusCart(productId) {
             // 更新购物车数量
             this.updateCartQuantity(productId, -1)
+                .then(() => {
+                    this.refreshCartData();
+                })
                 .catch(() => {
                     this.refreshCartData();
                 });
@@ -275,7 +286,7 @@ export default {
             }).then((response) => {
                 this.refreshCartData();
                 console.log(response);
-                if (response.data === 1000) {
+                if (response.data === 1000) {  // 状态码，由后端反馈
                     this.$notify({
                         title: 'Success',
                         message: '购物车-添加成功',
@@ -381,7 +392,7 @@ body{
     height: 40px;
     top: 100px;
 
-    background-color: $blue-color;
+    background: $degree-fabric-light-blue;
 
     line-height: 40px;
     color: #ffffff;
@@ -429,7 +440,7 @@ body{
         height: 40px;
         cursor: pointer;
 
-        background-color: $booth-red-color;
+        background: $degree-fabric-light-red;
 
         text-align: center;
         color: #ffffff;
@@ -450,7 +461,7 @@ img[id="smileJPG"] {
     transform: rotate(350deg);
 }
 
-/* 订单展示块 */
+/* 购物车 */
 .cart_div {
     position: fixed;
     width: 420px;

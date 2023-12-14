@@ -8,7 +8,7 @@
         <div class="top_left_div">
           <!-- 图标 -->
           <div class="icon_div">
-            <img src="@/image/img_bg/Polaris_icon.png" alt="">
+            <img src="@/image/img_bg/Polaris_icon_noise_2.png" alt="">
           </div>
 
           <!-- 分页 -->
@@ -159,6 +159,7 @@ export default {
 <style lang="scss" scoped>
 body {
     width: 100%;
+    min-width: 960px;
     
     display: flex;
     align-items: center;
@@ -191,7 +192,7 @@ p, a, span {
         width: 100%;
         height: 60px;
 
-        background-color: $blue-color;
+        background: $degree-fabric-light-blue;
 
         /* 图标 */
         .icon_div {
@@ -326,7 +327,7 @@ p, a, span {
 
     box-shadow: 2px 2px 2px #bdbdbd;
 
-    background-color: $blue-color;
+    background: $degree-fabric-light-blue;
 
     /* 功能键 */
     .function_div {
@@ -376,7 +377,7 @@ p, a, span {
             }
 
             &:hover, &.route_style {
-                background-color: $booth-red-color;
+                background: $degree-fabric-light-red;
                 width: 210px;
                 padding: 8px 0;
                 //margin-right: 70px;

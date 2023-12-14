@@ -128,14 +128,14 @@
           data-wbdivname="wb5"
         >
           <div class="wb_id">
-            <p>World Bubble Ⅴ&nbsp;&nbsp;&nbsp;&nbsp;Fox Journey</p>
-            <p>第五世界泡&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;狐之旅路</p>
+            <p>World Bubble Ⅴ&nbsp;&nbsp;&nbsp;&nbsp;Salt on the Canal</p>
+            <p>第五世界泡&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;运河上的盐</p>
           </div>
           <!-- 书籍：狐之旅路 -->
           <div class="book_div">
             <a>
               <img
-                src="@/image/library/fj_1.jpg"
+                src="@/image/library/salt.jpg"
                 alt=""
               >
             </a>
@@ -143,7 +143,7 @@
               <a>正史</a>
             </div>
             <div id="book_name_div">
-              <a>狐之旅路</a>
+              <a>运河上的盐</a>
             </div>
             <div id="update_time_div">
               <a>最近更新时间</a>

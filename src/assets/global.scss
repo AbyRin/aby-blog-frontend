@@ -12,6 +12,15 @@ $bg-light-gray-color: #eeeeee;  /* 背景-浅灰 */
 
 $shadow-color: #bdbdbd;  /* 阴影 */
 
+/* 布料(fabric)质感 */
+$degree-fabric-light-blue: rgb(0,8,40) url("@/image/material/45-degree-fabric-light.png");
+$degree-fabric-light-yellow: rgb(255, 197, 52) url("@/image/material/45-degree-fabric-light.png");
+$degree-fabric-light-red: rgb(250, 49, 53) url("@/image/material/45-degree-fabric-light.png");
+$degree-fabric-light-green: rgb(14, 143, 163) url("@/image/material/45-degree-fabric-light.png");
+
+$classy-fabric: $blue-color url("@/image/material/classy-fabric.png");
+/* 用于 background 属性 */
+
 @font-face {
     font-family: "Roboto-Regular";
     src: url("@/assets/fonts/Roboto/Roboto-Regular.ttf");
