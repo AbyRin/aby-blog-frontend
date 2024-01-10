@@ -49,18 +49,18 @@ const router = createRouter({
     { path: '/cart', component: () => import('@/views/Cart.vue') },
 
     // 用户页面
-    { path: '/user/:userKind',
+    { path: '/user/:logOrSign',
       component: () => import('@/views/User.vue'),
       children: [
         {
           path: 'login',
           component: () => import('@/views/Login.vue'),
-          meta: { hideHeader: true }
+          meta: { hideTop: true }
         },
         {
           path: 'signup',
           component: () => import('@/views/Signup.vue'),
-          meta: { hideHeader: true }
+          meta: { hideTop: true }
         },
       ],
     },
@@ -71,14 +71,17 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.path.startsWith('/user/') && to.params.userKind) {
+  if (to.path.startsWith('/user/') && to.params.logOrSign) {
     document.documentElement.style.background = '#31384f';
+    app.config.globalProperties.$hideTop = true; // 隐藏 top 组件
   } else {
     document.documentElement.style.background = 'linear-gradient(#ffffff 60%, #b4b4b4)';
+    app.config.globalProperties.$hideTop = to.matched.some(record => record.meta.hideTop);
   }
-  to.meta.hideHeader = to.matched.some(record => record.meta.hideHeader);
+
   next();
 });
+
 
 // 挂载
 const app = createApp(App);

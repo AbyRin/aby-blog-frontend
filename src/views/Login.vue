@@ -10,11 +10,11 @@
         :rules="formRules"
       >
         <!-- 账号 -->
-        <el-form-item prop="account">
+        <el-form-item prop="email">
           <img id="account_icon" src="@/image/icon/icons8-account-48.png" alt="">
           <el-input
-            v-model="user.account"
-            placeholder="Account"
+            v-model="user.email"
+            placeholder="Email"
           />
         </el-form-item>
 
@@ -38,7 +38,7 @@
           </el-checkbox>
         </el-form-item>
 
-        <!-- 按钮 -->
+        <!-- 按钮：登录 -->
         <el-form-item>
           <el-button
             class="login-btn"
@@ -64,22 +64,28 @@ import {ElMessage, ElMessageBox} from "element-plus";
 export default {
     data() {
         return {
+            // 测试用账户-用户
             user: {
-                account: "1001@outlook.com",
+                email: "1001@outlook.com",
                 password: "123qwe",
                 agree: false,
             },
-            loginLoading: false,  // 登录按钮 loading 状态
+            // 测试用账户-管理员
             admin: {
                 email: "admin@outlook.com",
                 password: "admin123",
                 agree: false,
             },
+
+            // 登录按钮 loading 状态
+            loginLoading: false,
+
+            // 表单验证规则
             formRules: {
                 // required：规定表单是否必须填写
                 // message：不满足验证规则时的提示信息
                 // trigger：change属性-表单项数据改变时验证
-                account: [
+                email: [
                     { required: true, message: '请输入账号', trigger: 'change' },
                     { pattern: /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/, message: '请输入正确的账号格式', trigger: 'change' }
                     // 规则：邮箱通用规则
@@ -115,33 +121,35 @@ export default {
                 if (!valid) {
                     return
                 }
-                // 验证通过，提交请求
+                // 验证通过，提交登录请求
                 this.login()
             })
         },
 
-        // 登录
+        // 提交登录请求
         login() {
             this.$http.post("user/login", this.user)
                 .then(response => {
-                    if (!response.data) {
-                        this.$message({
-                            type: 'error',
-                            message: '用户名或密码错误'
-                        });
-                    } else {
+                    if (response.data.code === '200') {
+                        localStorage.setItem("user", JSON.stringify(response.data.data));
                         this.$message({
                             type: 'success',
                             message: '登录成功'
                         });
                         this.$router.push("/");
+                    } else {
+                        this.$message({
+                            type: 'error',
+                            message: response.data.message
+                        });
+                        // console.log(response)  // 测试用
                     }
                 })
                 .catch(error => {
                     console.error('登录请求失败:', error);
                     this.$message({
                         type: 'error',
-                        message: '登录失败，发生了一个错误'
+                        message: '发生错误，登录失败'
                     });
                 });
         },
@@ -165,7 +173,6 @@ export default {
 
             })
         }
-
     }
 }
 </script>

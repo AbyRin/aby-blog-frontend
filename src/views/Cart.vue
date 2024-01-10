@@ -200,7 +200,6 @@
 import axios from "axios";
 import { ref } from 'vue'
 const text = ref('')
-const textarea = ref('')
 
 export default {
     data() {

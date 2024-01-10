@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <header v-if="!$route.meta.hideHeader">
-      <top />
+    <header>
+      <top v-if="!$hideTop" />
     </header>
 
     <main>
@@ -18,6 +18,11 @@ import Top from '@/components/Top.vue';
 export default {
     components: {
         'top': Top,
+    },
+    data() {
+        return {
+            $hideTop: false,
+        };
     },
 };
 </script>

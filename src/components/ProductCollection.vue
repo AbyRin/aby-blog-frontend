@@ -5,7 +5,9 @@
 </template>
 
 <script>
+import { markRaw } from 'vue';
 
+export default markRaw({});
 </script>
 
 <style scoped lang="scss">
