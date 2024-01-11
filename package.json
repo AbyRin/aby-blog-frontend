@@ -22,7 +22,6 @@
     "qs": "^6.11.2",
     "sass": "^1.69.5",
     "vue": "^3.3.9",
-    "vue-loader": "^17.3.1",
     "vue-router": "^4.2.5",
     "vuex": "^4.1.0"
   },
@@ -39,7 +38,9 @@
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-vue": "^9.18.1",
     "sass-loader": "^13.3.2",
-    "vue-template-compiler": "^2.7.15",
+    "ts-loader": "^9.5.1",
+    "vue-loader": "^17.4.2",
+    "vue-template-compiler": "^2.7.16",
     "webpack-cli": "^5.1.4"
   },
   "eslintConfig": {
