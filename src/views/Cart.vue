@@ -43,7 +43,7 @@
       <el-backtop
         id="el_back_top"
         target=".product_container"
-        style="left: 600px; bottom: 20px; box-shadow: 5px 5px 10px rgba(0,0,0,0.4);"
+        style="left: 60rem; bottom: 2rem; box-shadow: 0.5rem 0.5rem 1rem rgba(0,0,0,0.4);"
       >
         <div class="el_style">
           ▲
@@ -136,7 +136,7 @@
             </td>
           </tr>
           <tr id="trade_item">
-            <td colspan="3" style="height: 80px;">
+            <td colspan="3" style="height: 8rem;">
               Remark
               <el-input
                 v-model="remark"
@@ -146,12 +146,12 @@
                 type="text"
                 autosize
                 clearable
-                style="margin-top: 10px;"
+                style="margin-top: 1rem;"
               />
             </td>
           </tr>
 
-          <tr style="height: 10px" />
+          <tr style="height: 1rem" />
         </table>
       </div>
 
@@ -491,7 +491,7 @@ export default {
 }
 body{
     width: 100%;
-    min-width: 1200px;
+    min-width: 120rem;
 }
 
 /* 商品搜索条部分 */
@@ -504,55 +504,55 @@ body{
     z-index: 101;
 
     width: 70vw;
-    height: 40px;
-    top: 100px;
+    height: 4rem;
+    top: 10rem;
 
     background: $degree-fabric-light-blue;
 
-    line-height: 40px;
+    line-height: 4rem;
     color: #ffffff;
     font: {
         weight: bold;
     }
 
     #search_each{
-        height: 40px;
-        margin-right: 60px;
+        height: 4rem;
+        margin-right: 6rem;
 
         /* 按商品类别搜索--选择框 */
         .product_class {
-            width: 140px;
-            height: 26px;
+            width: 14rem;
+            height: 2.6rem;
         }
 
         input {
             border: 2px solid #D4D4D4;
-            height: 20px;
+            height: 2rem;
 
             &[type=text]{
-                width: 80px;
+                width: 8rem;
 
-                border-radius: 20px;
+                border-radius: 2rem;
                 text-indent: 4px;
                 outline: none;
 
                 transition: width .3s;
             }
             &[name=product_name]:focus{
-                width: 160px;
+                width: 16rem;
             }
             &[name=category]{
-                width: 120px;
+                width: 12rem;
             }
             &[name=minprice], &[name=maxprice]{
-                width: 80px;
+                width: 8rem;
             }
         }
     }
     input[type=submit]{
         border-style: none;
-        width: 100px;
-        height: 40px;
+        width: 10rem;
+        height: 4rem;
         cursor: pointer;
 
         background: $degree-fabric-light-red;
@@ -560,7 +560,7 @@ body{
         text-align: center;
         color: #ffffff;
         font: {
-            size: 20px;
+            size: 2rem;
             weight: bold;
         }
     }
@@ -569,27 +569,27 @@ body{
 /* 笑脸 */
 img[id="smileJPG"] {
     position: fixed;
-    top: 80px;
-    right: 90px;
+    top: 8rem;
+    right: 9rem;
 
-    width: 100px;
+    width: 10rem;
 
     transform: rotate(10deg);
 }
 
 /* 购物车 */
-$cartDivWidth: 800px;  // 购物车-总宽度
-$productDivWidth: 600px;  // 购物车-单品宽度
+$cartDivWidth: 80rem;  // 购物车-总宽度
+$productDivWidth: 60rem;  // 购物车-单品宽度
 $infoDivWidth: 268px;  // 购物车-信息栏宽度
 
 .product_container{
     position: fixed;
 
-    left: 70px;
+    left: 7rem;
     bottom: 0;
 
     width: $cartDivWidth;
-    height: 740px;
+    height: 74rem;
 
     overflow-y: auto;
     scrollbar-width: none; /* Firefox */
@@ -622,12 +622,12 @@ $infoDivWidth: 268px;  // 购物车-信息栏宽度
         flex-direction: row;
 
         width: $productDivWidth;
-        height: 130px;
+        height: 13rem;
 
         margin-bottom: 18px;
 
         background-color: #ffffff;
-        box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
+        box-shadow: 0.5rem 0.5rem 1rem rgba(0,0,0,0.4);
         border-radius: 12px;
 
         transition: all 0.3s;
@@ -638,14 +638,14 @@ $infoDivWidth: 268px;  // 购物车-信息栏宽度
 
         &:hover {
             transform: translateY(-2px) scale(0.99, 0.99);
-            box-shadow:10px 10px 20px rgba(0,0,0,0.3);
+            box-shadow:1rem 1rem 2rem rgba(0,0,0,0.3);
         }
 
         img{
-            height: 110px;
-            width: 110px;
+            height: 11rem;
+            width: 11rem;
             border-radius: 12px;
-            margin: 10px;
+            margin: 1rem;
         }
 
         .info_div {
@@ -655,7 +655,7 @@ $infoDivWidth: 268px;  // 购物车-信息栏宽度
             width: $infoDivWidth;
             height: auto;
 
-            margin: 10px;
+            margin: 1rem;
 
             &:last-child {
                 background-color: gray;
@@ -676,9 +676,9 @@ $infoDivWidth: 268px;  // 购物车-信息栏宽度
                 width: auto;
                 height: auto;
 
-                margin-top: 5px;
+                margin-top: 0.5rem;
 
-                font-size: 20px;
+                font-size: 2rem;
                 text-align: left;
                 color: $blue-color;
 
@@ -693,9 +693,9 @@ $infoDivWidth: 268px;  // 购物车-信息栏宽度
                 align-items: flex-end;
 
                 width: auto;
-                height: 60px;
+                height: 6rem;
 
-                font-size: 20px;
+                font-size: 2rem;
                 text-align: left;
                 color: $booth-red-color;
             }
@@ -706,27 +706,27 @@ $infoDivWidth: 268px;  // 购物车-信息栏宽度
             justify-content: flex-start;
             align-items: flex-end;
 
-            margin-bottom: 10px;
+            margin-bottom: 1rem;
 
             #product_quantity_div {
                 display: flex;
                 flex-direction: row;
 
-                margin-right: 10px;
+                margin-right: 1rem;
 
                 width: auto;
-                height: 30px;
+                height: 3rem;
                 background-color: #f5f7fa;
 
                 color: white;
                 div {
                     &:nth-child(1), &:nth-child(3) {
-                        width: 30px;
-                        height: 30px;
+                        width: 3rem;
+                        height: 3rem;
                         background-color: #e6e8ee;
 
                         text-align: center;
-                        line-height: 30px;
+                        line-height: 3rem;
 
                         color: #444444;
                         cursor: pointer;
@@ -739,11 +739,11 @@ $infoDivWidth: 268px;  // 购物车-信息栏宽度
                         font: {
                             size: 18px;
                         };
-                        width: 30px;
-                        height: 30px;
+                        width: 3rem;
+                        height: 3rem;
                         margin: 0 4px;
                         text-align: center;
-                        line-height: 30px;
+                        line-height: 3rem;
                         color: #666666;
                     }
                 }
@@ -753,8 +753,8 @@ $infoDivWidth: 268px;  // 购物车-信息栏宽度
                 flex-direction: column;
 
                 button {
-                    width: 30px;
-                    height: 30px;
+                    width: 3rem;
+                    height: 3rem;
                     margin: 0 4px;
                     border: none;
                     border-radius: 50%;
@@ -773,13 +773,13 @@ $infoDivWidth: 268px;  // 购物车-信息栏宽度
                     justify-content: center;
                     align-items: center;
 
-                    width: 60px;
-                    height: 30px;
-                    margin-top: 10px;
-                    margin-right: 10px;
+                    width: 6rem;
+                    height: 3rem;
+                    margin-top: 1rem;
+                    margin-right: 1rem;
 
                     border: none;
-                    border-radius: 10px;;
+                    border-radius: 1rem;;
                     background-color: white;
 
                     cursor: pointer;
@@ -788,7 +788,7 @@ $infoDivWidth: 268px;  // 购物车-信息栏宽度
 
                     &:hover {
                         transform: translateY(-2px) scale(0.99, 0.99);
-                        box-shadow:10px 10px 20px rgba(0,0,0,0.3);
+                        box-shadow:1rem 1rem 2rem rgba(0,0,0,0.3);
                     }
 
                     font: {
@@ -797,12 +797,12 @@ $infoDivWidth: 268px;  // 购物车-信息栏宽度
                     };
 
                     img {
-                        width: 20px;
-                        height: 20px;
+                        width: 2rem;
+                        height: 2rem;
                         &[id="collect_icon"] {
                             width: 22px;
                             height: 22px;
-                            margin-top: 10px;
+                            margin-top: 1rem;
                         }
                     }
 
@@ -816,35 +816,35 @@ $infoDivWidth: 268px;  // 购物车-信息栏宽度
 }
 
 /* 订单 */
-$orderWidth: 800px;  // 订单-总宽度
+$orderWidth: 80rem;  // 订单-总宽度
 .order_div {
     position: fixed;
 
     width: $orderWidth;
-    height: 740px;
+    height: 80%;
 
-    right: 180px;
+    right: 18rem;
     bottom: 0;
 
     background-color: #ffffff;
-    box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
-    border-radius: 20px 20px 0 0;
+    box-shadow: 0.5rem 0.5rem 1rem rgba(0,0,0,0.4);
+    border-radius: 2rem 2rem 0 0;
     text-align: center;
 
     /* 订单-用户信息 */
     .order_info_div {
-        height: 340px;
+        height: 34rem;
 
         table[id="order_info"] {
-            width: 760px;
-            margin: 0 20px;
+            width: 76rem;
+            margin: 0 2rem;
             border-collapse: collapse;
             tr {
                 td {
                     text-align: left;
-                    width: 130px;
+                    width: 13rem;
                     font: {
-                        size: 16px;
+                        size: 1.6rem;
                         weight: bold;
                     }
                     color: $blue-color;
@@ -864,9 +864,9 @@ $orderWidth: 800px;  // 订单-总宽度
                     td {
                         text-align: center;
 
-                        height: 80px;
+                        height: 8rem;
                         font: {
-                            size: 30px;
+                            size: 3rem;
                             weight: bold;
                         }
                         color: $blue-color;
@@ -876,7 +876,7 @@ $orderWidth: 800px;  // 订单-总宽度
                 &[id="trade_item"] {
                     border: none;
                     td {
-                        height: 40px;
+                        height: 4rem;
                     }
                 }
             }
@@ -885,10 +885,10 @@ $orderWidth: 800px;  // 订单-总宽度
 
     #cart_topic {
         width: $orderWidth;
-        height: 50px;
+        height: 5rem;
 
         border-top: #cccccc solid 1px;
-        line-height: 50px;
+        line-height: 5rem;
         font: {
             size: 24px;
             weight: bold;
@@ -897,7 +897,7 @@ $orderWidth: 800px;  // 订单-总宽度
     }
     .cart_div {
         width: $orderWidth;
-        height: 280px;
+        height: 28rem;
 
         overflow-y: auto;
         scrollbar-width: none; /* Firefox */
@@ -905,16 +905,16 @@ $orderWidth: 800px;  // 订单-总宽度
 
         /* 订单-商品信息 */
         table[id="cart_content"] {
-            width: 770px;
+            width: 77rem;
             margin: 0 15px;
             border-collapse: collapse;
             tr {
                 td {
                     &:nth-child(1) {
-                        width: 450px;
+                        width: 45rem;
                     }
                     &:nth-child(2), &:nth-child(3) {
-                        width: 160px;
+                        width: 16rem;
                     }
                     font: {
                         size: 14px;
@@ -925,7 +925,7 @@ $orderWidth: 800px;  // 订单-总宽度
                 &[id="cart_item"] {
                     border: none;
                     td {
-                        height: 40px;
+                        height: 4rem;
                         font: {
                             size: 16px;
                             weight: bold;
@@ -947,7 +947,7 @@ $orderWidth: 800px;  // 订单-总宽度
                             justify-content: space-evenly;
                             align-items: center;
 
-                            height: 40px;
+                            height: 4rem;
 
                             img {
                                 width: 18px;
@@ -970,18 +970,18 @@ $orderWidth: 800px;  // 订单-总宽度
         align-items: center;
 
         width: $orderWidth;
-        height: 70px;
+        height: 7rem;
 
         border-top: #cccccc solid 1px;
 
         #count_item {
-            width: 400px;
+            width: 40rem;
             font: {
-                size: 20px;
+                size: 2rem;
                 weight: bold;
             }
             span {
-                margin: 20px;
+                margin: 2rem;
                 &:nth-child(1) {
                     color: $blue-color;
                 }
@@ -992,13 +992,13 @@ $orderWidth: 800px;  // 订单-总宽度
         }
 
         #check_item {
-            width: 400px;
+            width: 40rem;
             button[id="btn_check"] {
-                height: 40px;
-                width: 160px;
+                height: 4rem;
+                width: 16rem;
 
                 border: none;
-                border-radius: 20px;
+                border-radius: 2rem;
 
                 background-color: $blue-color;
 
@@ -1012,7 +1012,7 @@ $orderWidth: 800px;  // 订单-总宽度
                 transition: all .2s;
 
                 &:hover {
-                    //width: 300px;
+                    //width: 30rem;
                     background-color: $booth-red-color;
                 }
 

@@ -2,10 +2,12 @@
   <div>
     <!-- 账户信息 -->
     <div class="account_div">
+      <!-- 头像 -->
       <div class="avatar_div">
         <img :src="userData.avatar" alt="">
       </div>
 
+      <!-- 用户信息 -->
       <div class="account_info_div">
         <p id="nickname_p">
           {{ userData.nickName }}
@@ -14,34 +16,21 @@
           {{ userData.email }}
         </p>
       </div>
+
+      <!-- 按钮：登出 -->
+      <div class="logout_div" @click="logout">
+        登出
+      </div>
     </div>
 
-    <!-- 折叠面板-地址管理  -->
-    <div class="address_collapse">
-      <div class="collapse_title">我的地址</div>
-      <el-collapse v-model="activeNames" class="collapse_block" @change="handleChange">
-        <el-collapse-item title="地址1" name="1">
-          <p>测试-收货人姓名</p>
-          <p>测试-收货人电话</p>
-          <p>测试-收货人地址</p>
-        </el-collapse-item>
-        <el-collapse-item title="地址2" name="2">
-          <p>测试-收货人姓名</p>
-          <p>测试-收货人电话</p>
-          <p>测试-收货人地址</p>
-        </el-collapse-item>
-        <el-collapse-item title="地址3" name="3">
-          <p>测试-收货人姓名</p>
-          <p>测试-收货人电话</p>
-          <p>测试-收货人地址</p>
-        </el-collapse-item>
-      </el-collapse>
-    </div>
+    <Collapse class="collapse" />
   </div>
 </template>
 
 <script>
+import Collapse from "@/components/Collapse.vue";
 export default {
+    components: {Collapse},
     data() {
         return {
             // 本地存储的用户信息（检查是否为空，不为空则解析为 JSON 对象）
@@ -53,7 +42,19 @@ export default {
     methods: {
         handleChange(val) {
             console.log(val);
-        }
+        },
+        logout() {
+            // 清空本地存储的用户信息
+            localStorage.removeItem("user");
+            // 跳转到首页
+            this.$router.push("/user/login");
+            this.$notify({
+                title: "提示",
+                message: "登出成功",
+                type: "success",
+                duration: 1000,
+            });
+        },
     },
 }
 </script>
@@ -65,30 +66,33 @@ export default {
     padding: 0;
     font-family: frutiger sans-serif;
 }
-body{
-    width: 100%;
-    min-width: 1200px;
+html {
+    font-size: 1.6rem;
 }
-$account_div_width: 640px;  // 账户信息-总宽度
+
 /* 账户信息 */
 .account_div {
     position: fixed;
-    width: $account_div_width;
-    height: 760px;
+    width: 26%;
+    height: 70%;
 
-    left: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    left: 4%;
     bottom: 0;
 
     background-color: #ffffff;
-    box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
-    border-radius: 20px 20px 0 0;
+    box-shadow: 0.5rem 0.5rem 1rem rgba(0,0,0,0.4);
+    border-radius: 2rem 2rem 0 0;
     text-align: center;
 
     .avatar_div {
-        margin-top: 40px;
+        margin-top: 4rem;
         img {
-            width: 150px;
-            height: 150px;
+            width: 10rem;
+            height: 10rem;
             border-radius: 50%;
         }
     }
@@ -96,48 +100,63 @@ $account_div_width: 640px;  // 账户信息-总宽度
     .account_info_div {
         p {
             &[id="nickname_p"] {
-                margin-top: 20px;
+                margin-top: 2rem;
                 color: $blue_color;
                 font: {
-                    size: 24px;
+                    size: 2.4rem;
                     weight: bold;
                 }
             }
             &[id="email_p"] {
-                margin-top: 20px;
-                color: #888888;
+                margin-top: 1rem;
+                color: $text-gray-color;
+                font: {
+                    size: 1.6rem;
+                }
             }
 
         }
     }
+
+    .logout_div {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        width: 60%;
+        height: 4rem;
+        margin-top: 2rem;
+
+        border: $text-gray-color solid 1px;
+        border-radius: 2rem;
+
+        background-color: white;
+
+        font: {
+            size: 2rem;
+        }
+        color: $text-gray-color;
+
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            cursor: pointer;
+            background-color: $booth-red-color;
+            border: none;
+
+            font: {
+                weight: bold;
+            }
+            color: white;
+        }
+    }
 }
 
-
-// 折叠面板-地址管理
-.address_collapse {
+/* 折叠面板 */
+.collapse {
     position: fixed;
-    width: 600px;
-    height: auto;
-
-    right: 240px;
-    top: 500px;
-
-    background-color: #ffffff;
-    box-shadow: 5px 5px 10px rgba(0,0,0,0.4);
-    border-radius: 20px 20px 0 0;
-
-    .collapse_title {
-        text-align: center;
-        font: {
-            size: 24px;
-            weight: bold;
-        };
-        color: $blue_color;
-    }
-
-    .collapse_block {
-        border-radius: 20px 20px 0 0;
-        background-color: red;
-    }
+    top: 20%;
+    right: 15%;
 }
 </style>

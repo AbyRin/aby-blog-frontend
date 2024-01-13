@@ -24,6 +24,14 @@ export default {
             $hideTop: false,
         };
     },
+    head: {
+        meta: [
+            {
+                name: 'viewport',
+                content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'
+            }
+        ]
+    },
 };
 </script>
 
@@ -39,5 +47,7 @@ html {
     height: 100%;
     width: 100%;
     background: linear-gradient(#ffffff 60%, #b4b4b4);
+
+    font-size: 62.5%;  /* 10px */
 }
 </style>

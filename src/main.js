@@ -10,6 +10,8 @@ import axios from "axios";
 import request from "@/utils/request"; // 引入axios封装
 axios.defaults.baseURL = 'http://localhost:8081';  // 省略每次axios请求配置
 
+// 自制组件
+
 // 主要页面
 import App from '@/App.vue';
 
