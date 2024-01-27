@@ -9,12 +9,48 @@
 
       <!-- 用户信息 -->
       <div class="account_info_div">
-        <p id="nickname_p">
+        <p id="info_topic_p">
           {{ userData.nickName }}
         </p>
-        <p id="email_p">
-          {{ userData.email }}
+        <div>
+          <p id="info_item">
+            积分
+          </p>
+          <p id="info_content">
+            {{ userData.point }}
+          </p>
+        </div>
+      </div>
+
+      <!-- 隐私信息 -->
+      <div class="account_private_div">
+        <p id="private_topic_p">
+          账号与安全
         </p>
+        <div>
+          <p id="private_item">
+            邮箱
+          </p>
+          <p id="private_content">
+            {{ userData.email }}
+          </p>
+        </div>
+        <div>
+          <p id="private_item">
+            手机
+          </p>
+          <p id="private_content">
+            {{ userData.mobile }}
+          </p>
+        </div>
+        <div>
+          <p id="private_item">
+            地址
+          </p>
+          <p id="private_content">
+            {{ userData.address }}
+          </p>
+        </div>
       </div>
 
       <!-- 按钮：登出 -->
@@ -23,14 +59,14 @@
       </div>
     </div>
 
-    <Collapse class="collapse" />
+    <CustomerCollapse class="collapse" />
   </div>
 </template>
 
 <script>
-import Collapse from "@/components/Collapse.vue";
+import CustomerCollapse from "@/components/CustomerCollapse.vue";
 export default {
-    components: {Collapse},
+    components: {CustomerCollapse},
     data() {
         return {
             // 本地存储的用户信息（检查是否为空，不为空则解析为 JSON 对象）
@@ -39,10 +75,11 @@ export default {
             activeNames: ['1'],
         };
     },
+    created() {
+
+    },
     methods: {
-        handleChange(val) {
-            console.log(val);
-        },
+        // 用户登出
         logout() {
             // 清空本地存储的用户信息
             localStorage.removeItem("user");
@@ -74,7 +111,7 @@ html {
 .account_div {
     position: fixed;
     width: 26%;
-    height: 70%;
+    height: 82%;
 
     display: flex;
     flex-direction: column;
@@ -98,23 +135,82 @@ html {
     }
 
     .account_info_div {
-        p {
-            &[id="nickname_p"] {
-                margin-top: 2rem;
-                color: $blue_color;
-                font: {
-                    size: 2.4rem;
-                    weight: bold;
-                }
-            }
-            &[id="email_p"] {
-                margin-top: 1rem;
-                color: $text-gray-color;
-                font: {
-                    size: 1.6rem;
-                }
-            }
+        display: flex;
+        flex-direction: column;
+        align-items: center;
 
+        p[id="info_topic_p"] {
+            margin-top: 2rem;
+            color: $blue_color;
+            font: {
+                size: 2.4rem;
+                weight: bold;
+            }
+        }
+        div {
+            display: flex;
+            flex-direction: row;
+            p {
+                &[id="info_item"] {
+                    margin-top: 1rem;
+
+                    color: $blue-color;
+                    font: {
+                        size: 1.6rem;
+                        weight: bold;
+                    }
+                }
+                &[id="info_content"] {
+                    margin-top: 1rem;
+                    margin-left: 2rem;
+
+                    color: $text-gray-color;
+                    font: {
+                        size: 1.6rem;
+                    }
+                }
+            }
+        }
+    }
+
+    .account_private_div {
+        display: flex;
+        flex-direction: column;
+
+        margin-top: 10rem;
+
+        p[id="private_topic_p"] {
+            margin-top: 2rem;
+            color: $blue_color;
+            font: {
+                size: 2.4rem;
+                weight: bold;
+            }
+        }
+        div {
+            display: flex;
+            flex-direction: row;
+
+            p {
+                &[id="private_item"] {
+                    margin-top: 1rem;
+
+                    color: $blue-color;
+                    font: {
+                        size: 1.6rem;
+                        weight: bold;
+                    }
+                }
+                &[id="private_content"] {
+                    margin-top: 1rem;
+                    margin-left: 2rem;
+
+                    color: $text-gray-color;
+                    font: {
+                        size: 1.6rem;
+                    }
+                }
+            }
         }
     }
 

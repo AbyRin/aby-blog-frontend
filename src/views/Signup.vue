@@ -76,8 +76,8 @@ export default {
         return {
             // 测试用账户-用户
             user: {
-                account: "",
-                password: "",
+                account: "test@outlook.com",
+                password: "123qwe",
                 agree: false,
             },
             confirmPassword: "",  // 确认密码

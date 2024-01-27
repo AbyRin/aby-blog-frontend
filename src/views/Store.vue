@@ -98,7 +98,7 @@
       </el-backtop>
 
       <!-- 商品展示块 -->
-      <div v-for="(item, key) of productData" :key="key" class="product_div">
+      <div v-for="(item, index) of productData" :key="index" class="product_div">
         <a :id="item.productId">
           <img :src="require(`@/image/img_product/${item.productPicture}`)" alt="">
         </a>
@@ -683,22 +683,22 @@ img[id="smileJPG"] {
         div {
             /* 功能键: 加入购物车, 收藏 */
             #functionBtn {
-                float:left;
+                float: left;
 
-                width:100px;
-                height:30px;
+                width: 100px;
+                height: 30px;
 
-                margin-top:15px;
+                margin-top: 15px;
                 text-align: center;
-                line-height:30px;
+                line-height: 30px;
                 border-top: 1px solid #666666;
                 a{
                     display: block;
+                    font-size: 1.6rem;
+                    width: 100px;
+                    height: 30px;
 
-                    width:100px;
-                    height:30px;
-
-                    color:#666666;
+                    color: #666666;
                     text-decoration: none;
                     transition: color .2s;
 

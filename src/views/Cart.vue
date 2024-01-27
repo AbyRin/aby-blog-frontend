@@ -111,33 +111,32 @@
 
           <!-- 不可变动信息：uid、账号（邮箱）、昵称 -->
           <tr id="trade_item">
-            <td>Uid<span>测试值</span></td>
-            <td>E-mail<span>测试值</span></td>
-            <td>NickName<span>测试值</span></td>
+            <td>下单账户 / Account<span>{{ userData.email }}</span></td>
+            <td>使用地址 / Address<span>{{ userData.address }}</span></td>
           </tr>
 
           <!-- 可变动信息：收件人、手机、地址 -->
           <tr id="trade_item">
             <td colspan="3">
-              Consignee
+              收件人 / Consignee
               <span>测试值</span>
             </td>
           </tr>
           <tr id="trade_item">
             <td colspan="3">
-              Mobile
+              手机 / Mobile
               <span>测试值</span>
             </td>
           </tr>
           <tr id="trade_item">
             <td colspan="3">
-              Address
+              地址 / Address
               <span>测试值</span>
             </td>
           </tr>
           <tr id="trade_item">
             <td colspan="3" style="height: 8rem;">
-              Remark
+              备注 / Remark
               <el-input
                 v-model="remark"
                 maxlength="60"
@@ -204,6 +203,9 @@ const text = ref('')
 export default {
     data() {
         return {
+            // 本地存储的用户信息（检查是否为空，不为空则解析为 JSON 对象）
+            userData: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {},
+
             // 搜索条-条件
             productClassList: [],  // 商品种类选择器列表
             productName: '',
@@ -899,6 +901,7 @@ $orderWidth: 80rem;  // 订单-总宽度
         width: $orderWidth;
         height: 28rem;
 
+        overflow-x: hidden;
         overflow-y: auto;
         scrollbar-width: none; /* Firefox */
         -ms-overflow-style: none; /* IE 10+ */
@@ -911,10 +914,10 @@ $orderWidth: 80rem;  // 订单-总宽度
             tr {
                 td {
                     &:nth-child(1) {
-                        width: 45rem;
+                        flex: 3;
                     }
                     &:nth-child(2), &:nth-child(3) {
-                        width: 16rem;
+                        flex: 1;
                     }
                     font: {
                         size: 14px;
