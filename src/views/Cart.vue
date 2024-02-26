@@ -109,33 +109,50 @@
             </td>
           </tr>
 
-          <!-- 不可变动信息：uid、账号（邮箱）、昵称 -->
-          <tr id="trade_item">
+          <!-- 不可变动信息：当前账户-邮箱、使用地址 -->
+          <tr id="trade_item" style="height: 5rem; border-bottom: #cccccc solid 0.1rem">
             <td>下单账户 / Account<span>{{ userData.email }}</span></td>
             <td>使用地址 / Address<span>{{ userData.address }}</span></td>
           </tr>
 
-          <!-- 可变动信息：收件人、手机、地址 -->
+          <!-- 可变动信息：收件人-姓名、手机、地址，备注 -->
+          <!-- 可变动信息：收件人-姓名 -->
           <tr id="trade_item">
-            <td colspan="3">
+            <td>
               收件人 / Consignee
-              <span>测试值</span>
+              <span>{{ consigneeList.consigneeName }}</span>
+            </td>
+            <td
+              style="
+              display: flex;
+              flex-direction: row-reverse;
+              align-items: center"
+            >
+              <button id="edit_consignee_btn" @click="editConsignee(item.consigneeId)">
+                <img src="@/image/icon/icons8-edit-60.png" alt="">
+              </button>
             </td>
           </tr>
+          <!-- 可变动信息：收件人-手机 -->
           <tr id="trade_item">
-            <td colspan="3">
+            <td colspan="2">
               手机 / Mobile
-              <span>测试值</span>
+              <span>{{ consigneeList.consigneeMobile }}</span>
             </td>
           </tr>
+          <!-- 可变动信息：收件人-地址 -->
           <tr id="trade_item">
-            <td colspan="3">
+            <td colspan="2">
               地址 / Address
-              <span>测试值</span>
+              <span>{{ consigneeList.consigneeProvince }}</span> 省
+              <span>{{ consigneeList.consigneeCity }}</span> 市
+              <span>{{ consigneeList.consigneeArea }}</span> 区
+              <span>{{ consigneeList.consigneeAddress }}</span>
             </td>
           </tr>
+          <!-- 可变动信息：备注 -->
           <tr id="trade_item">
-            <td colspan="3" style="height: 8rem;">
+            <td colspan="2" style="height: 9rem">
               备注 / Remark
               <el-input
                 v-model="remark"
@@ -145,7 +162,7 @@
                 type="text"
                 autosize
                 clearable
-                style="margin-top: 1rem;"
+                style="margin-top: 2rem;"
               />
             </td>
           </tr>
@@ -215,6 +232,8 @@ export default {
 
             productData: [],  // 商品数据
 
+            consigneeList: {},  // 收件人数据
+
             cartData: [],  // 购物车数据
             totalCartPrice: null,  // 购物车-小计
             currentProductQuantity: null,  // 购物车-商品数量
@@ -271,7 +290,7 @@ export default {
         }).catch((error) => {
             console.log(error);
         });
-        // 请求[商品]收藏夹数据
+        // 请求 商品收藏夹 数据
         this.$http.get("/collect/pageCollection", {
             params: {
                 userId: this.testUserId,
@@ -281,9 +300,19 @@ export default {
             this.productCollectionData = response.data;
         }).catch((error)=>{
             console.log(error);
-        })
+        });
     },
     mounted() {
+        // 请求 收件人 数据
+        this.$http.get("/consignee/showConsigneeListByUserId", {
+            params: {
+                userId: this.testUserId,
+            }
+        }).then((response)=>{
+            this.consigneeList = response.data.length > 0 ? response.data[0] : {};  // 获取数组的第一个元素作为对象
+        }).catch((error)=>{
+            console.log(error);
+        });
     },
     methods: {
         // 复合搜索：商品名，商品类型，价格区间
@@ -841,10 +870,10 @@ $orderWidth: 80rem;  // 订单-总宽度
             width: 76rem;
             margin: 0 2rem;
             border-collapse: collapse;
-            tr {
+            tr[id="trade_item"] {
                 td {
                     text-align: left;
-                    width: 13rem;
+                    height: 4rem;
                     font: {
                         size: 1.6rem;
                         weight: bold;
@@ -852,12 +881,37 @@ $orderWidth: 80rem;  // 订单-总宽度
                     color: $blue-color;
 
                     span {
-                        margin-left: 12px;
+                        margin-left: 1.2rem;
                         font: {
-                            size: 14px;
+                            size: 1.6rem;
                             weight: normal;
                         }
                         color: #888888;
+                    }
+
+                    // 收件人-编辑按钮
+                    #edit_consignee_btn {
+                        width: 6rem;
+                        height: 3rem;
+
+                        margin-right: 2rem;
+
+                        border: none;
+                        border-radius: 2rem;
+
+                        background-color: $blue-color;
+                        transition: all 0.2s ease-in-out;
+                        cursor: pointer;
+
+                        //background-color: $blue-color;
+
+                        img {
+                            width: 2rem;
+                        }
+
+                        &:hover {
+                            background-color: $booth-red-color;
+                        }
                     }
                 }
 
@@ -875,7 +929,7 @@ $orderWidth: 80rem;  // 订单-总宽度
                     }
                 }
 
-                &[id="trade_item"] {
+                &[id="cart_item"] {
                     border: none;
                     td {
                         height: 4rem;

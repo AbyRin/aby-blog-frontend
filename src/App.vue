@@ -48,6 +48,6 @@ html {
     width: 100%;
     background: linear-gradient(#ffffff 60%, #b4b4b4);
 
-    font-size: 62.5%;  /* 10px */
+    font-size: 62.5%;  /* 1rem = 10px */
 }
 </style>

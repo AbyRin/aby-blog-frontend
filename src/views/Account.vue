@@ -59,14 +59,15 @@
       </div>
     </div>
 
-    <CustomerCollapse class="collapse" />
+    <ConsigneeCollapse class="collapse" />
   </div>
 </template>
 
 <script>
-import CustomerCollapse from "@/components/CustomerCollapse.vue";
+import ConsigneeCollapse from "@/components/ConsigneeCollapse.vue";
 export default {
-    components: {CustomerCollapse},
+    components: {
+        ConsigneeCollapse},
     data() {
         return {
             // 本地存储的用户信息（检查是否为空，不为空则解析为 JSON 对象）
