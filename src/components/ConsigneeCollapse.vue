@@ -5,60 +5,75 @@
       <img src="../image/icon/icons8-address-50.png" alt="">
       <p>地址管理</p>
     </div>
-    <!-- 核心 -->
+    <!-- 核心内容 -->
     <div class="aby-collapse-main">
       <!-- 折叠面板-单元 -->
       <div
-        v-for="(item, index) in consigneeList"
-        :key="index"
+        v-for="consignee in consigneeList"
+        :key="consignee.consigneeId"
         class="aby-collapse"
-        @click="handleCollapseClick($event, index)"
+        @click="handleCollapseClick($event, consignee.consigneeId)"
       >
-        <!-- 折叠面板-单元 -->
+        <!-- 单元-标题容 -->
         <div class="aby-collapse-title">
-          <p>{{ title[index] }}</p>
+          <p>{{ addressNum[consigneeList.indexOf(consignee)] }}</p>
           <transition name="fade">
-            <div v-if="collapseActive[index]" class="btn_div">
-              <button class="edit_btn" @click="editConsignee(item.consigneeId)">
+            <div v-if="collapseActive[consigneeList.indexOf(consignee)+1]" class="btn_div">
+              <!-- 按钮：编辑 收件人 -->
+              <button class="edit_btn" @click="editConsignee(consignee.consigneeId)">
                 <img src="@/image/icon/icons8-edit-60.png" alt="">
               </button>
-              <button class="edit_btn">
+              <!-- 按钮：删除 收件人 -->
+              <button class="edit_btn" @click="deleteConsignee(consignee.consigneeId)">
                 <img src="@/image/icon/icons8-waste-50.png" alt="">
               </button>
             </div>
           </transition>
         </div>
 
+        <!-- 单元-内容 -->
         <div class="aby-collapse-content">
           <div class="aby-collapse-item">
             <p>收件人</p>
-            <p>{{ item.consigneeName }}</p>
+            <p>{{ consignee.consigneeName }}</p>
           </div>
 
           <div class="aby-collapse-item">
             <p>联系方式</p>
-            <p>{{ item.consigneeMobile }}</p>
+            <p>{{ consignee.consigneeMobile }}</p>
           </div>
 
           <div class="aby-collapse-item">
             <div class="aby-collapse-item-2nd">
               <p>省</p>
-              <p>{{ item.consigneeProvince }}</p>
+              <p>{{ consignee.consigneeProvince }}</p>
             </div>
             <div class="aby-collapse-item-2nd">
               <p>市</p>
-              <p>{{ item.consigneeCity }}</p>
+              <p>{{ consignee.consigneeCity }}</p>
             </div>
             <div class="aby-collapse-item-2nd">
               <p>区</p>
-              <p>{{ item.consigneeArea }}</p>
+              <p>{{ consignee.consigneeArea }}</p>
             </div>
           </div>
 
           <div class="aby-collapse-item">
             <p>详细地址</p>
-            <p>{{ item.consigneeAddress }}</p>
+            <p>{{ consignee.consigneeAddress }}</p>
           </div>
+        </div>
+      </div>
+
+      <!-- 补充空白的折叠面板标题，确保始终有3个 -->
+      <div
+        v-for="i in 3 - consigneeList.length"
+        :key="i"
+        class="aby-collapse"
+      >
+        <div class="aby-collapse-title">
+          <p>{{ addressNum[i] }}</p>
+          <!-- 无需渲染按钮，因为这是空白的折叠面板标题 -->
         </div>
       </div>
     </div>
@@ -68,38 +83,31 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
+import {ElNotification} from "element-plus";
 
-/* 地址顺序 */
-const title = ["地址一", "地址二", "地址三"];
-const testUserId = 1;
+// 固定地址编号
+const addressNum = ["地址一", "地址二", "地址三"]
+const userData = ref(JSON.parse(localStorage.getItem("user")) || {});
 
 /* 收件人信息 */
 const consigneeList = ref([
     {
-        consigneeName: "测试值-收件人姓名",
-        consigneeMobile: "测试值-收件人号码",
-        consigneeProvince: "测试值-省",
-        consigneeCity: "测试值-市",
-        consigneeArea: "测试值-区",
-        consigneeAddress: "测试值-详细地址",
+        consigneeName: "代码内测试值-姓名",
+        consigneeMobile: "代码内测试值-电话",
+        consigneeProvince: "代码内测试值-省",
+        consigneeCity: "代码内测试值-市",
+        consigneeArea: "代码内测试值-区",
+        consigneeAddress: "代码内测试值-详细地址",
         consigneeDefault: "1",
     }
 ]);
 
-onMounted(async () => {
-    try {
-        const response = await axios.get("/consignee/showConsigneeListByUserId", {
-            params: {
-                userId: testUserId,
-            },
-        });
-        consigneeList.value = response.data;
-    } catch (error) {
-        console.error('Error fetching consigneeList:', error);
-    }
+onMounted(() => {
+    showConsigneeListByUserId();
 });
 
-/* 折叠功能 */
+// 折叠面板————————————
+// 折叠功能
 const collapseActive = ref(Array(consigneeList.value.length).fill(false));
 const handleCollapseClick = (event, index) => {
     const target = event.target;
@@ -111,8 +119,60 @@ const handleCollapseClick = (event, index) => {
     collapseActive.value[index] = !collapseActive.value[index];
 };
 
+// 收件人信息————————————
+// 获取/刷新 收件人列表
+const showConsigneeListByUserId = () => {
+    axios
+        .get("/consignee/showConsigneeListByUserId", {
+            params: {
+                userId: userData.value.userId,
+            }
+        })
+        .then((response) => {
+            console.log(response.data);  // 测试用
+            consigneeList.value = response.data;
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+};
+
+// 编辑收件人
 const editConsignee = (consigneeId) => {
     console.log(consigneeId);
+};
+
+// 删除收件人
+const deleteConsignee = (consigneeId) => {
+    axios
+        .delete("/consignee/deleteConsignee", {
+            params: {
+                consigneeId: consigneeId,
+                userId: userData.value.userId,
+            },
+        })
+        .then(response => {
+            showConsigneeListByUserId();  // 刷新：收件人列表
+            // console.log(response)  // 测试用
+            if (response.data === 1001) {
+                ElNotification({
+                    title: 'Success',
+                    message: '删除收件人成功',
+                    type: 'success',
+                    duration: 1500
+                });
+            } else {
+                ElNotification({
+                    title: 'Error',
+                    message: '删除收件人失败',
+                    type: 'error',
+                    duration: 1500
+                });
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
 };
 </script>
 

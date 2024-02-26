@@ -64,37 +64,44 @@
 </template>
 
 <script>
+import { ref, onMounted } from 'vue';
 import ConsigneeCollapse from "@/components/ConsigneeCollapse.vue";
+import {ElNotification} from "element-plus";
+import { useRouter } from 'vue-router';
+
 export default {
     components: {
-        ConsigneeCollapse},
-    data() {
-        return {
-            // 本地存储的用户信息（检查是否为空，不为空则解析为 JSON 对象）
-            userData: localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {},
-            // 折叠面板
-            activeNames: ['1'],
-        };
+        ConsigneeCollapse
     },
-    created() {
+    setup() {
+        const router = useRouter();
+        const userData = ref(JSON.parse(localStorage.getItem("user")) || {});
+        const activeNames = ref(['1']);
 
-    },
-    methods: {
-        // 用户登出
-        logout() {
+        const logout = function() {
             // 清空本地存储的用户信息
             localStorage.removeItem("user");
             // 跳转到首页
-            this.$router.push("/user/login");
-            this.$notify({
+            router.push("/user/login");
+            ElNotification({
                 title: "提示",
                 message: "登出成功",
                 type: "success",
                 duration: 1000,
             });
-        },
+        };
+
+        onMounted(() => {
+            // Perform any additional setup on component mount
+        });
+
+        return {
+            userData,
+            activeNames,
+            logout,
+        };
     },
-}
+};
 </script>
 
 <style lang="scss" scoped>

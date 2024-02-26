@@ -137,6 +137,7 @@ export default {
                             message: '登录成功'
                         });
                         this.$router.push("/");
+                        // console.log(response)  // 测试用
                     } else {
                         this.$message({
                             type: 'error',

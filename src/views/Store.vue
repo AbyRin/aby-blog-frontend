@@ -45,7 +45,7 @@
             Cart
           </td>
         </tr>
-        
+
         <tr id="cart_item">
           <td>Product</td>
           <td>Price</td>
@@ -73,7 +73,7 @@
             >
           </td>
         </tr>
-        
+
         <tr id="cart_count">
           <td>Total price</td>
           <td colspan="2">
@@ -126,7 +126,7 @@
 
           <!-- 收藏 -->
           <div id="functionBtn">
-            <a @click="addProductToCollect()"><b>Collect</b></a>
+            <a @click="addProductToCollect(item.productId, testUserId)"><b>Collect</b></a>
           </div>
         </div>
       </div>
@@ -135,113 +135,116 @@
 </template>
 
 <script>
+import { ref, computed, watch, onMounted } from 'vue';
 import axios from "axios";
+import { ElNotification } from "element-plus";
 
 export default {
-    data() {
-        return {
-            // 搜索条-条件
-            productClassList: [],  // 商品种类选择器列表
-            productName: '',
-            productClass: 'All',  // 默认值为 'All'
-            minPrice: '',
-            maxPrice: '',
+    setup() {
+        // 搜索条-条件
+        const productClassList = ref([]);  // 商品种类选择器列表
+        const productName = ref('');
+        const productClass = ref('All');  // 默认值为 'All'
+        const minPrice = ref('');
+        const maxPrice = ref('');
 
-            productData: [],  // 商品数据
+        // 商品数据
+        const productData = ref([]);
 
-            cartData: [],  // 购物车数据
-            totalCartPrice: null,  // 购物车-小计
-            currentProductQuantity: null,  // 购物车-商品数量
-            productId: null,  // 购物车-商品ID
+        // 购物车数据
+        const cartData = ref([]);
+        const totalCartPrice = ref(null);  // 购物车-小计
 
-            testUserId: 1,  // 测试用-用户ID
+        // 测试用-用户ID
+        const testUserId = ref(1);
 
-            collectionShowType: "product",  // 收藏夹展示类型
-            productCollectionData: [],  // 商品收藏夹数据
-        };
-    },
-    computed: {
+        // 商品收藏夹数据
+        const collectionShowType = ref("product");
+        const productCollectionData = ref([]);
+
         // 计算购物车商品项-渲染与否
-        filteredCartData() {
-            return this.cartData.filter(item => item.productQuantity > 0);
-        },
+        const filteredCartData = computed(() => {
+            return cartData.value.filter(item => item.productQuantity > 0);
+        });
 
         // 计算购物车-小计
-        totalCartPriceComputed() {
-            return this.cartData.reduce(
+        const totalCartPriceComputed = computed(() => {
+            return cartData.value.reduce(
                 (total, item) => total + item.productPrice * item.productQuantity,
                 0
             );
-        },
-    },
-    watch: {
-        // 监听 cartData 的变化，实时更新数据
-        cartData: {
-            handler() {
-                this.totalCartPrice = this.totalCartPriceComputed;
-            },
-            deep: true,
-        },
-    },
-    created() {
-        // 请求商品数据
-        this.$http.get("/store/showProduct").then((response)=>{
-            this.productData = response.data;
-            this.productClassList = Array.from(new Set(this.productData.map(item => item.productClass)));
-            console.log(this.productClassList)
-        })
-        // 请求购物车数据
-        this.$http.get("/cart/showCart", {
-            params: {
-                userId: this.testUserId,
-            }
-        }).then((response)=>{
-            this.cartData = response.data;
-        }).catch((error) => {
-            console.log(error);
         });
+
+        // 监听 cartData 的变化，实时更新数据
+        watch(cartData, () => {
+            totalCartPrice.value = totalCartPriceComputed.value;
+        }, { deep: true });
+
+        // 请求商品数据
+        const fetchProductData = async () => {
+            try {
+                const response = await axios.get("/store/showProduct");
+                productData.value = response.data;
+                productClassList.value = Array.from(new Set(productData.value.map(item => item.productClass)));
+                console.log(productClassList.value);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        // 请求购物车数据
+        const fetchCartData = async () => {
+            try {
+                const response = await axios.get("/cart/showCart", { params: { userId: testUserId.value } });
+                cartData.value = response.data;
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
         // 请求[商品]收藏夹数据
-        this.$http.get("/collect/pageCollection", {
-            params: {
-                userId: this.testUserId,
-                type: this.collectionShowType,
+        const fetchProductCollectionData = async () => {
+            try {
+                const response = await axios.get("/collect/pageCollection", { params: { userId: testUserId.value, type: collectionShowType.value } });
+                productCollectionData.value = response.data;
+            } catch (error) {
+                console.error(error);
             }
-        }).then((response)=>{
-            this.productCollectionData = response.data;
-        }).catch((error)=>{
-            console.log(error);
-        })
-    },
-    mounted() {
-    },
-    methods: {
+        };
+
+        onMounted(() => {
+            fetchProductData();
+            fetchCartData();
+            fetchProductCollectionData();
+        });
+
         // 复合搜索：商品名，商品类型，价格区间
-        searchProduct() {
-            if (this.productClass === "All") {
-                this.productClass = "";
+        const searchProduct = () => {
+            if (productClass.value === "All") {
+                productClass.value = "";
             }
-            console.log(this.productName, this.productClass, this.minPrice, this.maxPrice);
-            this.$http.get("/store/searchProduct", {
+
+            axios.get("/store/searchProduct", {
                 params: {
-                    productName: this.productName,
-                    productClass: this.productClass,
-                    minPrice: this.minPrice,
-                    maxPrice: this.maxPrice
+                    productName: productName.value,
+                    productClass: productClass.value,
+                    minPrice: minPrice.value,
+                    maxPrice: maxPrice.value
                 }
             })
                 .then((response) => {
                     console.log(response);
-                    this.productData = response.data;
+                    productData.value = response.data;
 
                     if (response.data) {
-                        this.$notify({
+                        ElNotification({
                             title: 'Success',
                             message: '筛选成功',
                             type: 'success',
                             duration: 1500
                         });
                     } else {
-                        this.$notify({
+                        ElNotification({
                             title: 'Error',
                             message: '筛选失败',
                             type: 'error',
@@ -250,121 +253,153 @@ export default {
                     }
                 })
                 .catch((error) => {
-                    console.log(error);
+                    console.error(error);
                 });
-        },
+        };
 
         // 购物车：商品数量 +1
-        plusCart(productId) {
-            this.updateCartQuantity(productId, 1)
+        const plusCart = (productId) => {
+            updateCartQuantity(productId, 1)
                 .then(() => {
-                    this.refreshCartData();
+                    refreshCartData();
                 })
                 .catch(() => {
-                    this.refreshCartData();
+                    refreshCartData();
                 });
-        },
+        };
+
         // 购物车：商品数量 -1
-        minusCart(productId) {
+        const minusCart = (productId) => {
             // 更新购物车数量
-            this.updateCartQuantity(productId, -1)
+            updateCartQuantity(productId, -1)
                 .then(() => {
-                    this.refreshCartData();
+                    refreshCartData();
                 })
                 .catch(() => {
-                    this.refreshCartData();
+                    refreshCartData();
                 });
-        },
+        };
+
         // 购物车：更新商品数量到后端
-        updateCartQuantity(productId, num) {
-            return axios.post("/cart/updateCart", null, {
-                params: {
-                    userId: this.testUserId,
-                    productId: productId,
-                    purchaseQuantity: num,
-                },
-            }).then((response) => {
-                this.refreshCartData();
-                console.log(response);
-                if (response.data === 1000) {  // 状态码，由后端反馈
-                    this.$notify({
-                        title: 'Success',
-                        message: '购物车-添加成功',
-                        type: 'success',
-                        duration: 1500
-                    });
-                } else if (response.data === 1001) {
-                    this.$notify({
-                        title: 'Success',
-                        message: '购物车-更新成功',
-                        type: 'success',
-                        duration: 1500
-                    });
-                } else if (response.data === 2001) {
-                    this.$notify({
-                        title: 'Info',
-                        message: '已到达限购额',
-                        type: 'info',
-                        duration: 1500
-                    });
-                } else {
-                    this.$notify({
-                        title: 'Error',
-                        message: '购物车-更新失败',
-                        type: 'error',
-                        duration: 1500
-                    });
-                }
+        const updateCartQuantity = (productId, num) => {
+            return axios
+                .post("/cart/updateCart", null, {
+                    params: {
+                        userId: testUserId.value,
+                        productId: productId,
+                        purchaseQuantity: num,
+                    },
+                })
+                .then((response) => {
+                    refreshCartData();
+                    console.log(response);
+                    if (response.data === 1000) {
+                        ElNotification({
+                            title: 'Success',
+                            message: '购物车-添加成功',
+                            type: 'success',
+                            duration: 1500
+                        });
+                    } else if (response.data === 1001) {
+                        ElNotification({
+                            title: 'Success',
+                            message: '购物车-更新成功',
+                            type: 'success',
+                            duration: 1500
+                        });
+                    } else if (response.data === 2001) {
+                        ElNotification({
+                            title: 'Info',
+                            message: '已到达限购额',
+                            type: 'info',
+                            duration: 1500
+                        });
+                    } else {
+                        ElNotification({
+                            title: 'Error',
+                            message: '购物车-更新失败',
+                            type: 'error',
+                            duration: 1500
+                        });
+                    }
+                })
+                .catch((error) => {
+                    refreshCartData();
+                    console.error(error);
+                    // 将 Promise 拒绝传递回调用方，即 plusCart 和 minusCart，将信息反馈给用户
+                    return Promise.reject(error);
+                });
+        };
 
-            }).catch((error) => {
-                this.refreshCartData();
-                console.log(error);
-                // 将 Promise 拒绝传递回调用方，即 plusCart 和 minusCart，将信息反馈给用户
-                return Promise.reject(error);
-            });
-        },
         // 刷新购物车数据
-        refreshCartData() {
+        const refreshCartData = () => {
             // 发起请求或者调用方法刷新购物车数据
-            this.$http.get("/cart/showCart", {
-                params: {
-                    userId: this.testUserId,
-                }
-            }).then((response) => {
-                this.cartData = response.data;
-            }).catch((error) => {
-                console.log(error);
-            });
-        },
-
+            axios
+                .get("/cart/showCart", {
+                    params: {
+                        userId: testUserId.value,
+                    }
+                })
+                .then((response) => {
+                    cartData.value = response.data;
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        };
 
         // 添加商品到收藏夹
-        addProductToCollect(productId, userId) {
-            axios.post("/collect/productCollection", null, {
-                params: { productId, userId }
-            }).then((response) => {
-                console.log(response.data);
-                if (response.data) {
-                    this.$notify({
-                        title: 'Success',
-                        message: '商品收藏成功',
-                        type: 'success',
-                        duration: 1500
-                    });
-                } else {
-                    this.$notify({
-                        title: 'Error',
-                        message: '商品收藏失败',
-                        type: 'error',
-                        duration: 1500
-                    });
-                }
-            }).catch((error) => {
-                console.log(error)
-            });
-        },
-    },
-}
+        const addProductToCollect = (productId, userId) => {
+            axios
+                .post("/collect/productCollection", null, {
+                    params: { productId, userId }
+                })
+                .then((response) => {
+                    console.log(response.data);
+                    if (response.data) {
+                        ElNotification({
+                            title: 'Success',
+                            message: '商品收藏成功',
+                            type: 'success',
+                            duration: 1500
+                        });
+                    } else {
+                        ElNotification({
+                            title: 'Error',
+                            message: '商品收藏失败',
+                            type: 'error',
+                            duration: 1500
+                        });
+                    }
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        };
+
+        return {
+            productClassList,
+            productName,
+            productClass,
+            minPrice,
+            maxPrice,
+            productData,
+            cartData,
+            totalCartPrice,
+            testUserId,
+            collectionShowType,
+            productCollectionData,
+            filteredCartData,
+            totalCartPriceComputed,
+            searchProduct,
+            plusCart,
+            minusCart,
+            updateCartQuantity,
+            refreshCartData,
+            addProductToCollect
+        };
+    }
+};
 </script>
 
 <style lang="scss" scoped>
