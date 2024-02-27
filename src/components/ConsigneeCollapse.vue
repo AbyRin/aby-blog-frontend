@@ -9,71 +9,88 @@
     <div class="aby-collapse-main">
       <!-- 折叠面板-单元 -->
       <div
-        v-for="consignee in consigneeList"
-        :key="consignee.consigneeId"
+        v-for="(consignee, index) in consigneeList"
+        :key="index"
         class="aby-collapse"
-        @click="handleCollapseClick($event, consignee.consigneeId)"
+        @click="handleCollapseClick($event, index)"
       >
-        <!-- 单元-标题容 -->
+        <!-- 单元-标题 -->
         <div class="aby-collapse-title">
-          <p>{{ addressNum[consigneeList.indexOf(consignee)] }}</p>
-          <transition name="fade">
-            <div v-if="collapseActive[consigneeList.indexOf(consignee)+1]" class="btn_div">
+          <p>{{ addressNum[index] }}</p>
+          <!-- 按钮 淡入淡出效果 -->
+          <transition v-if="consignee.consigneeName" name="fade">
+            <div v-if="collapseActive[index]" class="btn_div">
               <!-- 按钮：编辑 收件人 -->
-              <button class="edit_btn" @click="editConsignee(consignee.consigneeId)">
+              <button class="edit_btn" @click.stop="editConsignee(consignee.consigneeId)">
                 <img src="@/image/icon/icons8-edit-60.png" alt="">
               </button>
+
               <!-- 按钮：删除 收件人 -->
-              <button class="edit_btn" @click="deleteConsignee(consignee.consigneeId)">
-                <img src="@/image/icon/icons8-waste-50.png" alt="">
-              </button>
+              <el-popconfirm
+                width="220"
+                confirm-button-text="是"
+                cancel-button-text="否"
+                icon-color="#f84f52"
+                title="确定删除该收件人吗?"
+                @confirm="deleteConsignee(consignee.consigneeId)"
+              >
+                <template #reference>
+                  <button class="edit_btn" @click.stop>
+                    <img src="@/image/icon/icons8-waste-50.png" alt="">
+                  </button>
+                </template>
+              </el-popconfirm>
             </div>
           </transition>
         </div>
 
         <!-- 单元-内容 -->
         <div class="aby-collapse-content">
-          <div class="aby-collapse-item">
-            <p>收件人</p>
-            <p>{{ consignee.consigneeName }}</p>
-          </div>
-
-          <div class="aby-collapse-item">
-            <p>联系方式</p>
-            <p>{{ consignee.consigneeMobile }}</p>
-          </div>
-
-          <div class="aby-collapse-item">
-            <div class="aby-collapse-item-2nd">
-              <p>省</p>
-              <p>{{ consignee.consigneeProvince }}</p>
+          <template v-if="consignee.consigneeName">
+            <!-- 当有收件人信息时 -->
+            <div class="aby-collapse-item">
+              <p>收件人</p>
+              <p>{{ consignee.consigneeName || '暂无收件人信息' }}</p>
             </div>
-            <div class="aby-collapse-item-2nd">
-              <p>市</p>
-              <p>{{ consignee.consigneeCity }}</p>
-            </div>
-            <div class="aby-collapse-item-2nd">
-              <p>区</p>
-              <p>{{ consignee.consigneeArea }}</p>
-            </div>
-          </div>
 
-          <div class="aby-collapse-item">
-            <p>详细地址</p>
-            <p>{{ consignee.consigneeAddress }}</p>
-          </div>
+            <div class="aby-collapse-item">
+              <p>联系方式</p>
+              <p>{{ consignee.consigneeMobile }}</p>
+            </div>
+
+            <div class="aby-collapse-item">
+              <div class="aby-collapse-item-2nd">
+                <p>省</p>
+                <p>{{ consignee.consigneeProvince }}</p>
+              </div>
+              <div class="aby-collapse-item-2nd">
+                <p>市</p>
+                <p>{{ consignee.consigneeCity }}</p>
+              </div>
+              <div class="aby-collapse-item-2nd">
+                <p>区</p>
+                <p>{{ consignee.consigneeArea }}</p>
+              </div>
+            </div>
+
+            <div class="aby-collapse-item">
+              <p>详细地址</p>
+              <p>{{ consignee.consigneeAddress }}</p>
+            </div>
+          </template>
+          <template v-else>
+            <!-- 当没有收件人信息时 -->
+            <div id="aby-collapse-null" class="aby-collapse-item">
+              <p>点击 <span @click="createConsignee">此处</span> 创建收件人</p>
+            </div>
+          </template>
         </div>
       </div>
 
       <!-- 补充空白的折叠面板标题，确保始终有3个 -->
-      <div
-        v-for="i in 3 - consigneeList.length"
-        :key="i"
-        class="aby-collapse"
-      >
+      <div v-for="i in 3 - consigneeList.length" :key="i" class="aby-collapse">
         <div class="aby-collapse-title">
-          <p>{{ addressNum[i] }}</p>
-          <!-- 无需渲染按钮，因为这是空白的折叠面板标题 -->
+          <p>{{ addressNum[consigneeList.length + i] }}</p>
         </div>
       </div>
     </div>
@@ -83,24 +100,16 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import axios from 'axios';
-import {ElNotification} from "element-plus";
+import { ElNotification, ElPopconfirm } from 'element-plus';
 
 // 固定地址编号
-const addressNum = ["地址一", "地址二", "地址三"]
+const addressNum = ["地址一", "地址二", "地址三"];
+
+// 本地缓存 用户信息
 const userData = ref(JSON.parse(localStorage.getItem("user")) || {});
 
-/* 收件人信息 */
-const consigneeList = ref([
-    {
-        consigneeName: "代码内测试值-姓名",
-        consigneeMobile: "代码内测试值-电话",
-        consigneeProvince: "代码内测试值-省",
-        consigneeCity: "代码内测试值-市",
-        consigneeArea: "代码内测试值-区",
-        consigneeAddress: "代码内测试值-详细地址",
-        consigneeDefault: "1",
-    }
-]);
+// 收件人信息
+const consigneeList = ref([]);
 
 onMounted(() => {
     showConsigneeListByUserId();
@@ -108,7 +117,9 @@ onMounted(() => {
 
 // 折叠面板————————————
 // 折叠功能
-const collapseActive = ref(Array(consigneeList.value.length).fill(false));
+// 将collapseActive初始化为每个consignee的布尔值数组
+const collapseActive = ref([]);
+
 const handleCollapseClick = (event, index) => {
     const target = event.target;
     const collapseTitle = target.closest('.aby-collapse-title');
@@ -130,7 +141,10 @@ const showConsigneeListByUserId = () => {
         })
         .then((response) => {
             console.log(response.data);  // 测试用
-            consigneeList.value = response.data;
+            // 使用虚拟的 consigneeList，确保 consigneeList 的长度为 3
+            consigneeList.value = response.data.concat(Array(3 - response.data.length).fill({}));
+            // 初始化 collapseActive
+            collapseActive.value = Array(consigneeList.value.length).fill(false);
         })
         .catch((error) => {
             console.error(error);
@@ -139,11 +153,46 @@ const showConsigneeListByUserId = () => {
 
 // 编辑收件人
 const editConsignee = (consigneeId) => {
-    console.log(consigneeId);
+    // console.log("触发编辑收件人事件");  //测试用
+    axios
+        .delete("/consignee/updateConsignee", {
+            params: {
+                consigneeId: consigneeId,
+                userId: userData.value.userId,
+                consigneeName: consigneeName,
+            },
+        })
+        .then(response => {
+            // 刷新：收件人列表
+            showConsigneeListByUserId();
+
+            // 通过创建新的 ref 对象来强制更新 collapseActive
+            collapseActive.value = Array(consigneeList.value.length).fill(false);
+
+            if (response.data === 1001) {
+                ElNotification({
+                    title: 'Success',
+                    message: '编辑收件人成功',
+                    type: 'success',
+                    duration: 1500
+                });
+            } else {
+                ElNotification({
+                    title: 'Error',
+                    message: '编辑收件人失败',
+                    type: 'error',
+                    duration: 1500
+                });
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
 };
 
 // 删除收件人
 const deleteConsignee = (consigneeId) => {
+    // console.log("触发删除收件人事件");  //测试用
     axios
         .delete("/consignee/deleteConsignee", {
             params: {
@@ -152,8 +201,12 @@ const deleteConsignee = (consigneeId) => {
             },
         })
         .then(response => {
-            showConsigneeListByUserId();  // 刷新：收件人列表
-            // console.log(response)  // 测试用
+            // 刷新：收件人列表
+            showConsigneeListByUserId();
+
+            // 通过创建新的 ref 对象来强制更新 collapseActive
+            collapseActive.value = Array(consigneeList.value.length).fill(false);
+
             if (response.data === 1001) {
                 ElNotification({
                     title: 'Success',
@@ -174,10 +227,16 @@ const deleteConsignee = (consigneeId) => {
             console.log(error);
         });
 };
+// 测试用：检查编辑、删除收件人按钮
+// const handleConfirmDelete = (consigneeId) => {
+//     console.log("确认删除，consigneeId:", consigneeId);
+//     deleteConsignee(consigneeId);
+// };
 </script>
 
+
 <style scoped lang="scss">
-/* 淡入淡出 */
+// 折叠面板-单元-标题-按钮 淡入淡出
 .fade-enter-active, .fade-leave-active {
     transition: opacity 0.5s;
 }
@@ -340,6 +399,20 @@ const deleteConsignee = (consigneeId) => {
 
                         p {
                             display: inline;
+                        }
+                    }
+
+                    &[id="aby-collapse-null"] {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                        p {
+                            span {
+                                color: $booth-red-color;
+                                cursor: pointer;
+                                text-decoration: underline
+                            }
                         }
                     }
                 }
